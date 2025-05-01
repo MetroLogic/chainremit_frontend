@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# starkRemit_frontend
 
-## Getting Started
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ## Project Overview 🧐
 
-First, run the development server:
+starkRemit_frontend is the user-facing web application for starkRemit, a platform designed to global remittances and microfinance by combining blockchain scalability, smart contract automation, and AI-driven insights. Tailored for migrant workers and underbanked communities, the platform allows users to send money, access microloans, and join community-based savings groups with minimal fees and near-instant settlements. By leveraging the power of StarkNet, StarkRemit offers a secure, decentralized alternative to traditional remittance and lending services, dramatically reducing reliance on banks and high transaction costs. facilitate seamless and secure international money transfers. Built with Next.js, it leverages the power of React for building dynamic user interfaces with features like server-side rendering and excellent developer experience. This documentation serves as the central guide for developers looking to understand, contribute to, or deploy this frontend application.
+
+## Setup Instructions 🛠️
+
+Follow these steps to get the project running on your local machine:
+
+1.  **Prerequisites:**
+    * [Node.js](https://nodejs.org/) (version >= 18.x recommended)
+    * [npm](https://www.npmjs.com/) (version >= 9.x recommended) or [Yarn](https://yarnpkg.com/) (version >= 1.x recommended)
+    * Git installed on your system.
+
+2.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/MetroLogic/starkRemit_frontend
+    cd starkRemit_frontend
+    ```
+
+3.  **Install Dependencies:**
+    Using npm:
+    ```bash
+    npm install
+    ```
+    Or using Yarn:
+    ```bash
+    yarn install
+    ```
+
+4.  **Run the Development Server:**
+    Using npm:
+    ```bash
+    npm run dev
+    ```
+    Or using Yarn:
+    ```bash
+    yarn dev
+    ```
+
+    This will start the development server, and you can view the application in your browser at `http://localhost:3000`.
+
+## Available Scripts 📜
+
+Here's a breakdown of the npm scripts or build commands available in this project:
+
+* `dev`: Starts the Next.js development server with hot-reloading at `http://localhost:3000`.
+* `build`: Creates an optimized production build of your application in the `.next` directory.
+* `start`: Starts the Next.js production server. Ensure you run `npm run build` first.
+* `lint`: Runs the ESLint linter to identify and report on potential code style issues.
+* `lint:fix`: Automatically attempts to fix some of the linting issues reported by ESLint.
+* `test`: Runs the project's test suite (if configured).
+* `test:watch`: Runs the test suite in watch mode, re-running tests on file changes (if configured).
+* `format`: Runs Prettier to automatically format your code according to the project's code style.
+
+
+## Project Structure 📂
+
+Here's a high-level overview of the project's directory structure:
+
+## 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+starkRemit_frontend/
+│
+├── .github/                # GitHub-specific configurations (e.g., workflows, issue templates)
+├── public/                 # Static files like images and favicons
+├── src/
+│   ├── app/                # Next.js App Router directory (entry point and routes)
+│   ├── components/         # Reusable UI components
+│   ├── hooks/              # Custom React hooks
+│   ├── services/           # API service functions
+│   ├── utils/              # Utility/helper functions
+│
+├── .gitignore              # Git ignored files and folders
+├── LICENSE                 # Project license
+├── next.config.js          # Next.js configuration file
+├── package.json            # Project dependencies and scripts
+├── package-lock.json       # Exact versions of installed dependencies
+├── postcss.config.mjs      # PostCSS configuration for TailwindCSS
+├── README.md               # Project documentation
+├── tsconfig.json           # TypeScript configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment Process 📜
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run build
+# or
+yarn build
