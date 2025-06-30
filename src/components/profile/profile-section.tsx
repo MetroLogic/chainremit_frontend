@@ -67,9 +67,8 @@ export default function ProfileSection() {
 
   return (
     <div className="space-y-4 lg:space-y-6">
-
       {/* Profile Information */}
-      <Card className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white text-lg lg:text-xl">
             Profile Information
@@ -99,7 +98,7 @@ export default function ProfileSection() {
                     <Edit className="h-3 w-3 lg:h-4 lg:w-4" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 mx-4">
+                <DialogContent className="bg-white bg-card  border-gray-200 dark:border-gray-800 mx-4">
                   <DialogHeader>
                     <DialogTitle className="text-gray-900 dark:text-white">
                       Update Avatar
@@ -273,7 +272,7 @@ export default function ProfileSection() {
       </Card>
 
       {/* Wallet Information */}
-      <Card className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white text-lg lg:text-xl">
             Wallet Information
@@ -283,7 +282,7 @@ export default function ProfileSection() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 lg:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-3 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 lg:p-4 bg-gray-100 dark:bg-black rounded-lg space-y-3 sm:space-y-0">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 lg:h-10 lg:w-10 bg-blue-600 rounded-lg flex items-center justify-center">
                 <User className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
@@ -314,7 +313,7 @@ export default function ProfileSection() {
             </Button>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 lg:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-3 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 lg:p-4 bg-gray-100 dark:bg-black  rounded-lg space-y-3 sm:space-y-0">
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 lg:h-10 lg:w-10 bg-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xs lg:text-sm">
@@ -341,7 +340,7 @@ export default function ProfileSection() {
       </Card>
 
       {/* Verification Status */}
-      <Card className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white text-lg lg:text-xl">
             Verification Status
@@ -375,7 +374,7 @@ export default function ProfileSection() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-3 lg:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <div className="p-3 lg:p-4 bg-gray-100 dark:bg-black rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <Check className="h-4 w-4 text-green-500" />
                 <p className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">
@@ -386,7 +385,7 @@ export default function ProfileSection() {
                 Government ID verified
               </p>
             </div>
-            <div className="p-3 lg:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <div className="p-3 lg:p-4 bg-gray-100 dark:bg-black rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <Check className="h-4 w-4 text-green-500" />
                 <p className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">

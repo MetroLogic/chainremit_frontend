@@ -262,7 +262,7 @@ Detailed History:
 
   return (
     <div className="space-y-4 lg:space-y-6">
-      <Card className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Download className="h-5 w-5 mr-2" />
@@ -281,7 +281,7 @@ Detailed History:
             return (
               <div
                 key={item.id}
-                className="p-3 lg:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-4"
+                className="p-3 lg:p-4 bg-gray-100 dark:bg-black rounded-lg space-y-4"
               >
                 <div className="flex flex-col sm:flex-row items-start justify-between space-y-3 sm:space-y-0">
                   <div className="flex items-start space-x-3 flex-1">
@@ -360,7 +360,7 @@ Detailed History:
       </Card>
 
       {/* Export History */}
-      <Card className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Calendar className="h-5 w-5 mr-2" />
@@ -372,7 +372,7 @@ Detailed History:
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-3">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-3 sm:space-y-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 dark:bg-black rounded-lg space-y-3 sm:space-y-0">
               <div className="flex items-center space-x-3">
                 <FileText className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 dark:text-gray-400" />
                 <div>
@@ -393,7 +393,7 @@ Detailed History:
                 Re-download
               </Button>
             </div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-3 sm:space-y-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 dark:bg-black rounded-lg space-y-3 sm:space-y-0">
               <div className="flex items-center space-x-3">
                 <Shield className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 dark:text-gray-400" />
                 <div>
