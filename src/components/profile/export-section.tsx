@@ -318,7 +318,7 @@ Detailed History:
                     size="sm"
                     onClick={() => handleExport(item.id)}
                     disabled={status === "processing"}
-                    className="w-full sm:w-auto border-gray-300 dark:border-gray-700"
+                    className=" cursor-pointer w-full sm:w-auto border-gray-300 dark:border-gray-700"
                   >
                     {status === "processing" ? (
                       <>
@@ -387,7 +387,7 @@ Detailed History:
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700"
+                className="cursor-pointer w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Re-download
@@ -408,7 +408,7 @@ Detailed History:
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700"
+                className="cursor-pointer w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Re-download

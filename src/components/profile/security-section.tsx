@@ -64,7 +64,7 @@ export default function SecuritySection() {
             <DialogTrigger asChild>
               <Button
                 variant="outline"
-                className="border-gray-300 dark:border-gray-700 bg-transparent"
+                className="border-gray-300 dark:border-gray-700 bg-transparent cursor-pointer"
               >
                 Change Password
               </Button>
@@ -167,7 +167,7 @@ export default function SecuritySection() {
           {!twoFactorEnabled && (
             <Button
               variant="outline"
-              className="w-full bg-transparent border-gray-300 dark:border-gray-700"
+              className="w-full cursor-pointer bg-transparent border-gray-300 dark:border-gray-700"
             >
               Enable 2FA
             </Button>
@@ -237,13 +237,13 @@ export default function SecuritySection() {
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
             <Button
               variant="outline"
-              className="flex-1 bg-transparent border-gray-300 dark:border-gray-700"
+              className="flex-1 cursor-pointer bg-transparent border-gray-300 dark:border-gray-700"
             >
               View Recovery Phrase
             </Button>
             <Button
               variant="outline"
-              className="flex-1 bg-transparent border-gray-300 dark:border-gray-700"
+              className="flex-1 cursor-pointer bg-transparent border-gray-300 dark:border-gray-700"
             >
               Download Backup
             </Button>

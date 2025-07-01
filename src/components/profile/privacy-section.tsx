@@ -126,7 +126,7 @@ export default function PrivacySection() {
           </p>
           <Button
             variant="outline"
-            className="w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700"
+            className="w-full sm:w-auto bg-transparent border-gray-300 dark:border-gray-700 cursor-pointer"
           >
             <Download className="h-4 w-4 mr-2" />
             Export All Data
@@ -163,7 +163,7 @@ export default function PrivacySection() {
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="destructive">Delete Account</Button>
+              <Button className="cursor-pointer" variant="destructive">Delete Account</Button>
             </DialogTrigger>
             <DialogContent className="bg-white bg-card  border-gray-200 dark:border-gray-800">
               <DialogHeader>
@@ -181,12 +181,12 @@ export default function PrivacySection() {
                   className="w-full p-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-gray-900 dark:text-white"
                 />
                 <div className="flex space-x-2">
-                  <Button variant="destructive" className="flex-1">
+                  <Button variant="destructive" className="flex-1 cursor-pointer">
                     Delete My Account
                   </Button>
                   <Button
                     variant="outline"
-                    className="flex-1 bg-transparent border-gray-300 dark:border-gray-700"
+                    className="flex-1 bg-transparent border-gray-300 dark:border-gray-700 cursor-pointer"
                   >
                     Cancel
                   </Button>

@@ -17,8 +17,8 @@ export default function PreferencesSection() {
   const [preferences, setPreferences] = useState({
     language: "en",
     theme: "dark",
-    currency: "USD",
-    timezone: "PST",
+    currency: "NGN",
+    timezone: "WAT",
     pushNotifications: true,
   });
 
@@ -43,7 +43,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, language: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+            <SelectTrigger className="cursor-pointer  w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -74,7 +74,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, theme: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer ">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -103,7 +103,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, currency: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer ">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -112,6 +112,9 @@ export default function PreferencesSection() {
               <SelectItem value="GBP">GBP</SelectItem>
               <SelectItem value="ETH">ETH</SelectItem>
               <SelectItem value="BTC">BTC</SelectItem>
+              <SelectItem value="NGN">NGN</SelectItem>
+              <SelectItem value="GHS">GHS</SelectItem>
+              <SelectItem value="EGP">EGP</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -134,7 +137,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, timezone: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -143,6 +146,9 @@ export default function PreferencesSection() {
               <SelectItem value="GMT">GMT</SelectItem>
               <SelectItem value="CET">CET</SelectItem>
               <SelectItem value="JST">JST</SelectItem>
+              <SelectItem value="WAT">WAT</SelectItem>
+              <SelectItem value="CAT">CAT</SelectItem>
+              <SelectItem value="EAT">EAT</SelectItem>
             </SelectContent>
           </Select>
         </div>

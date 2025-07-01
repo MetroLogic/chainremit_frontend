@@ -93,7 +93,7 @@ export default function ProfileSection() {
                 <DialogTrigger asChild>
                   <Button
                     size="sm"
-                    className="absolute -bottom-1 -right-1 lg:-bottom-2 lg:-right-2 h-6 w-6 lg:h-8 lg:w-8 rounded-full p-0"
+                    className="absolute cursor-pointer -bottom-1 -right-1 lg:-bottom-2 lg:-right-2 h-6 w-6 lg:h-8 lg:w-8 rounded-full p-0"
                   >
                     <Edit className="h-3 w-3 lg:h-4 lg:w-4" />
                   </Button>
@@ -112,7 +112,7 @@ export default function ProfileSection() {
                       type="file"
                       accept="image/*"
                       onChange={handleAvatarUpload}
-                      className="bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
+                      className="cursor-pointer  bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
                     />
                   </div>
                 </DialogContent>
@@ -138,7 +138,7 @@ export default function ProfileSection() {
               <Button
                 variant="outline"
                 size="sm"
-                className="mt-2 bg-transparent border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="mt-2 bg-transparent border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer "
                 onClick={() => setIsEditing(!isEditing)}
               >
                 <Edit className="h-4 w-4 mr-2" />
@@ -220,13 +220,16 @@ export default function ProfileSection() {
                 />
               </div>
               <div className="col-span-1 lg:col-span-2 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                <Button onClick={() => setIsEditing(false)} className="flex-1">
+                <Button
+                  onClick={() => setIsEditing(false)}
+                  className="flex-1 cursor-pointer "
+                >
                   Save Changes
                 </Button>
                 <Button
                   variant="outline"
                   onClick={() => setIsEditing(false)}
-                  className="flex-1 border-gray-300 dark:border-gray-700"
+                  className="flex-1 border-gray-300 dark:border-gray-700 cursor-pointer "
                 >
                   Cancel
                 </Button>
@@ -300,7 +303,7 @@ export default function ProfileSection() {
               variant="outline"
               size="sm"
               onClick={() => copyToClipboard(profile.walletAddress, "wallet")}
-              className="border-gray-300 dark:border-gray-700"
+              className="border-gray-300 cursor-pointer  dark:border-gray-700"
             >
               {copied === "wallet" ? (
                 <Check className="h-4 w-4" />

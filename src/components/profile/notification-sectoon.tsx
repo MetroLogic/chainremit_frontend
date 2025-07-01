@@ -125,7 +125,7 @@ export default function NotificationsSection() {
                 }))
               }
             >
-              <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+              <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
