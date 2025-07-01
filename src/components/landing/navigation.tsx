@@ -28,7 +28,7 @@ export function Navigation() {
             <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
               How It Works
             </Link>
-            <Link href="#dashboard" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">
               Dashboard
             </Link>
           </div>
