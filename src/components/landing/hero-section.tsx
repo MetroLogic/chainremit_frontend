@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { FiGlobe } from "react-icons/fi"
 import { HiArrowRight } from "react-icons/hi"
 
@@ -19,13 +20,18 @@ export function HeroSection() {
               </h1>
 
               <p className="text-lg text-gray-300 lg:text-xl">
-                Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion.
+                Send, save, and borrow across borders on StarkNet. Join the
+                future of financial inclusion.
               </p>
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <button className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                Launch App
+                <Link
+                  href="/dashboard"
+                >
+                  Launch App
+                </Link>
                 <HiArrowRight className="h-4 w-4" />
               </button>
               <button className="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-transparent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800">
@@ -43,5 +49,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
