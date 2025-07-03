@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { FileText, X } from "lucide-react";
+import { CreditCard, FileText, X } from "lucide-react";
 import { LoanOffer, LoanApplication as LoanApp } from "@/hooks/useLoan";
 import useLoan from "@/hooks/useLoan";
 import { formatCurrency } from "@/utils/formatting";
@@ -47,49 +47,40 @@ interface LoanApplicationProps {
 export default function LoanApplication({
   selectedOffer,
   onSubmit,
-  onClearOffer,
 }: LoanApplicationProps) {
   const [loanAmount, setLoanAmount] = useState("100");
   const [loanTerm, setLoanTerm] = useState("");
   const [loanPurpose, setLoanPurpose] = useState("");
   const [offerCollateral, setOfferCollateral] = useState(false);
 
-  // Get calculation functions from the hook
   const { calculateLoanMetrics } = useLoan();
 
-  // Pre-fill form when a loan offer is selected
   useEffect(() => {
     if (selectedOffer) {
-      // Set default amount to a reasonable value within the max amount
-      const maxAmount = selectedOffer.maxAmount; // Now already a number
-      const defaultAmount = Math.min(maxAmount, 500); // Default to $500 or max amount if less
+      const maxAmount = selectedOffer.maxAmount;
+      const defaultAmount = Math.min(maxAmount, 500);
       setLoanAmount(defaultAmount.toString());
 
-      // Set term from the offer
-      const termInDays = selectedOffer.term; // Now already a number
+      const termInDays = selectedOffer.term;
       setLoanTerm(termInDays.toString());
 
-      // Set collateral requirement
       setOfferCollateral(selectedOffer.collateralRequired);
     }
   }, [selectedOffer]);
 
-  // Calculate loan estimates dynamically
   const getEstimates = () => {
     const amount = parseFloat(loanAmount) || 0;
     const termDays = parseInt(loanTerm) || 30;
 
-    let apr = 12.0; // Default APR
+    let apr = 12.0;
     if (selectedOffer) {
-      apr = selectedOffer.apr; // Now already a number
+      apr = selectedOffer.apr;
     }
 
-    // Adjust APR based on collateral
     if (offerCollateral && selectedOffer && !selectedOffer.collateralRequired) {
-      apr = Math.max(apr - 2, 5); // Reduce APR by 2% if offering collateral when not required
+      apr = Math.max(apr - 2, 5);
     }
 
-    // Use the hook's calculation function
     const calculation = calculateLoanMetrics(amount, apr, termDays);
 
     return {
@@ -118,7 +109,7 @@ export default function LoanApplication({
     > = {
       lenderTitle: selectedOffer.title,
       amount: parseFloat(loanAmount),
-      apr: selectedOffer.apr, // Now already a number
+      apr: selectedOffer.apr,
       term: parseInt(loanTerm),
       purpose: loanPurpose,
       collateralOffered: offerCollateral,
@@ -240,11 +231,11 @@ export default function LoanApplication({
         </Card>
 
         <Button
-          className="w-full bg-[#818181]"
+          className="w-full text-muted bg-muted-foreground border border-muted"
           onClick={handleSubmit}
           disabled={!loanAmount || !loanTerm || !loanPurpose.trim()}
         >
-          <FileText className="w-4 h-4 mr-2" />
+          <CreditCard className="w-4 h-4 mr-2" />
           Submit Loan Request
         </Button>
       </CardContent>

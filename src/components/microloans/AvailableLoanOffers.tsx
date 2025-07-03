@@ -6,7 +6,7 @@ import { LoanOffer } from "@/hooks/useLoan";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -22,8 +22,8 @@ interface LoanFilters {
   searchTerm: string;
   maxAmount: number;
   maxAPR: string;
-  termLength: string; // "all" | "15" | "30" | "45" | "60" | "90" | "120"
-  lenderType: string; // "all" | specific lender type
+  termLength: string; 
+  lenderType: string;  
   noCollateralOnly: boolean;
 }
 
@@ -46,15 +46,12 @@ export default function AvailableLoanOffers({
     noCollateralOnly: false,
   });
 
-  // Get unique lender types for filter dropdown
   const lenderTypes = Array.from(
     new Set(offers.map((offer: LoanOffer) => offer.lenderType))
   ).sort();
 
-  // Filter logic
   const filteredOffers = useMemo(() => {
     return offers.filter((offer: LoanOffer) => {
-      // Search term filter
       if (
         filters.searchTerm &&
         !offer.title.toLowerCase().includes(filters.searchTerm.toLowerCase()) &&
@@ -68,17 +65,14 @@ export default function AvailableLoanOffers({
         return false;
       }
 
-      // Amount filter - offer.maxAmount is now a number
       if (offer.maxAmount > filters.maxAmount) {
         return false;
       }
 
-      // APR filter - offer.apr is now a number
       if (filters.maxAPR && offer.apr > parseFloat(filters.maxAPR)) {
         return false;
       }
 
-      // Term length filter - offer.term is now a number
       if (filters.termLength && filters.termLength !== "all") {
         const filterTermDays = parseInt(filters.termLength);
         if (offer.term !== filterTermDays) {
@@ -86,7 +80,6 @@ export default function AvailableLoanOffers({
         }
       }
 
-      // Lender type filter
       if (
         filters.lenderType &&
         filters.lenderType !== "all" &&
@@ -95,7 +88,6 @@ export default function AvailableLoanOffers({
         return false;
       }
 
-      // No collateral filter
       if (filters.noCollateralOnly && offer.collateralRequired) {
         return false;
       }
@@ -125,7 +117,6 @@ export default function AvailableLoanOffers({
 
   return (
     <div className="space-y-4">
-      {/* Search and Filter Header */}
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <div className="relative flex-1 sm:w-80">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -165,10 +156,8 @@ export default function AvailableLoanOffers({
             )}
           </Button>
 
-          {/* Floating Filter Dropdown */}
           {showFilters && (
             <div className="absolute top-full right-0 mt-2 w-[900px] bg-background border border-border rounded-lg shadow-lg z-50 p-4">
-              {/* Headers Row */}
               <div className="grid grid-cols-5 gap-4 mb-3">
                 <Label className="text-sm font-medium text-foreground">
                   Max Amount{" "}
@@ -193,9 +182,7 @@ export default function AvailableLoanOffers({
                 </Label>
               </div>
 
-              {/* Controls Row */}
               <div className="grid grid-cols-5 gap-4 items-center">
-                {/* Max Amount Slider */}
                 <div className="h-8 flex items-center">
                   <input
                     type="range"
@@ -213,7 +200,6 @@ export default function AvailableLoanOffers({
                   />
                 </div>
 
-                {/* Interest Rate Slider */}
                 <div className="h-8 flex items-center">
                   <input
                     type="range"
@@ -231,7 +217,6 @@ export default function AvailableLoanOffers({
                   />
                 </div>
 
-                {/* Term Length Select */}
                 <Select
                   value={filters.termLength}
                   onValueChange={(value) =>
@@ -252,7 +237,6 @@ export default function AvailableLoanOffers({
                   </SelectContent>
                 </Select>
 
-                {/* Lender Type Select */}
                 <Select
                   value={filters.lenderType}
                   onValueChange={(value) =>
@@ -272,7 +256,6 @@ export default function AvailableLoanOffers({
                   </SelectContent>
                 </Select>
 
-                {/* Options Column */}
                 <div className="flex items-center justify-between h-8">
                   <div className="flex items-center space-x-2">
                     <Switch
@@ -309,7 +292,6 @@ export default function AvailableLoanOffers({
         </div>
       </div>
 
-      {/* Results Summary */}
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span>
           {filteredOffers.length} of {offers.length} offers
@@ -322,7 +304,6 @@ export default function AvailableLoanOffers({
         )}
       </div>
 
-      {/* Loan Offers */}
       <div className="space-y-4">
         {filteredOffers.length === 0 ? (
           <Card className="border-dashed">

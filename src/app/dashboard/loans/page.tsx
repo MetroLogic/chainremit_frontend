@@ -23,16 +23,13 @@ export default function LoansPage() {
     makePayment,
   } = useLoan();
 
-  // Handle Apply Now
   const handleApplyNow = (offer: any) => {
     selectLoanOffer(offer);
     setActiveTab("request");
   };
 
-  // Handle loan application submission
   const handleLoanSubmission = (applicationData: any) => {
     submitLoanApplication(applicationData);
-    // Switch to My Loans tab
     setActiveTab("my-loans");
   };
 

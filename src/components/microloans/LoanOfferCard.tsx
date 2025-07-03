@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { TrendingUp, User, Users } from "lucide-react";
+import { TrendingUp, User} from "lucide-react";
 
 interface LoanOfferCardProps {
   title: string;
