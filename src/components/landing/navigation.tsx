@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { HiMenu, HiX } from "react-icons/hi"
-import { HiPaperAirplane } from "react-icons/hi"
+import Link from "next/link";
+import { useState } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
+import { HiPaperAirplane } from "react-icons/hi";
 
 export function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className="relative z-50 px-4 py-6 lg:px-8">
@@ -22,20 +22,45 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="#features"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               Features
             </Link>
-            <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="#how-it-works"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               How It Works
             </Link>
-            <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="/dashboard"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               Dashboard
+            </Link>
+
+            <Link
+              href="/auth/login"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+                Login
+              </button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <HiX className="h-6 w-6" /> : <HiMenu className="h-6 w-6" />}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <HiX className="h-6 w-6" />
+            ) : (
+              <HiMenu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
@@ -43,19 +68,36 @@ export function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+              <Link
+                href="#features"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
                 Features
               </Link>
-              <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
+              <Link
+                href="#how-it-works"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
                 How It Works
               </Link>
-              <Link href="#dashboard" className="text-gray-300 hover:text-white transition-colors">
+              <Link
+                href="#dashboard"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
                 Dashboard
+              </Link>
+              <Link
+                href="/auth/login"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+                  Login
+                </button>
               </Link>
             </div>
           </div>
         )}
       </div>
     </nav>
-  )
+  );
 }
