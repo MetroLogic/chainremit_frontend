@@ -1,5 +1,5 @@
 import React from "react";
-import { DownloadIcon, Share2Icon, ArrowDownIcon, CheckCircleIcon, ClockIcon, XCircleIcon, QrCodeIcon } from "lucide-react";
+import { DownloadIcon, Share2Icon, CheckCircleIcon, ClockIcon, XCircleIcon, QrCodeIcon } from "lucide-react";
 import { CopyButton } from "./copy-button";
 
 const getStatusBadge = (status: string) => {
