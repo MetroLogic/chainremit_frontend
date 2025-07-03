@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import type React from "react";
+
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,222 +10,210 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Mail, Loader2, Send, CheckCircle } from "lucide-react";
-import { VerificationCodeInput } from "@/components/auth/verification-code-input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/hooks/use-toast";
+import { Mail, Send, Loader2, CheckCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function VerifyEmailPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
-
   const [verificationCode, setVerificationCode] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
-  const [error, setError] = useState("");
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const router = useRouter();
 
-  // Auto-send initial verification code
-  useEffect(() => {
-    if (email) {
-      sendVerificationCode();
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!verificationCode.trim()) {
+      toast(
+       "Please enter the verification code sent to your email.",
+       
+      );
+      return;
     }
-  }, [email]);
 
-  const sendVerificationCode = async () => {
-    if (!email) return;
+    setIsLoading(true);
 
-    setIsResending(true);
     try {
-      const response = await fetch("/api/auth/resend-verification", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      // Simulate verification
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const data = await response.json();
+      setIsVerified(true);
+      toast(
+          "Your account has been verified. Redirecting to dashboard...",
+      );
 
-      if (data.success) {
-        setShowSuccessToast(true);
-        setTimeout(() => setShowSuccessToast(false), 5000);
-
-      } else {
-      }
+      // Redirect after a short delay
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
     } catch (error) {
+      toast(
+        "Invalid verification code. Please try again."
+      
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  const handleResendCode = async () => {
+    setIsResending(true);
+
+    try {
+      // Simulate resending code
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast(
+         "A new verification code has been sent to your email."
+      );
+    } catch (error) {
+      toast(
+      "Failed to resend verification code. Please try again."
+        
+      );
     } finally {
       setIsResending(false);
     }
   };
 
-  const handleVerifyCode = async () => {
-    if (!email || verificationCode.length !== 6) {
-      setError("Please enter a valid 6-digit code");
-      return;
-    }
-
-    setIsVerifying(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/auth/verify-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code: verificationCode }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-
-        // Redirect to dashboard after 2 seconds
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 2000);
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
-      setError("Verification failed. Please try again.");
-    } finally {
-      setIsVerifying(false);
-    }
-  };
-
-  const handleCodeChange = (code: string) => {
-    setVerificationCode(code);
-    setError("");
-
-    // Auto-verify when 6 digits are entered
-    if (code.length === 6) {
-      setTimeout(() => {
-        handleVerifyCode();
-      }, 500);
-    }
-  };
+  if (isVerified) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+        <div className="w-full max-w-md space-y-6">
+          <Card>
+            <CardContent className="pt-6 text-center space-y-4">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto">
+                <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Email Verified!
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 mt-2">
+                  Your account has been successfully verified. Redirecting to
+                  dashboard...
+                </p>
+              </div>
+              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative">
-      {/* Header */}
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center ">
-        <div className="flex items-center justify-center space-x-2 mb-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-            <Send className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            ChainRemit
-          </span>
-        </div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
-          Verify your email
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          We've sent a verification code to your email address
-        </p>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
-        {/* Main Verification Card */}
-        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-xl dark:shadow-gray-900/20">
-          <CardHeader className="text-center pb-4">
-            <div className="mx-auto mb-4 w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <Send className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-2xl font-bold">StarkRemit</span>
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Verify your email
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              We've sent a verification code to your email address
+            </p>
+          </div>
+        </div>
+
+        {/* Verification Card */}
+        <Card>
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
               <Mail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
-            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-              Check your email
-            </CardTitle>
-            <CardDescription className="text-gray-600 dark:text-gray-400 px-2">
+            <CardTitle>Check your email</CardTitle>
+            <CardDescription>
               Enter the 6-digit verification code we sent to your email address
               to complete your account setup.
             </CardDescription>
           </CardHeader>
-
           <CardContent className="space-y-6">
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Verification Code
-              </label>
-              <VerificationCodeInput
-                value={verificationCode}
-                onChange={handleCodeChange}
-                disabled={isVerifying}
-                error={!!error}
-              />
-              {error && (
-                <p className="text-sm text-red-600 dark:text-red-400 text-center">
-                  {error}
-                </p>
-              )}
-            </div>
+            <form onSubmit={handleVerify} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="code">Verification Code</Label>
+                <Input
+                  id="code"
+                  placeholder="Enter 6-digit code"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  maxLength={6}
+                  className="text-center text-lg tracking-widest"
+                  disabled={isLoading}
+                />
+              </div>
 
-            <Button
-              onClick={handleVerifyCode}
-              disabled={isVerifying || verificationCode.length !== 6}
-              className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 font-medium"
-              size="lg"
-            >
-              {isVerifying ? (
-                <>
-                  <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                  Verifying...
-                </>
-              ) : (
-                "Verify Email"
-              )}
-            </Button>
+              <Button
+                type="submit"
+                className="w-full"
+                size="lg"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                    Verifying...
+                  </>
+                ) : (
+                  "Verify Email"
+                )}
+              </Button>
+            </form>
 
             <div className="text-center space-y-2">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 Didn't receive the code?
               </p>
               <Button
                 variant="link"
-                onClick={sendVerificationCode}
+                onClick={handleResendCode}
                 disabled={isResending}
-                className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 p-0 h-auto font-medium"
+                className="text-blue-600 hover:text-blue-500 dark:text-blue-400"
               >
-                {isResending ? "Sending..." : "Resend verification code"}
+                {isResending ? (
+                  <>
+                    <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                    Resending...
+                  </>
+                ) : (
+                  "Resend verification code"
+                )}
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Back to Login Link */}
+        {/* Back to Login */}
         <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Want to use a different email?{" "}
             <Link
               href="/auth/login"
-              className="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+              className="text-blue-600 hover:text-blue-500 dark:text-blue-400 font-medium"
             >
               Back to login
             </Link>
           </p>
         </div>
 
-      </div>
-
-      {/* Success Toast Notification */}
-      {showSuccessToast && (
-        <div className="fixed top-8 right-8 z-50 animate-in slide-in-from-right duration-300">
-          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-gray-900/20 w-80">
-            <CardContent className="p-4">
-              <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                    Verification Code Sent
-                  </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    A new verification code has been sent to your email.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Theme Toggle */}
+        <div className="flex justify-center">
+          <ThemeToggle />
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -59,7 +59,7 @@ export function PhoneInput({
           onValueChange={onCountryChange}
           disabled={disabled}
         >
-          <SelectTrigger className="w-32 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+          <SelectTrigger className="w-32 border-gray-300 dark:border-gray-600 bg-white text-gray-900 dark:text-gray-100">
             <SelectValue>
               <div className="flex items-center space-x-2">
                 <span>{selectedCountry.flag}</span>
@@ -93,7 +93,7 @@ export function PhoneInput({
             placeholder="Enter your phone number"
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className={`pl-10 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400 ${
+            className={`pl-10 bg-white   text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400  ${
               error ? "border-red-500 dark:border-red-400" : ""
             }`}
             disabled={disabled}
