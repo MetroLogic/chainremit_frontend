@@ -302,8 +302,7 @@ export default function AvailableLoanOffers({
 
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span>
-          {filteredOffers.length} of {offers.length} offers
-          {hasActiveFilters && " (filtered)"}
+          {filteredOffers.length} / {offers.length}
         </span>
         {filteredOffers.length === 0 && hasActiveFilters && (
           <Button variant="link" onClick={clearFilters} className="text-sm p-0">
