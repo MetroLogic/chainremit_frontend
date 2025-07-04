@@ -34,12 +34,6 @@ export function Navigation() {
             >
               How It Works
             </Link>
-            <Link
-              href="/dashboard"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Dashboard
-            </Link>
 
             <Link
               href="/auth/login"
@@ -47,6 +41,14 @@ export function Navigation() {
             >
               <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
                 Login
+              </button>
+            </Link>
+            <Link
+              href="/auth/signup"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+                Sign Up
               </button>
             </Link>
           </div>
