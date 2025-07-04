@@ -22,8 +22,8 @@ interface LoanFilters {
   searchTerm: string;
   maxAmount: number;
   maxAPR: string;
-  termLength: string; 
-  lenderType: string;  
+  termLength: string;
+  lenderType: string;
   noCollateralOnly: boolean;
 }
 
@@ -117,8 +117,8 @@ export default function AvailableLoanOffers({
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="relative flex-1 sm:w-80">
+      <div className="flex flex-row gap-4 items-start sm:items-center relative justify-between">
+        <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             placeholder="Search loans, lenders, or types..."
@@ -136,7 +136,7 @@ export default function AvailableLoanOffers({
           <Button
             variant={showFilters ? "default" : "outline"}
             onClick={() => setShowFilters(!showFilters)}
-            className="whitespace-nowrap"
+            className="whitespace-nowrap self-end"
           >
             <Filter className="h-4 w-4 mr-2" />
             Filters
@@ -157,107 +157,112 @@ export default function AvailableLoanOffers({
           </Button>
 
           {showFilters && (
-            <div className="absolute top-full right-0 mt-2 w-[900px] bg-background border border-border rounded-lg shadow-lg z-50 p-4">
-              <div className="grid grid-cols-5 gap-4 mb-3">
-                <Label className="text-sm font-medium text-foreground">
-                  Max Amount{" "}
-                  <span className="text-xs text-muted-foreground font-normal">
-                    ${filters.maxAmount}
-                  </span>
-                </Label>
-                <Label className="text-sm font-medium text-foreground">
-                  Max Rate{" "}
-                  <span className="text-xs text-muted-foreground font-normal">
-                    {filters.maxAPR || "20"}%
-                  </span>
-                </Label>
-                <Label className="text-sm font-medium text-foreground">
-                  Term
-                </Label>
-                <Label className="text-sm font-medium text-foreground">
-                  Lender
-                </Label>
-                <Label className="text-sm font-medium text-foreground">
-                  Options
-                </Label>
-              </div>
-
-              <div className="grid grid-cols-5 gap-4 items-center">
-                <div className="h-8 flex items-center">
-                  <input
-                    type="range"
-                    min="0"
-                    max="5000"
-                    step="100"
-                    value={filters.maxAmount}
-                    onChange={(e) =>
-                      setFilters((prev) => ({
-                        ...prev,
-                        maxAmount: parseInt(e.target.value),
-                      }))
-                    }
-                    className="w-full h-2 bg-foreground/20 rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
+            <div className="absolute top-full right-0 mt-2 w-[300px] lg:w-[500px] xl:w-[900px] bg-background border border-border rounded-lg shadow-lg z-50 p-4">
+              <div className="grid-cols-2 grid xl:grid-cols-5 gap-5 w-full">
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-foreground">
+                    Max Amount{" "}
+                    <span className="text-xs text-muted-foreground font-normal">
+                      ${filters.maxAmount}
+                    </span>
+                  </Label>
+                  <div className="h-8 flex items-center">
+                    <input
+                      type="range"
+                      min="0"
+                      max="5000"
+                      step="100"
+                      value={filters.maxAmount}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          maxAmount: parseInt(e.target.value),
+                        }))
+                      }
+                      className="w-full h-2 bg-foreground/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                    />
+                  </div>
                 </div>
 
-                <div className="h-8 flex items-center">
-                  <input
-                    type="range"
-                    min="5"
-                    max="20"
-                    step="0.5"
-                    value={filters.maxAPR || "20"}
-                    onChange={(e) =>
-                      setFilters((prev) => ({
-                        ...prev,
-                        maxAPR: e.target.value,
-                      }))
-                    }
-                    className="w-full h-2 bg-foreground/20 rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-foreground">
+                    Max Rate{" "}
+                    <span className="text-xs text-muted-foreground font-normal">
+                      {filters.maxAPR || "20"}%
+                    </span>
+                  </Label>
+                  <div className="h-8 flex items-center">
+                    <input
+                      type="range"
+                      min="5"
+                      max="20"
+                      step="0.5"
+                      value={filters.maxAPR || "20"}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          maxAPR: e.target.value,
+                        }))
+                      }
+                      className="w-full h-2 bg-foreground/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                    />
+                  </div>
                 </div>
 
-                <Select
-                  value={filters.termLength}
-                  onValueChange={(value) =>
-                    setFilters((prev) => ({ ...prev, termLength: value }))
-                  }
-                >
-                  <SelectTrigger className="text-sm h-8">
-                    <SelectValue placeholder="Any" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Any term</SelectItem>
-                    <SelectItem value="15">15 days</SelectItem>
-                    <SelectItem value="30">30 days</SelectItem>
-                    <SelectItem value="45">45 days</SelectItem>
-                    <SelectItem value="60">60 days</SelectItem>
-                    <SelectItem value="90">90 days</SelectItem>
-                    <SelectItem value="120">120 days</SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-foreground">
+                    Term
+                  </Label>
+                  <Select
+                    value={filters.termLength}
+                    onValueChange={(value) =>
+                      setFilters((prev) => ({ ...prev, termLength: value }))
+                    }
+                  >
+                    <SelectTrigger className="text-sm h-8">
+                      <SelectValue placeholder="Any" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Any term</SelectItem>
+                      <SelectItem value="15">15 days</SelectItem>
+                      <SelectItem value="30">30 days</SelectItem>
+                      <SelectItem value="45">45 days</SelectItem>
+                      <SelectItem value="60">60 days</SelectItem>
+                      <SelectItem value="90">90 days</SelectItem>
+                      <SelectItem value="120">120 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-                <Select
-                  value={filters.lenderType}
-                  onValueChange={(value) =>
-                    setFilters((prev) => ({ ...prev, lenderType: value }))
-                  }
-                >
-                  <SelectTrigger className="text-sm h-8">
-                    <SelectValue placeholder="Any" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Any type</SelectItem>
-                    {lenderTypes.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-foreground">
+                    Lender
+                  </Label>
+                  <Select
+                    value={filters.lenderType}
+                    onValueChange={(value) =>
+                      setFilters((prev) => ({ ...prev, lenderType: value }))
+                    }
+                  >
+                    <SelectTrigger className="text-sm h-8">
+                      <SelectValue placeholder="Any" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Any type</SelectItem>
+                      {lenderTypes.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-                <div className="flex items-center justify-between h-8">
-                  <div className="flex items-center space-x-2">
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-foreground">
+                    Options
+                  </Label>
+                  <div className="flex items-center space-x-2 h-8">
                     <Switch
                       id="no-collateral"
                       checked={filters.noCollateralOnly}
@@ -270,23 +275,26 @@ export default function AvailableLoanOffers({
                     />
                     <Label
                       htmlFor="no-collateral"
-                      className="text-xs text-foreground"
+                      className="text-xs text-foreground text-nowrap"
                     >
                       No collateral
                     </Label>
                   </div>
-                  {hasActiveFilters && (
-                    <Button
-                      variant="ghost"
-                      onClick={clearFilters}
-                      className="text-xs h-6 px-2 text-muted-foreground hover:text-foreground ml-2"
-                    >
-                      <X className="h-3 w-3 mr-1" />
-                      Clear
-                    </Button>
-                  )}
                 </div>
               </div>
+
+              {hasActiveFilters && (
+                <div className="flex justify-end pt-4 mt-4 border-t border-border">
+                  <Button
+                    variant="ghost"
+                    onClick={clearFilters}
+                    className="text-xs h-8"
+                  >
+                    <X className="h-3 w-3 mr-1.5" />
+                    Clear Filters
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -309,7 +317,7 @@ export default function AvailableLoanOffers({
           <Card className="border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-12">
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <h3 className="text-lg font-medium text-foreground mb-2">
                   No loans found
                 </h3>
                 <p className="text-gray-500 mb-4">

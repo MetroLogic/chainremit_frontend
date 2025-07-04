@@ -134,4 +134,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  input,
+  textarea {
+    @apply focus:outline-none focus:ring-0 focus:ring-offset-0;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+  }
 }

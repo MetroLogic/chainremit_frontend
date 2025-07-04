@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { CreditCard, FileText, X } from "lucide-react";
+import { CreditCard} from "lucide-react";
 import { LoanOffer, LoanApplication as LoanApp } from "@/hooks/useLoan";
 import useLoan from "@/hooks/useLoan";
 import { formatCurrency } from "@/utils/formatting";

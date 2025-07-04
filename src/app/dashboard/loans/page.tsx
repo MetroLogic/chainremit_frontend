@@ -46,7 +46,13 @@ export default function LoansPage() {
         <TabsList className="w-full py-1 px-0.5 bg-tabs-bg rounded-sm">
           <TabsTrigger value="available">Available Offers</TabsTrigger>
           <TabsTrigger value="my-loans">My Loans</TabsTrigger>
-          <TabsTrigger value="request">Request Loan</TabsTrigger>
+          <TabsTrigger
+            value="request"
+            disabled={!selectedOffer}
+            className={!selectedOffer ? "cursor-not-allowed opacity-50" : ""}
+          >
+            Request Loan
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="available" className="space-y-4 mt-4">
