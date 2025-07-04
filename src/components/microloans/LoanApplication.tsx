@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { CreditCard} from "lucide-react";
+import { CreditCard } from "lucide-react";
 import { LoanOffer, LoanApplication as LoanApp } from "@/hooks/useLoan";
 import useLoan from "@/hooks/useLoan";
 import { formatCurrency } from "@/utils/formatting";
@@ -150,11 +150,6 @@ export default function LoanApplication({
                 selectedOffer ? selectedOffer.maxAmount.toString() : undefined
               }
             />
-            {selectedOffer && (
-              <p className="text-xs text-muted-foreground mt-1">
-                Max: ${selectedOffer.maxAmount.toLocaleString()}
-              </p>
-            )}
           </div>
           <div>
             <Label
@@ -197,32 +192,26 @@ export default function LoanApplication({
             id="offer-collateral"
             checked={offerCollateral}
             onCheckedChange={setOfferCollateral}
+            className="w-9 h-5"
           />
           <Label htmlFor="offer-collateral" className="text-sm">
             Offer collateral for better rates
-            {selectedOffer &&
-              !selectedOffer.collateralRequired &&
-              offerCollateral && (
-                <span className="text-green-600 ml-2">
-                  (~2% rate reduction)
-                </span>
-              )}
           </Label>
         </div>
 
-        <Card className="bg-loan-terms-bg gap-1 py-3 px-4 border-[#202938]">
-          <CardHeader className="p-0">
+        <Card className="bg-loan-terms-bg gap-0 py-3 px-4 border-[#202938] text-muted-foreground">
+          <CardHeader className="p-0 mb-0">
             <CardTitle className="text-lg">Estimated Loan Terms</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="p-0 mt-0">
             <div className="grid grid-cols-2 gap-4">
-              <div>
+              <div className="flex gap-1 items-center">
                 <Label className="text-sm">Estimated APR:</Label>
-                <p className="text-lg font-semibold">{estimates.apr}</p>
+                <p className="text-sm font-semibold">{estimates.apr}</p>
               </div>
-              <div>
+              <div className="flex gap-1 items-center">
                 <Label className="text-sm ">Total Repayment:</Label>
-                <p className="text-lg font-semibold">
+                <p className="text-sm font-semibold">
                   {estimates.totalRepayment}
                 </p>
               </div>
@@ -235,7 +224,7 @@ export default function LoanApplication({
           onClick={handleSubmit}
           disabled={!loanAmount || !loanTerm || !loanPurpose.trim()}
         >
-          <CreditCard className="w-4 h-4 mr-2" />
+          <CreditCard className="w-4 h-4 mr-2 text-black" />
           Submit Loan Request
         </Button>
       </CardContent>
