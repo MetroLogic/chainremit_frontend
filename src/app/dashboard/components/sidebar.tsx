@@ -15,6 +15,8 @@ import {
   Settings,
   X
 } from 'lucide-react';
+import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
+import { truncate } from '@/lib/utils';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -25,6 +27,21 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggleCollapse }) => {
   const pathname = usePathname();
+
+  const { disconnect } = useDisconnect()
+  const { isConnected, address } = useAccount()
+  const { connect, connectors, error } = useConnect()
+
+  const handleConnect = (idx: number) => {
+    const connector = connectors[idx]; // or find based on `id` like 'argentX', 'braavos'
+
+    if (!connector) {
+      console.error('No wallet connector available');
+      return;
+    }
+
+    connect({ connector });
+  };
   
   const sidebarItems = [
     { icon: LayoutDashboard, label: 'Dashboard', route: '/dashboard' },
@@ -210,6 +227,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
               </motion.div>
             )}
           </AnimatePresence>
+          {!isConnected ? connectors.map((connector, idx) => (
+            <button
+              key="nav-label-connect"
+              className="text-xs font-medium text-muted-foreground mb-4 px-2"
+              onClick={() => { 
+                handleConnect(idx)
+              }}
+            >
+              Connect {connector.name}
+            </button>
+          )) : (
+              <button
+                key="nav-label-connect"
+                className="text-xs font-medium text-muted-foreground mb-4 px-2"
+                onClick={() => {
+                  disconnect()
+                }}
+              >
+                {address ? truncate(address) : "-"} 
+              </button>
+            )}
           <nav className={`space-y-1 ${isCollapsed ? 'mt-[2em]' : 'mt-0'}`}>
             {sidebarItems.map((item, index) => {
               const isActive = pathname === item.route;

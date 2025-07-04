@@ -1,6 +1,8 @@
 import React from "react";
-import { DownloadIcon, Share2Icon, CheckCircleIcon, ClockIcon, XCircleIcon, QrCodeIcon } from "lucide-react";
+import { DownloadIcon, CheckCircleIcon, ClockIcon, XCircleIcon, QrCodeIcon } from "lucide-react";
 import { CopyButton } from "./copy-button";
+import QrCode from "./qr-code";
+import { WalletInjectedProps } from "./wallet-wrapper";
 
 const getStatusBadge = (status: string) => {
   const normalized = status.toLowerCase();
@@ -41,11 +43,10 @@ interface IncomingPayment {
   status: string;
 }
 
-export const Receive: React.FC<{
-  starknetId: string;
-  walletAddress: string;
+export const Receive: React.FC<WalletInjectedProps & {
   recentPayments: IncomingPayment[];
-}> = ({ starknetId, walletAddress, recentPayments }) => {
+}> = ({ starknetId, address, recentPayments }) => {
+
   return (
     <div className="flex flex-col items-center">
     <div className="space-y-6 w-[600px] max-w-[600px]">
@@ -58,23 +59,7 @@ export const Receive: React.FC<{
           <h2 className="text-2xl font-medium mb-1">Your Payment QR Code</h2>
           <h2 className="text-sm font-light mb-4 opacity-65">Scan to send money to your wallet</h2>
         </div>
-        <div className="flex flex-col items-center gap-3">
-          <div className="bg-gray-300 dark:bg-gray-800 rounded-lg p-6 m-6">
-            <QrCodeIcon size={128} className="text-gray-400" />
-          </div>
-          <div className="flex flex-col items-center gap-1">
-            <p>{starknetId}</p>
-            <p className="text-sm text-gray-400">{walletAddress}</p>
-          </div>
-          <div className="flex gap-2">
-            <button className="border border-gray-300 dark:border-gray-800 px-4 py-2 rounded inline-flex items-center hover:bg-gray-300 dark:hover:bg-gray-800">
-              <DownloadIcon className="mr-2 h-4 w-4" /> Download QR
-            </button>
-            <button className="border border-gray-300 dark:border-gray-800 px-4 py-2 rounded inline-flex items-center hover:bg-gray-300 dark:hover:bg-gray-800">
-              <Share2Icon className="mr-2 h-4 w-4" /> Share
-            </button>
-          </div>
-        </div>
+        <QrCode walletAddress={address} starknetId={starknetId} />
       </div>
 
       <div className="rounded-lg border p-6  border-gray-800 dark:border-gray-300">
@@ -83,20 +68,24 @@ export const Receive: React.FC<{
           <h2 className="text-sm font-light mb-4 opacity-65">Share these details to receive payments</h2>
         </div>
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium">StarkNet ID</label>
-            <div className="flex items-center gap-2 mt-1">
+            { starknetId && <div>
+              <label className="block text-sm font-medium">StarkNet ID</label>
+              <div className="flex items-center gap-2 mt-1">
                 <input readOnly value={starknetId} className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-1 bg-transparent" />
-              <CopyButton text={starknetId} />
+                <CopyButton text={starknetId} />
+              </div>
             </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Wallet Address</label>
-            <div className="flex items-center gap-2 mt-1">
-                <input readOnly value={walletAddress} className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-1 bg-transparent" />
-              <CopyButton text={walletAddress} />
-            </div>
-          </div>
+            }
+            { address 
+              ? <div>
+                <label className="block text-sm font-medium">Wallet Address</label>
+                <div className="flex items-center gap-2 mt-1">
+                  <input readOnly value={address} className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-1 bg-transparent" />
+                  <CopyButton text={address} />
+                </div>
+              </div> 
+              : <p className="block text-sm font-medium">Connect wallet to view address</p>
+            }
         </div>
       </div>
 

@@ -1,4 +1,8 @@
+"use client" 
+
+import React from "react"
 import Receive from "../components/receive"
+import WalletWrapper from "../components/wallet-wrapper"
 
 const DUMMY_RECENT = [
   {
@@ -29,11 +33,16 @@ const DUMMY_RECENT = [
 
 const page = () => {
   return (
-    <Receive 
-      walletAddress="0xdeadbeef"
-      starknetId="deadbeef.stark"
-      recentPayments={DUMMY_RECENT}
-    />
+    <WalletWrapper>
+      {({ address, starknetId, isStarknetIdLoading }) => {
+        return <Receive 
+          address={address}
+          starknetId={starknetId}
+          isStarknetIdLoading={isStarknetIdLoading}
+          recentPayments={DUMMY_RECENT}
+        />
+      }}
+    </WalletWrapper>
   )
 }
 
