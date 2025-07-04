@@ -11,6 +11,8 @@ import {
   jsonRpcProvider,
   voyager,
 } from "@starknet-react/core";
+import { Toaster } from "react-hot-toast";
+import { StarknetWalletProvider } from "./context/StarknetWalletContext";
 
 export function Providers({ children }: { children: ReactNode }) {
   const { connectors } = useInjectedConnectors({
@@ -28,8 +30,12 @@ export function Providers({ children }: { children: ReactNode }) {
         })}
         connectors={connectors}
         explorer={voyager}
+        autoConnect
       >
-        {children}
+        <StarknetWalletProvider>
+          {children}
+          <Toaster />
+        </StarknetWalletProvider>
       </StarknetConfig>
     </ThemeProvider>
   );

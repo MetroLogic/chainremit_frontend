@@ -1,12 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
-import { HiPaperAirplane } from "react-icons/hi";
+import { useEffect, useRef, useState } from "react";
+import { HiMenu, HiX, HiPaperAirplane } from "react-icons/hi";
+import { useStarknetWallet } from "../context/StarknetWalletContext";
 
-export function Navigation() {
+interface NavigationProps {
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}
+
+export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { address, walletName, connectWallet, disconnectWallet, status } = useStarknetWallet();
+
+
+
+
 
   return (
     <nav className="relative z-50 px-4 py-6 lg:px-8">
@@ -35,22 +44,31 @@ export function Navigation() {
               How It Works
             </Link>
 
-            <Link
-              href="/auth/login"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                Login
+            {!address && (
+              <button
+                onClick={connectWallet}
+                disabled={status === "connecting"}
+                className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+              >
+                {status === "connecting" ? "Connecting..." : "Connect Wallet"}
               </button>
-            </Link>
-            <Link
-              href="/auth/signup"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                Sign Up
+            )}
+
+
+
+            {address && (
+              <button
+                onClick={disconnectWallet}
+                disabled={status === "disconnecting"}
+                className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+              >
+                {status === "disconnecting" ? "Disconnecting..." : "Disconnect Wallet"}
               </button>
-            </Link>
+            )}
+
+
+
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,14 +106,29 @@ export function Navigation() {
               >
                 Dashboard
               </Link>
-              <Link
-                href="/auth/login"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                  Login
+
+
+              {!address && (
+                <button
+                  onClick={connectWallet}
+                  disabled={status === "connecting"}
+                  className="inline-flex w-fit items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                >
+                  {status === "connecting" ? "Connecting..." : "Connect Wallet"}
                 </button>
-              </Link>
+              )}
+
+              {address && (
+                <button
+                  onClick={disconnectWallet}
+                  disabled={status === "disconnecting"}
+                  className="inline-flex w-fit items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                >
+                  {status === "disconnecting" ? "Disconnecting..." : "Disconnect Wallet"}
+                </button>
+              )}
+
+
             </div>
           </div>
         )}
