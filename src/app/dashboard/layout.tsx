@@ -3,6 +3,7 @@
 import React, { useState, ReactNode } from 'react';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
+import { Providers } from '@/components/providers';
 
 interface DashboardLayoutProps {
   children: ReactNode;
