@@ -79,7 +79,7 @@ export const StarknetWalletProvider = ({ children }: { children: ReactNode }) =>
         try {
             const getWallet = await connect({
                 modalMode: "alwaysAsk",
-                modalTheme: "light",
+                modalTheme: "system",
             });
 
             if (!getWallet) throw new Error("No wallet selected");

@@ -34,7 +34,7 @@ export function Providers({ children }: { children: ReactNode }) {
       >
         <StarknetWalletProvider>
           {children}
-          <Toaster />
+          <Toaster position="bottom-right" />
         </StarknetWalletProvider>
       </StarknetConfig>
     </ThemeProvider>
