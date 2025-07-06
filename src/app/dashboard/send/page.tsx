@@ -1,4 +1,7 @@
+"use client" 
+
 import { Send } from "../components/send";
+import WalletWrapper from "../components/wallet-wrapper";
 
 const DUMMY_RECIPIENTS = [
   {
@@ -24,9 +27,16 @@ const DUMMY_RECIPIENTS = [
 ];
 
 const page = () => {
-  return <Send 
-    recentRecipients={DUMMY_RECIPIENTS}
-  /> 
+   return <WalletWrapper>
+      {({ address, starknetId, isStarknetIdLoading }) => {
+        return <Send
+          address={address}
+          starknetId={starknetId}
+          isStarknetIdLoading={isStarknetIdLoading}
+          recentRecipients={DUMMY_RECIPIENTS}
+        />
+      }}
+    </WalletWrapper>
 }
 
 export default page;

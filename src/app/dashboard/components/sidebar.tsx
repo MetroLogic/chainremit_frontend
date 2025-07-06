@@ -245,7 +245,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
                   disconnect()
                 }}
               >
-                {address ? truncate(address) : "-"} 
+                Connected to {address ? truncate(address) : "-"} 
               </button>
             )}
           <nav className={`space-y-1 ${isCollapsed ? 'mt-[2em]' : 'mt-0'}`}>

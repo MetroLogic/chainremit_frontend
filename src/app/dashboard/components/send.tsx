@@ -9,6 +9,7 @@ import { z } from "zod";
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { WalletInjectedProps } from "./wallet-wrapper";
 
 const currencies  = z.enum(["USDC", "ETH", "STRK"])
 
@@ -49,7 +50,11 @@ interface RecentRecipient {
   amount: string;
 }
 
-export const Send: React.FC<{ recentRecipients: RecentRecipient[] }> = ({ recentRecipients }) => {
+type ISend = WalletInjectedProps & {
+ recentRecipients: RecentRecipient[] 
+}
+
+export const Send: React.FC<ISend> = ({ recentRecipients, address, isStarknetIdLoading, starknetId, isConnected }) => {
   const { register, handleSubmit, watch, formState: { errors, isValid, isDirty }} = useForm({
     resolver: zodResolver(sendSchema) 
   });
