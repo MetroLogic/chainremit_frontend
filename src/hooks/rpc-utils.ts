@@ -148,9 +148,6 @@ export const makeTokenBalanceContractQueryCall = ({
 
   const functionNames = ["balance_of"];
 
-  ownerAddress = removeLeadingZeroFromHash(ownerAddress);
-  tokenContractAddresses = tokenContractAddresses?.map((tokenContractAddress) => (removeLeadingZeroFromHash(tokenContractAddress)));
-
   return {
     functionNames,
     rpcCallData: tokenContractAddresses?.map((tokenContractAddress) => ([
@@ -186,20 +183,12 @@ export const queryRpcData = async ({
 
   const calls: Call[] = [...tokenRpcCallData];
 
-  const nameToId: Record<string, number> = {};
-
-  tokenFunctionNames.forEach((functionName, idx) => {
-    nameToId[functionName] = 10000 + idx;
-  });
-
-    const rpc_body = prepareStarknetRawCallData(calls, Object.values(nameToId));
-
-    console.log({ rpc_body, nodeUrl, ownerAddress, tokenContractAddresses })
+  const rpc_body = prepareStarknetRawCallData(calls);
 
   const executeRpcCall = async (url: string) => {
     const res = await fetch(url, {
       method: "POST",
-      body: JSON.stringify(rpc_body),
+      body: JSON.stringify(rpc_body, null, undefined),
     });
     if (!res.ok) {
       throw new Error(`RPC call failed with status ${res.status}`);
@@ -220,8 +209,6 @@ export const queryRpcData = async ({
     }
     let balance: (bigint | undefined)[] = [];
     let allowance: (bigint | undefined)[]= [];
-
-    console.log({ bodyJson })
 
     // try {
     //   const balanceResponse = bodyJson.find(
@@ -250,9 +237,9 @@ export const queryRpcData = async ({
   }
 };
 
-export const prepareStarknetRawCallData = (calls: Call[], ids: number[]) => {
+export const prepareStarknetRawCallData = (calls: Call[]) => {
   return calls.map((c, idx) => {
-    const entryPointSelector = hash.getSelectorFromName(c.entrypoint);
+    let entryPointSelector = hash.getSelectorFromName(c.entrypoint);
     // const selectorLength = entryPointSelector?.length;
     // pad to start
     // if (selectorLength < 65) {
@@ -260,8 +247,9 @@ export const prepareStarknetRawCallData = (calls: Call[], ids: number[]) => {
     //   entryPointSelector = entryPointSelector.padStart(65 - 2, "0");
     //   entryPointSelector = `0x${entryPointSelector}`;
     // }
+
     return {
-      id: ids[idx] ?? idx,
+      id: idx,
       jsonrpc: "2.0",
       method: "starknet_call",
       params: {
