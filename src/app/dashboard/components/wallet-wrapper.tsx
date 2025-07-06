@@ -22,7 +22,6 @@ const WalletWrapper:React.FC<IWalletWrapper> = ({ children }) => {
   let { data, error, isLoading } = useStarkName({ address })
 
   const balances = useBalances({ ownerAddress: address })
-  console.log(balances)
 
   data = "me.stark"
 
