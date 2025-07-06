@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { queryRpcData } from './rpc-utils'
 import { useAccount, useNetwork, useProvider } from '@starknet-react/core'
 
@@ -51,13 +51,42 @@ const CURRENCIES: Record<"sepolia" | "mainnet", CURRENCIES_TYPE> = {
 } 
 
 const RPC_URL = {
-	"mainnet": "https://starknet-mainnet.public.blastapi.io/rpc/v0_8",
-	"sepolia": "https://starknet-sepolia.public.blastapi.io/rpc/v0_8"
+	"mainnet": "https://rpc.starknet.lava.build:443",
+	"sepolia": "https://rpc.starknet-testnet.lava.build:443"
+
+}
+
+type TokenBalance = {
+  tokenAddress: string;
+  balance?: bigint;
+};
+
+export function areTokenArraysEqual(
+  arr1: TokenBalance[],
+  arr2: TokenBalance[]
+): boolean {
+  if (arr1.length !== arr2.length) return false;
+
+  for (let i = 0; i < arr1.length; i++) {
+    const a = arr1[i];
+    const b = arr2[i];
+
+    if (a.tokenAddress !== b.tokenAddress) return false;
+
+    const balanceEqual =
+      a.balance === b.balance ||
+      (typeof a.balance === 'undefined' && typeof b.balance === 'undefined');
+
+    if (!balanceEqual) return false;
+  }
+
+  return true;
 }
 
 type IUseBalances = {
 	ownerAddress?: string,
 }
+
 
 export const useBalances = ({ ownerAddress }: IUseBalances) => {
 
@@ -71,13 +100,8 @@ export const useBalances = ({ ownerAddress }: IUseBalances) => {
 		(value: CURRENCY_TYPE) => (value.address) as string
 	)
 
-	// console.log({
-	// 	chain,
-	// 	tokenAddresses,
-	// 	ownerAddress,
-	// 	url: RPC_URL[chain?.network as "mainnet" | "sepolia"  ?? "mainnet"] as string
-	// })
-	//
+  const [tokenBalances, setTokenBalances] = useState<TokenBalance[]>([])
+
 	useEffect(() => {
 		(async() =>  {
 			const data = await queryRpcData({
@@ -85,12 +109,16 @@ export const useBalances = ({ ownerAddress }: IUseBalances) => {
 				ownerAddress: ownerAddress ?? "",
 				nodeUrl: RPC_URL[chain?.network as "mainnet" | "sepolia" ?? "mainnet"] as string
 			})
+      if(!areTokenArraysEqual(tokenBalances, data)) {
+	setTokenBalances(data)
+      }
 		})()
 	}, [tokenAddresses, ownerAddress])
 
 
 	return {
-		ownerAddress,
+    ownerAddress,
+    tokenBalances,
 		network: chain.network ?? "mainnet",
 		currentCurrencies,
 	}

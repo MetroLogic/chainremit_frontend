@@ -170,7 +170,8 @@ export const queryRpcData = async ({
   ownerAddress: string;
   nodeUrl: string;
 }): Promise<{
-  balances?: bigint;
+	tokenAddress: string,
+	balance?: bigint;
 }[]> => {
   const {
     rpcCallData: tokenRpcCallData,
@@ -183,7 +184,13 @@ export const queryRpcData = async ({
 
   const calls: Call[] = [...tokenRpcCallData];
 
-  const rpc_body = prepareStarknetRawCallData(calls);
+	const IDS_TOKEN:Record<number, string> = {}
+
+	calls.forEach((call, idx) => {
+		IDS_TOKEN[idx] = call.contractAddress
+	})
+
+  const rpc_body = prepareStarknetRawCallData(calls, Object.keys(IDS_TOKEN)?.map(i => Number(i)));
 
   const executeRpcCall = async (url: string) => {
     const res = await fetch(url, {
@@ -207,37 +214,36 @@ export const queryRpcData = async ({
     } catch (error) {
       console.error("Error with main RPC in balances", error);
     }
-    let balance: (bigint | undefined)[] = [];
-    let allowance: (bigint | undefined)[]= [];
+    let balances: { balance:  bigint | undefined, tokenAddress: string }[] = [];
 
-    // try {
-    //   const balanceResponse = bodyJson.find(
-    //     (item: any) => item?.id === nameToId[tokenFunctionNames[0]],
-    //   );
-    //   balance = tokenAbiCalldataParser.parse(tokenFunctionNames[0], balanceResponse?.result) as any;
-    // } catch (e) {
-    //   console.warn("failed to parse balance from rpc call", e);
-    // }
-    // try {
-    //   const allowanceResponse = bodyJson.find(
-    //     (item: any) => item?.id === nameToId[tokenFunctionNames[1]],
-    //   );
-    //   allowance = tokenAbiCalldataParser.parse(
-    //     tokenFunctionNames[1],
-    //     allowanceResponse?.result,
-    //   ) as any;
-    // } catch (e) {
-    //   console.warn("failed to parse allowance from rpc call", e);
-    // }
+	if (bodyJson && Array.isArray(bodyJson)) {
+			bodyJson?.forEach(result => {
+				if(!result?.error && result?.result) {
+					try {
+						let balance = tokenAbiCalldataParser.parse(
+							tokenFunctionNames[0],
+							result?.result,
+						) as any;
+					balances.push({
+						tokenAddress: IDS_TOKEN[Number(result?.id)],
+						balance
+					})
+					} catch(e) {
+						console.warn("failed to parse balance from rpc call", e);
+						console.error(e)
+					}
+				} 
+			})
+		}
 
-    return [];
+    return balances;
   } catch (e) {
     console.error(e);
     return []  
   }
 };
 
-export const prepareStarknetRawCallData = (calls: Call[]) => {
+export const prepareStarknetRawCallData = (calls: Call[], ids: number[]) => {
   return calls.map((c, idx) => {
     let entryPointSelector = hash.getSelectorFromName(c.entrypoint);
     // const selectorLength = entryPointSelector?.length;
@@ -249,7 +255,7 @@ export const prepareStarknetRawCallData = (calls: Call[]) => {
     // }
 
     return {
-      id: idx,
+      id: ids[idx] ?? idx,
       jsonrpc: "2.0",
       method: "starknet_call",
       params: {

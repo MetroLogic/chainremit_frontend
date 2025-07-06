@@ -23,6 +23,8 @@ const WalletWrapper:React.FC<IWalletWrapper> = ({ children }) => {
 
   const balances = useBalances({ ownerAddress: address })
 
+  // Balances are fetched now
+
   data = "me.stark"
 
   return <>
