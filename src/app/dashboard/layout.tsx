@@ -27,14 +27,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar 
-        isOpen={sidebarOpen} 
+      <Sidebar
+        isOpen={sidebarOpen}
         onClose={closeSidebar}
         isCollapsed={sidebarCollapsed}
         onToggleCollapse={toggleSidebarCollapse}
       />
       <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'}`}>
-        <Header 
+        <Header
           onMenuClick={toggleSidebar}
           isCollapsed={sidebarCollapsed}
           onToggleCollapse={toggleSidebarCollapse}

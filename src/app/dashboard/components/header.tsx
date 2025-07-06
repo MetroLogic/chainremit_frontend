@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { Bell, Menu, User, PanelLeftClose } from "lucide-react";
+import { Bell, Menu, User, PanelLeftClose, LogOut } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useAccount } from "@starknet-react/core";
+import { useStarknetWallet } from "@/components/context/StarknetWalletContext";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -15,6 +17,9 @@ const Header: React.FC<HeaderProps> = ({
   isCollapsed,
   onToggleCollapse,
 }) => {
+
+
+  const {truncatedAddress, disconnectWallet, address} =  useStarknetWallet()
   return (
     <header className="h-16 bg-background border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
       <div className="flex items-center space-x-4">
@@ -38,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
       <div className="flex items-center space-x-4">
-        <div className="text-sm text-muted-foreground">0xabc1...3456</div>
+       {address &&  <div className="text-sm text-muted-foreground"> {truncatedAddress} </div>}
         <button className="relative p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
           <Bell className="w-5 h-5" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -48,6 +53,12 @@ const Header: React.FC<HeaderProps> = ({
 
         <button className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors">
           <User className="w-4 h-4 text-muted-foreground" />
+        </button>
+
+
+
+        <button onClick={disconnectWallet} className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors">
+          <LogOut className="w-4 h-4 text-muted-foreground" />
         </button>
       </div>
     </header>

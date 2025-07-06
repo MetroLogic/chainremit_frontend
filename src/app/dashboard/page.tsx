@@ -6,6 +6,7 @@ import CreditScoreWidget from './components/credit-score';
 import ActiveLoansCard from './components/active-loan';
 import TransactionsAndRequests from './components/recent-transaction';
 import LoanRepaymentCard from './components/loan-repayment';
+import Link from 'next/link';
 
 const DashboardPage: React.FC = () => {
   return (
@@ -20,11 +21,11 @@ const DashboardPage: React.FC = () => {
           <div>
             <WalletBalanceCard />
           </div>
-          
+
           <div>
             <CreditScoreWidget />
           </div>
-          
+
           <div>
             <ActiveLoansCard />
           </div>
