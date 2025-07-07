@@ -31,7 +31,7 @@ const QrCode:React.FC<IQrCode> = ({ starknetId, walletAddress }) => {
       <div className="bg-gray-300 dark:bg-gray-400 rounded-lg p-6 m-6">
         { 
           walletAddress 
-            ? <QRCode value={walletAddress} bgColor='transparent' id='qr-code' /> 
+            ? <QRCode title='Wallet Address' value={walletAddress} bgColor='transparent' id='qr-code' /> 
             : <QrCodeIcon size={128} /> 
         }
       </div>
