@@ -28,11 +28,12 @@ const DUMMY_RECIPIENTS = [
 
 const page = () => {
    return <WalletWrapper>
-      {({ address, starknetId, isStarknetIdLoading }) => {
+      {({ address, isConnected, currentCurrencies, tokenBalances }) => {
         return <Send
           address={address}
-          starknetId={starknetId}
-          isStarknetIdLoading={isStarknetIdLoading}
+        isConnected={isConnected}
+        currentCurrencies={currentCurrencies}
+        tokenBalances={tokenBalances}
           recentRecipients={DUMMY_RECIPIENTS}
         />
       }}

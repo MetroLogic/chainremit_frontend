@@ -1,5 +1,6 @@
 
 import { Call, CallData, hash } from "starknet"
+import { TokenBalance } from "./use-balances";
 
 const ERC20_ABI = [
 	{
@@ -114,7 +115,18 @@ const ERC20_ABI = [
 			}
 		],
 		"state_mutability": "external"
-	}
+	},
+	{
+		"type": "function",
+		"name": "decimals",
+		"inputs": [],
+		"outputs": [
+			{
+				"type": "core::integer::u8"
+			}
+		],
+		"state_mutability": "view"
+	},
 ] as const
 
 
@@ -146,7 +158,7 @@ export const makeTokenBalanceContractQueryCall = ({
 } => {
   const abiCalldata = new CallData(ERC20_ABI);
 
-  const functionNames = ["balance_of"];
+  const functionNames = ["balance_of", "decimals"];
 
   return {
     functionNames,
@@ -155,6 +167,11 @@ export const makeTokenBalanceContractQueryCall = ({
         contractAddress: tokenContractAddress,
         entrypoint: functionNames[0],
         calldata: [ownerAddress],
+      },
+      {
+        contractAddress: tokenContractAddress,
+        entrypoint: functionNames[1],
+        calldata: [],
       },
     ] as Call[]))?.flat(),
     abiCalldataParser: abiCalldata,
@@ -169,10 +186,7 @@ export const queryRpcData = async ({
   tokenContractAddresses: string[];
   ownerAddress: string;
   nodeUrl: string;
-}): Promise<{
-	tokenAddress: string,
-	balance?: bigint;
-}[]> => {
+}): Promise<TokenBalance[]> => {
   const {
     rpcCallData: tokenRpcCallData,
     abiCalldataParser: tokenAbiCalldataParser,
@@ -214,26 +228,42 @@ export const queryRpcData = async ({
     } catch (error) {
       console.error("Error with main RPC in balances", error);
     }
-    let balances: { balance:  bigint | undefined, tokenAddress: string }[] = [];
+    let balances: TokenBalance[] = [];
 
-	if (bodyJson && Array.isArray(bodyJson)) {
-			bodyJson?.forEach(result => {
-				if(!result?.error && result?.result) {
+	if (bodyJson && Array.isArray(bodyJson) && bodyJson?.length >= 2) {
+			for (let i = 0; i < bodyJson?.length; i+= 2) {
+				const balanceResult = bodyJson[i]
+				const decimalResult = bodyJson[i+1]
+				let tokenBalanceObj: TokenBalance = { tokenAddress: IDS_TOKEN[i] }
+				if(!balanceResult?.error && balanceResult?.result) {
 					try {
 						let balance = tokenAbiCalldataParser.parse(
 							tokenFunctionNames[0],
-							result?.result,
+							balanceResult?.result,
 						) as any;
-					balances.push({
-						tokenAddress: IDS_TOKEN[Number(result?.id)],
+					tokenBalanceObj = {
+						tokenAddress: IDS_TOKEN[Number(balanceResult?.id)],
 						balance
-					})
+					}
 					} catch(e) {
 						console.warn("failed to parse balance from rpc call", e);
 						console.error(e)
 					}
 				} 
-			})
+				if(!decimalResult?.error && decimalResult?.result) {
+					try {
+						let decimals = tokenAbiCalldataParser.parse(
+							tokenFunctionNames[1],
+							decimalResult?.result,
+						) as any;
+						tokenBalanceObj["decimals"] = decimals ?? "18"
+					} catch(e) {
+						console.warn("failed to parse token decimals from rpc call", e);
+						console.error(e)
+					}
+				} 
+				balances.push(tokenBalanceObj)
+			}
 		}
 
     return balances;

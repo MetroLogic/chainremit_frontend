@@ -9,9 +9,9 @@ type CURRENCY_TYPE = {
       address: string;
 }
 
-type CURRENCIES_AVAILABLE = "USDC" | "STRK" | "ETH"
+export type CURRENCIES_AVAILABLE = "USDC" | "STRK" | "ETH"
 
-type CURRENCIES_TYPE = Record<CURRENCIES_AVAILABLE, CURRENCY_TYPE>
+export type CURRENCIES_TYPE = Record<CURRENCIES_AVAILABLE, CURRENCY_TYPE>
 
 const CURRENCIES: Record<"sepolia" | "mainnet", CURRENCIES_TYPE> = {
   "sepolia": {
@@ -56,9 +56,10 @@ const RPC_URL = {
 
 }
 
-type TokenBalance = {
+export type TokenBalance = {
   tokenAddress: string;
   balance?: bigint;
+  decimals?: number;
 };
 
 export function areTokenArraysEqual(
@@ -78,6 +79,12 @@ export function areTokenArraysEqual(
       (typeof a.balance === 'undefined' && typeof b.balance === 'undefined');
 
     if (!balanceEqual) return false;
+
+    const decimalsEqual =
+      a.decimals === b.decimals ||
+      (typeof a.decimals === 'undefined' && typeof b.decimals === 'undefined');
+
+    if (!decimalsEqual) return false;
   }
 
   return true;

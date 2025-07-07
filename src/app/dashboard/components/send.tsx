@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import {
     ArrowDownIcon,
     SendIcon,
@@ -54,13 +54,100 @@ type ISend = WalletInjectedProps & {
  recentRecipients: RecentRecipient[] 
 }
 
-export const Send: React.FC<ISend> = ({ recentRecipients, address, isStarknetIdLoading, starknetId, isConnected }) => {
-  const { register, handleSubmit, watch, formState: { errors, isValid, isDirty }} = useForm({
+export const Send: React.FC<ISend> = ({ 
+  recentRecipients, 
+  tokenBalances,
+  currentCurrencies,
+  isConnected 
+}) => {
+
+  const { register, handleSubmit, watch, formState: { errors, isValid, isDirty }, getValues, setValue, setError } = useForm({
     resolver: zodResolver(sendSchema) 
   });
 
   const onSubmit = (data: z.infer<typeof sendSchema>) => {
     console.log({ data })
+  }
+
+  const tokenWatcher = watch('currency')
+  const amountWatcher = watch('amount')
+
+  const { isBalanceAvailable, maxBalance } = useMemo(() => {
+
+    let isBalanceAvailable = false;
+    // @ts-ignore
+    let balance = 0n;
+
+    const currentCurrency = getValues("currency")
+
+    const currentTokenData = currentCurrencies?.[currentCurrency]
+
+    const tokenBalance = tokenBalances?.find(balance => balance?.tokenAddress?.toLowerCase() === currentTokenData?.address?.toLowerCase())
+
+    try {
+      if(tokenBalance && tokenBalance?.balance && tokenBalance?.decimals) {
+        isBalanceAvailable = true;
+        // @ts-ignore
+        balance = parseFloat(tokenBalance?.balance ?? 0n) / parseFloat(10n ** BigInt(tokenBalance?.decimals ?? 1))
+      }
+    } catch(e) {
+      console.warn(e)
+    }
+
+    return {
+      isBalanceAvailable,
+      maxBalance: balance
+    }
+  }, [tokenWatcher, tokenBalances])
+
+  useEffect(() => {
+    setValue('amount', (0)?.toString(), {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  }, [tokenWatcher])
+
+  useEffect(() => {
+    const currentAmount = getValues('amount')
+    const currentAmountNum = parseFloat(currentAmount)
+    if(!Number.isNaN(currentAmountNum)) {
+      if(currentAmountNum > maxBalance) {
+        setError('amount', {
+          type: 'manual', // or 'custom'
+          message: 'Amount can\'t be more than balance.',
+        });
+      } else {
+        setError('amount', {
+          type: 'manual', // or 'custom'
+          message: undefined,
+        });
+      }
+    } else {
+      setError('amount', {
+        type: 'manual', // or 'custom'
+        message: undefined,
+      });
+    }
+  }, [amountWatcher, maxBalance])
+
+  const handleMaxAmount = () => {
+    setValue('amount', (maxBalance ?? 0)?.toString(), {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  }
+
+  if(!isConnected) {
+    return <div className="flex flex-col items-center">
+      <div className="space-y-6 w-[600px] max-w-[600px]">
+        <div>
+          <h1 className="text-2xl font-semibold">Connect Wallet</h1>
+          <h3 className="text-md font-light opacity-65">Connect your wallet to send money</h3>
+        </div>
+      </div>
+    </div>
   }
 
   return (
@@ -88,7 +175,20 @@ export const Send: React.FC<ISend> = ({ recentRecipients, address, isStarknetIdL
 
         <div className="flex gap-2">
           <div className="flex-1 w-[50%]">
-            <label className="block text-sm font-medium">Amount</label>
+            <div className="flex justify-between">
+                  <label className="block text-sm font-medium">Amount</label>
+                  { 
+                    isBalanceAvailable && <button
+                      className="px-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-transparent rounded-sm hover:border-gray-400 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 transition text-[10px]"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleMaxAmount()
+                      }}
+                    >
+                      MAX 
+                    </button>
+                  }
+            </div>
             <input
               className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1"
               placeholder="0.00"
@@ -101,15 +201,15 @@ export const Send: React.FC<ISend> = ({ recentRecipients, address, isStarknetIdL
           <div className="w-[50%]">
             <label className="block text-sm font-medium">Currency</label>
             <div className="relative mt-1">
-              <select
-                defaultValue="USDC"
-                className="appearance-none w-full h-[43px] rounded border  border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent pr-8"
-                {...register("currency", { required: true })}
-              >
-              <option value="USDC">USDC</option>
-              <option value="ETH">ETH</option>
-              <option value="STRK">STRK</option>
-              </select>
+                  <select
+                    defaultValue="USDC"
+                    className="appearance-none w-full h-[43px] rounded border  border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent pr-8"
+                    {...register("currency", { required: true })}
+                  >
+                    {Object.keys(currentCurrencies ?? {}).map(key => {
+                      return <option value={key}>{key}</option>
+                    })}
+                  </select>
               <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
                 <ArrowDownIcon size={16} />
               </div>

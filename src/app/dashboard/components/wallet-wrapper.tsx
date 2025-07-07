@@ -1,6 +1,6 @@
 "use client"
 
-import { useBalances } from '@/hooks/use-balances';
+import { CURRENCIES_TYPE, TokenBalance, useBalances } from '@/hooks/use-balances';
 import { useAccount, useBalance, useStarkName } from '@starknet-react/core'
 import React, { ReactElement } from 'react'
 
@@ -9,7 +9,9 @@ export type WalletInjectedProps = {
   address?: string;
   isConnected?: boolean;
   starknetId?: string;
-  isStarknetIdLoading: boolean;
+  isStarknetIdLoading?: boolean;
+  currentCurrencies?: CURRENCIES_TYPE,
+  tokenBalances?: TokenBalance[]
 };
 
 type IWalletWrapper = {
@@ -19,11 +21,9 @@ type IWalletWrapper = {
 const WalletWrapper:React.FC<IWalletWrapper> = ({ children }) => {
 
   const { address, isConnected } = useAccount()
-  let { data, error, isLoading } = useStarkName({ address })
+  let { data, _error, isLoading } = useStarkName({ address })
 
-  const balances = useBalances({ ownerAddress: address })
-
-  // Balances are fetched now
+  const { currentCurrencies, tokenBalances } = useBalances({ ownerAddress: address })
 
   data = "me.stark"
 
@@ -33,6 +33,8 @@ const WalletWrapper:React.FC<IWalletWrapper> = ({ children }) => {
       isConnected,
       starknetId: data,
       isStarknetIdLoading: isLoading,
+      currentCurrencies,
+      tokenBalances
     })}
   </>
 }
