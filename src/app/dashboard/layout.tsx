@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, ReactNode } from 'react';
-import Sidebar from './components/sidebar';
-import Header from './components/header';
-import { Providers } from '@/components/providers';
+import React, { useState, ReactNode } from "react";
+import Sidebar from "./components/sidebar";
+import Header from "./components/header";
+import { Providers } from "@/components/providers";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -26,22 +26,24 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95">
       <Sidebar
         isOpen={sidebarOpen}
         onClose={closeSidebar}
         isCollapsed={sidebarCollapsed}
         onToggleCollapse={toggleSidebarCollapse}
       />
-      <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'}`}>
+      <div
+        className={`transition-all duration-300 ${
+          sidebarCollapsed ? "lg:ml-16" : "lg:ml-64"
+        }`}
+      >
         <Header
           onMenuClick={toggleSidebar}
           isCollapsed={sidebarCollapsed}
           onToggleCollapse={toggleSidebarCollapse}
         />
-        <main className="p-4 lg:p-6">
-          {children}
-        </main>
+        <main className="p-4 lg:p-6">{children}</main>
       </div>
     </div>
   );

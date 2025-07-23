@@ -8,14 +8,12 @@ import NotificationsSection from "@/components/profile/notification-sectoon";
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black  text-gray-900 dark:text-white p-4 lg:p-6 transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95  text-gray-900 dark:text-white p-4 lg:p-6 transition-colors duration-200">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 lg:mb-8">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold mb-2">
-                Profile
-              </h1>
+              <h1 className="text-2xl lg:text-3xl font-bold mb-2">Profile</h1>
               <p className="text-gray-600 dark:text-gray-400 text-sm lg:text-base">
                 Manage your account information and preferences
               </p>
