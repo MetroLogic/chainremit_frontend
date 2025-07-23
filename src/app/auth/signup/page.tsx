@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import {
   Card,
@@ -42,7 +41,7 @@ export default function SignUpPage() {
     password: "",
     confirmPassword: "",
     phoneNumber: "",
-    countryCode:"",
+    countryCode: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -146,7 +145,8 @@ export default function SignUpPage() {
         <div>
           <div className="font-bold">Account Created Successfully</div>
           <div>
-            Welcome to StarkRemit! Please check your email to verify your account.
+            Welcome to StarkRemit! Please check your email to verify your
+            account.
           </div>
         </div>
       );
@@ -177,10 +177,7 @@ export default function SignUpPage() {
 
       router.push("/dashboard");
     } catch (error) {
-      toast(
-       "Failed to connect wallet. Please try again.",
-        
-      );
+      toast("Failed to connect wallet. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -196,26 +193,17 @@ export default function SignUpPage() {
 
       router.push("/dashboard");
     } catch (error) {
-      toast(
-      `Failed to sign up with ${provider}. Please try again.`,
-      
-      );
+      toast(`Failed to sign up with ${provider}. Please try again.`);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95 flex items-center justify-center p-4">
+      <div className="w-full max-w-[600px] space-y-6">
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="flex items-center justify-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Send className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-bold">StarkRemit</span>
-          </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Create your account
@@ -227,7 +215,7 @@ export default function SignUpPage() {
         </div>
 
         {/* Sign Up Card */}
-        <Card>
+        <Card className="bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 shadow-lg border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Sign Up</CardTitle>
             <CardDescription>
@@ -267,7 +255,7 @@ export default function SignUpPage() {
                 <div className="space-y-2">
                   <Label htmlFor="firstName">First Name</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <User className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                     <Input
                       id="firstName"
                       placeholder="John"
@@ -275,7 +263,7 @@ export default function SignUpPage() {
                       onChange={(e) =>
                         handleInputChange("firstName", e.target.value)
                       }
-                      className={`pl-10 ${
+                      className={`py-6 pl-10 ${
                         errors.firstName ? "border-red-500" : ""
                       }`}
                       disabled={isLoading}
@@ -295,7 +283,7 @@ export default function SignUpPage() {
                     onChange={(e) =>
                       handleInputChange("lastName", e.target.value)
                     }
-                    className={errors.lastName ? "border-red-500" : ""}
+                    className={errors.lastName ? "border-red-500 p-6" : "p-6"}
                     disabled={isLoading}
                   />
                   {errors.lastName && (
@@ -307,14 +295,14 @@ export default function SignUpPage() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className={`pl-10 ${errors.email ? "border-red-500" : ""}`}
+                    className={`py-6 pl-10 ${errors.email ? "border-red-500" : ""}`}
                     disabled={isLoading}
                   />
                 </div>
@@ -338,7 +326,7 @@ export default function SignUpPage() {
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -347,7 +335,7 @@ export default function SignUpPage() {
                     onChange={(e) =>
                       handleInputChange("password", e.target.value)
                     }
-                    className={`pl-10 pr-10 ${
+                    className={`py-6 px-10 ${
                       errors.password ? "border-red-500" : ""
                     }`}
                     disabled={isLoading}
@@ -422,7 +410,7 @@ export default function SignUpPage() {
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                   <Input
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
@@ -431,7 +419,7 @@ export default function SignUpPage() {
                     onChange={(e) =>
                       handleInputChange("confirmPassword", e.target.value)
                     }
-                    className={`pl-10 pr-10 ${
+                    className={`py-6 px-10 ${
                       errors.confirmPassword ? "border-red-500" : ""
                     }`}
                     disabled={isLoading}
@@ -523,6 +511,7 @@ export default function SignUpPage() {
             {/* Social Sign Up */}
             <div className="grid grid-cols-2 gap-4">
               <Button
+                className="p-6"
                 variant="outline"
                 onClick={() => handleSocialSignUp("Google")}
                 disabled={isLoading}
@@ -548,6 +537,7 @@ export default function SignUpPage() {
                 Google
               </Button>
               <Button
+                className="p-6"
                 variant="outline"
                 onClick={() => handleSocialSignUp("Apple")}
                 disabled={isLoading}

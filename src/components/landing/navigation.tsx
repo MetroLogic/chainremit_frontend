@@ -1,9 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { Send } from "lucide-react"
+import Link from "next/link"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useState } from "react";
 import { HiMenu, HiX, HiPaperAirplane } from "react-icons/hi";
 import { useStarknetWallet } from "../context/StarknetWalletContext";
+import { Button } from "../ui/button";
 
 interface NavigationProps {
   setIsModalOpen: (isModalOpen: boolean) => void;
@@ -11,94 +14,75 @@ interface NavigationProps {
 
 export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { address, walletName, connectWallet, disconnectWallet, status } = useStarknetWallet();
+  const { address, walletName, connectWallet, disconnectWallet, status } =
+    useStarknetWallet();
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-
-
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
-    <nav className="relative z-50 px-4 py-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
-              <HiPaperAirplane className="h-5 w-5 text-white rotate-45" />
-            </div>
-            <span className="text-xl font-bold text-white">ChainRemit</span>
+    <header className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <Send className="w-4 h-4 text-white" />
           </div>
+          <span className="text-xl font-bold">StarkRemit</span>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="#features"
-              className="text-gray-300 hover:text-white transition-colors"
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-6">
+          <Link
+            href="#features"
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+          >
+            Features
+          </Link>
+          <Link 
+            href="/demo" 
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+          >
+            Demo
+          </Link>
+          <Link 
+            href="/about" 
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+          >
+            About
+          </Link>
+          <Link 
+            href="/help" 
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+          >
+            Help
+          </Link>
+          <div className="flex items-center space-x-3">
+            <ThemeToggle />
+            <Button variant="ghost" asChild>
+              <Link href="/auth/login">Log In</Link>
+            </Button>
+            <Button
+              asChild
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
             >
-              Features
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              How It Works
-            </Link>
-
-            <Link
-              href="/auth/login"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                Login
-              </button>
-            </Link>
-
-
-            <Link
-              href="/auth/signup"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                Sign Up
-              </button>
-            </Link>
-
-
-
-
-
-
-            {!address && (
-              <button
-                onClick={connectWallet}
-                disabled={status === "connecting"}
-                className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-              >
-                {status === "connecting" ? "Connecting..." : "Connect Wallet"}
-              </button>
-            )}
-
-
-
-            {address && (
-              <button
-                onClick={disconnectWallet}
-                disabled={status === "disconnecting"}
-                className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-              >
-                {status === "disconnecting" ? "Disconnecting..." : "Disconnect Wallet"}
-              </button>
-            )}
-
-
-
-
+              <Link href="/auth/signup">Sign Up</Link>
+            </Button>
           </div>
+        </nav>
 
-          {/* Mobile Menu Button */}
+        {/* Mobile Menu Button and Theme Toggle */}
+        <div className="lg:hidden flex items-center space-x-2">
+          <ThemeToggle />
           <button
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
+            className="p-2 rounded-md text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <HiX className="h-6 w-6" />
@@ -107,70 +91,92 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
             )}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-4">
-              <Link
-                href="#features"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                Features
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                How It Works
-              </Link>
-              <Link
-                href="#dashboard"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                Dashboard
-              </Link>
-
-
-
-              <Link
-                href="/auth/login"
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                <button className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                  Login
-                </button>
-              </Link>
-
-
-
-
-
-              {!address && (
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="lg:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            onClick={closeMenu}
+          />
+          
+          {/* Mobile Menu */}
+          <div className="fixed top-0 right-0 h-full w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-2xl z-50 transform transition-transform duration-300 border-l border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
+                <div className="flex items-center space-x-2">
+                  <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-md flex items-center justify-center">
+                    <Send className="w-3 h-3 text-white" />
+                  </div>
+                  <span className="text-lg font-bold">StarkRemit</span>
+                </div>
                 <button
-                  onClick={connectWallet}
-                  disabled={status === "connecting"}
-                  className="inline-flex w-fit items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                  onClick={closeMenu}
+                  className="p-2 rounded-md text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
-                  {status === "connecting" ? "Connecting..." : "Connect Wallet"}
+                  <HiX className="h-5 w-5" />
                 </button>
-              )}
-
-              {address && (
-                <button
-                  onClick={disconnectWallet}
-                  disabled={status === "disconnecting"}
-                  className="inline-flex w-fit items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+              </div>
+              
+              {/* Navigation Links */}
+              <div className="flex-1 py-6 bg-white/95 dark:bg-gray-900/95">
+                <nav className="space-y-1 px-4">
+                  <Link
+                    href="#features"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    Features
+                  </Link>
+                  <Link
+                    href="/demo"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    Demo
+                  </Link>
+                  <Link
+                    href="/about"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/help"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    Help
+                  </Link>
+                </nav>
+              </div>
+              
+              {/* Bottom Actions */}
+              <div className="p-4 border-t dark:border-gray-800 space-y-3">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  asChild
+                  onClick={closeMenu}
                 >
-                  {status === "disconnecting" ? "Disconnecting..." : "Disconnect Wallet"}
-                </button>
-              )}
-
-
+                  <Link href="/auth/login">Log In</Link>
+                </Button>
+                <Button
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  asChild
+                  onClick={closeMenu}
+                >
+                  <Link href="/auth/signup">Sign Up</Link>
+                </Button>
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      )}
+    </header>
   );
 }
