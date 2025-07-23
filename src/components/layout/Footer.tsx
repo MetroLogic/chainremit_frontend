@@ -1,6 +1,12 @@
-import Link from "next/link"
-import { FiTwitter, FiGithub, FiMessageCircle, FiGlobe, FiMoon } from "react-icons/fi"
-import { HiPaperAirplane } from "react-icons/hi"
+import Link from "next/link";
+import {
+  FiTwitter,
+  FiGithub,
+  FiMessageCircle,
+  FiGlobe,
+  FiMoon,
+} from "react-icons/fi";
+import { HiPaperAirplane } from "react-icons/hi";
 
 export function Footer() {
   return (
@@ -11,16 +17,28 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white">About</h3>
             <div className="space-y-2">
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 About Us
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Careers
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Press
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Contact
               </Link>
             </div>
@@ -30,16 +48,28 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white">Documentation</h3>
             <div className="space-y-2">
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 API Docs
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Developer Guide
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Security
               </Link>
-              <Link href="#" className="block text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="/terms-of-service"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 Terms of Service
               </Link>
             </div>
@@ -49,13 +79,22 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white">Social</h3>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FiTwitter className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FiGithub className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FiMessageCircle className="h-5 w-5" />
               </Link>
             </div>
@@ -67,7 +106,7 @@ export function Footer() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="flex h-6 w-6 items-center justify-center rounded bg-blue-600">
-                 <HiPaperAirplane className="h-5 w-5 text-white rotate-45" />
+                <HiPaperAirplane className="h-5 w-5 text-white rotate-45" />
               </div>
               <span className="font-semibold text-white">ChainRemit</span>
             </div>
@@ -89,5 +128,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
