@@ -1,26 +1,27 @@
 "use client"
-import {
-    Search,
-    MessageCircle,
-    Send,
-    Download,
-    Users,
-    CreditCard,
-    TrendingUp,
-    Shield,
-    HelpCircle,
-    Moon,
-    Video,
-    Book,
-    ArrowRight,
-  } from "lucide-react"
-  import { Button } from "@/components/ui/button"
-  import { Input } from "@/components/ui/input"
-  import { Card, CardContent } from "@/components/ui/card"
-import { HiPaperAirplane } from "react-icons/hi"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import Faq from "@/components/help/faq"
-import PopularArticles from "@/components/help/popular-articles"
+  import {
+      Search,
+      MessageCircle,
+      Send,
+      Download,
+      Users,
+      CreditCard,
+      TrendingUp,
+      Shield,
+      HelpCircle,
+      Moon,
+      Video,
+      Book,
+      ArrowRight,
+      } from "lucide-react"
+    import Link from "next/link"
+    import { Button } from "@/components/ui/button"
+    import { Input } from "@/components/ui/input"
+    import { Card, CardContent } from "@/components/ui/card"
+    import { HiPaperAirplane } from "react-icons/hi"
+    import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+    import Faq from "@/components/help/faq"
+    import PopularArticles from "@/components/help/popular-articles"
   
   const helpTopics = [
     {
@@ -156,12 +157,15 @@ import PopularArticles from "@/components/help/popular-articles"
         <header className="border-b border-slate-800 px-4 py-3">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
             {/* Logo */}
+            <Link href="/" className="cursor-pointer">
           <div className="flex items-center space-x-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
               <HiPaperAirplane className="h-5 w-5 text-white rotate-45" />
             </div>
             <span className="text-xl font-bold text-white">ChainRemit Help</span>
           </div>
+          </Link>
+
             <div className="flex items-center gap-4">
               <Button variant="ghost" className="text-white hover:text-white">
                 Home
@@ -260,7 +264,7 @@ import PopularArticles from "@/components/help/popular-articles"
         </section>
   
         {/* Bottom CTA Section */}
-        <section className="bg-gradient-to-l m-2 xl:mx-8 rounded-lg from-purple-600 to-blue-600 px-4 py-5 xl:py-7">
+        <section className="bg-gradient-to-l m-2  xl:max-w-screen-2xl xl:mx-auto rounded-lg from-purple-600 to-blue-600 px-4 py-5 xl:py-7">
           <div className="mx-auto max-w-4xl flex items-center flex-col text-center">
             <MessageCircle className="h-10 mb-4 w-12 text-white" />
             <h2 className="mb-3 text-2xl font-bold">Still Need Help?</h2>
