@@ -60,7 +60,6 @@ export default function DemoPage() {
     setCurrentStep(0)
     setDemoProgress(0)
 
-    // Simulate demo progression
     const interval = setInterval(() => {
       setDemoProgress((prev) => {
         if (prev >= 100) {
@@ -447,7 +446,6 @@ export default function DemoPage() {
           </TabsContent>
 
           <TabsContent value="walkthrough" className="space-y-8">
-            {/* Step-by-Step Walkthrough */}
             <div className="max-w-4xl mx-auto space-y-8">
               {demoSteps.map((step, index) => (
                 <Card key={index} className="overflow-hidden">
@@ -469,7 +467,6 @@ export default function DemoPage() {
           </TabsContent>
         </Tabs>
 
-        {/* Call to Action */}
         <div className="text-center mt-16">
           <Card className="max-w-2xl mx-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
             <CardContent className="p-8">
