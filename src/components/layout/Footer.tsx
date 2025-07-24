@@ -91,14 +91,14 @@ export function Footer() {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <Link href="/" className="flex items-center">
-            <Image
-              src="/Logo and text-3.png"
-              alt="ChainRemit Logo"
-              width={150}
-              height={50}
-              className="w-[150px] h-[50px] object-fill"
-            />
-          </Link>
+              <Image
+                src="/Logo and text-3.png"
+                alt="ChainRemit Logo"
+                width={150}
+                height={50}
+                className="w-[150px] h-[50px] object-fill"
+              />
+            </Link>
             <span className="text-gray-500">×</span>
             <span className="">MetroLogic</span>
           </div>

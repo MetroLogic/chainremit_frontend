@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   LayoutDashboard,
   Send,
@@ -65,13 +65,13 @@ const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   const smoothSpring = {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 280,
     damping: 35,
     mass: 0.8,
   };
 
-  const sidebarVariants = {
+  const sidebarVariants: Variants = {
     expanded: {
       width: 256,
       transition: smoothSpring,
@@ -98,10 +98,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       scale: 0.98,
       transition: {
         duration: 0.15,
-        ease: [0.4, 0, 1, 1],
+        ease: "easeInOut",
       },
     },
-  };
+  } as const;
 
   const containerVariants = {
     show: {
@@ -134,10 +134,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       scale: 0.95,
       transition: {
         duration: 0.2,
-        ease: [0.4, 0, 1, 1],
+        ease: "easeInOut",
       },
     },
-  };
+  } as const;
 
   return (
     <>
