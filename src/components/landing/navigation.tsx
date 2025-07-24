@@ -1,12 +1,13 @@
 "use client";
 
-import { Send } from "lucide-react"
-import Link from "next/link"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { Send } from "lucide-react";
+import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useState } from "react";
 import { HiMenu, HiX, HiPaperAirplane } from "react-icons/hi";
 import { useStarknetWallet } from "../context/StarknetWalletContext";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 interface NavigationProps {
   setIsModalOpen: (isModalOpen: boolean) => void;
@@ -27,13 +28,18 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
 
   return (
     <header className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-            <Send className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-xl font-bold">StarkRemit</span>
+        <div className="flex items-center justify-center">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/Logo and text-3.png"
+              alt="ChainRemit Logo"
+              width={200}
+              height={70}
+              className="w-[200px] h-[70px] object-fill"
+            />
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -44,20 +50,20 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
           >
             Features
           </Link>
-          <Link 
-            href="/demo" 
+          <Link
+            href="/demo"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             Demo
           </Link>
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             About
           </Link>
-          <Link 
-            href="/help" 
+          <Link
+            href="/help"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             Help
@@ -97,11 +103,11 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
       {isMenuOpen && (
         <div className="lg:hidden">
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
             onClick={closeMenu}
           />
-          
+
           {/* Mobile Menu */}
           <div className="fixed top-0 right-0 h-full w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-2xl z-50 transform transition-transform duration-300 border-l border-gray-200 dark:border-gray-700">
             <div className="flex flex-col h-full">
@@ -120,7 +126,7 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   <HiX className="h-5 w-5" />
                 </button>
               </div>
-              
+
               {/* Navigation Links */}
               <div className="flex-1 py-6 bg-white/95 dark:bg-gray-900/95">
                 <nav className="space-y-1 px-4">
@@ -154,12 +160,12 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   </Link>
                 </nav>
               </div>
-              
+
               {/* Bottom Actions */}
               <div className="p-4 border-t dark:border-gray-800 space-y-3">
-                <Button 
-                  variant="outline" 
-                  className="w-full" 
+                <Button
+                  variant="outline"
+                  className="w-full"
                   asChild
                   onClick={closeMenu}
                 >

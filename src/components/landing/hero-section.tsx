@@ -31,7 +31,7 @@ export function HeroSection() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
-                <Link href="/dashboard">
+                <Link href="/auth/signup">
                   Launch App
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>

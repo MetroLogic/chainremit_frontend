@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useAccount, useConnect, useDisconnect } from "@starknet-react/core";
 import { truncate } from "@/lib/utils";
+import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -156,7 +157,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <motion.div
         variants={sidebarVariants}
         animate={isCollapsed ? "collapsed" : "expanded"}
-        className={`fixed inset-y-0 left-0 bg-slate-200/95 dark:bg-slate-950/95 border-r border-sidebar-border transform ${
+        className={`fixed inset-y-0 left-0 pt-3 bg-slate-200/95 dark:bg-slate-950/95 border-r border-sidebar-border transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 overflow-hidden`}
         style={{
@@ -171,19 +172,19 @@ const Sidebar: React.FC<SidebarProps> = ({
           } p-6 h-16`}
         >
           <Link
-            href="/dashboard"
-            className={`flex items-center min-w-0 ${
-              isCollapsed ? "justify-center w-full" : ""
+            href="/"
+            className={`flex items-center min-w-0 my-6 ${
+              isCollapsed ? "justify-center w-full" : "my-6"
             }`}
           >
-            <motion.div
+            {/* <motion.div
               className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={smoothSpring}
             >
               <Send className="w-6 h-6 text-primary-foreground rotate-45" />
-            </motion.div>
+            </motion.div> */}
             <AnimatePresence mode="wait">
               {!isCollapsed && (
                 <motion.div
@@ -192,15 +193,19 @@ const Sidebar: React.FC<SidebarProps> = ({
                   initial="hide"
                   animate="show"
                   exit="hide"
-                  className="ml-3 overflow-hidden"
+                  className="ml-3 my-6 overflow-hidden"
                   style={{
                     originX: 0,
                     willChange: "transform, opacity",
                   }}
                 >
-                  <span className="text-xl font-bold text-sidebar-foreground whitespace-nowrap">
-                    StarkRemit
-                  </span>
+                  <Image
+                    src="/Logo and text-3.png"
+                    alt="ChainRemit Logo"
+                    width={200}
+                    height={70}
+                    className="w-[200px] h-[70px] object-fill"
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -218,7 +223,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <motion.div
-          className="px-4"
+          className="px-4 mt-6"
           variants={containerVariants}
           animate={isCollapsed ? "hide" : "show"}
         >
