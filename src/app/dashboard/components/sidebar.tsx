@@ -1,22 +1,23 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  Send, 
-  Download, 
-  CreditCard, 
-  Users, 
-  TrendingUp, 
-  User, 
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  LayoutDashboard,
+  Send,
+  Download,
+  CreditCard,
+  Users,
+  TrendingUp,
+  User,
   Settings,
-  X
-} from 'lucide-react';
-import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
-import { truncate } from '@/lib/utils';
+  X,
+} from "lucide-react";
+import { useAccount, useConnect, useDisconnect } from "@starknet-react/core";
+import { truncate } from "@/lib/utils";
+import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -25,55 +26,62 @@ interface SidebarProps {
   onToggleCollapse: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggleCollapse }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  isOpen,
+  onClose,
+  isCollapsed,
+  onToggleCollapse,
+}) => {
   const pathname = usePathname();
 
-  const { disconnect } = useDisconnect()
-  const { isConnected, address } = useAccount()
-  const { connect, connectors, error } = useConnect()
+  const { disconnect } = useDisconnect();
+  const { isConnected, address } = useAccount();
+  const { connect, connectors, error } = useConnect();
 
   const handleConnect = (idx: number) => {
     const connector = connectors[idx]; // or find based on `id` like 'argentX', 'braavos'
 
     if (!connector) {
-      console.error('No wallet connector available');
+      console.error("No wallet connector available");
       return;
     }
 
     connect({ connector });
   };
-  
+
   const sidebarItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', route: '/dashboard' },
-    { icon: Send, label: 'Send Money', route: '/dashboard/send' },
-    { icon: Download, label: 'Receive Money', route: '/dashboard/receive' },
-    { icon: CreditCard, label: 'Microloans', route: '/dashboard/loans' },
-    { icon: Users, label: 'Group Savings', route: '/dashboard/savings' },
-    { icon: TrendingUp, label: 'Credit Score', route: '/dashboard/credit-score' },
-    { icon: User, label: 'Profile', route: '/dashboard/profile' },
-    { icon: Settings, label: 'Settings', route: '/dashboard/settings' },
+    { icon: LayoutDashboard, label: "Dashboard", route: "/dashboard" },
+    { icon: Send, label: "Send Money", route: "/dashboard/send" },
+    { icon: Download, label: "Receive Money", route: "/dashboard/receive" },
+    { icon: CreditCard, label: "Microloans", route: "/dashboard/loans" },
+    { icon: Users, label: "Group Savings", route: "/dashboard/savings" },
+    {
+      icon: TrendingUp,
+      label: "Credit Score",
+      route: "/dashboard/credit-score",
+    },
+    { icon: User, label: "Profile", route: "/dashboard/profile" },
+    { icon: Settings, label: "Settings", route: "/dashboard/settings" },
   ];
 
-  
   const smoothSpring = {
     type: "spring",
     stiffness: 280,
     damping: 35,
-    mass: 0.8
+    mass: 0.8,
   };
 
   const sidebarVariants = {
     expanded: {
       width: 256,
-      transition: smoothSpring
+      transition: smoothSpring,
     },
     collapsed: {
       width: 64,
-      transition: smoothSpring
-    }
+      transition: smoothSpring,
+    },
   };
 
-  
   const textVariants = {
     show: {
       opacity: 1,
@@ -81,8 +89,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
       scale: 1,
       transition: {
         ...smoothSpring,
-        delay: 0.05
-      }
+        delay: 0.05,
+      },
     },
     hide: {
       opacity: 0,
@@ -90,28 +98,26 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
       scale: 0.98,
       transition: {
         duration: 0.15,
-        ease: [0.4, 0, 1, 1]
-      }
-    }
+        ease: [0.4, 0, 1, 1],
+      },
+    },
   };
 
-  
   const containerVariants = {
     show: {
       transition: {
         staggerChildren: 0.03,
-        delayChildren: 0.02
-      }
+        delayChildren: 0.02,
+      },
     },
     hide: {
       transition: {
         staggerChildren: 0.015,
-        staggerDirection: -1
-      }
-    }
+        staggerDirection: -1,
+      },
+    },
   };
 
-  
   const logoTextVariants = {
     show: {
       opacity: 1,
@@ -119,8 +125,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
       scale: 1,
       transition: {
         ...smoothSpring,
-        delay: 0.1
-      }
+        delay: 0.1,
+      },
     },
     hide: {
       opacity: 0,
@@ -128,17 +134,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
       scale: 0.95,
       transition: {
         duration: 0.2,
-        ease: [0.4, 0, 1, 1]
-      }
-    }
+        ease: [0.4, 0, 1, 1],
+      },
+    },
   };
 
   return (
     <>
-      
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -149,29 +154,37 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
         )}
       </AnimatePresence>
 
-      
-      <motion.div 
+      <motion.div
         variants={sidebarVariants}
         animate={isCollapsed ? "collapsed" : "expanded"}
-        className={`fixed inset-y-0 left-0 bg-sidebar border-r border-sidebar-border transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 overflow-hidden`}
-        style={{ 
-          
-          willChange: 'width',
-          backfaceVisibility: 'hidden',
-          transform: 'translateZ(0)'
+        className={`fixed inset-y-0 left-0 pt-3 bg-slate-200/95 dark:bg-slate-950/95 border-r border-sidebar-border transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 overflow-hidden`}
+        style={{
+          willChange: "width",
+          backfaceVisibility: "hidden",
+          transform: "translateZ(0)",
         }}
       >
-        
-        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} p-6 h-16`}>
-          <Link href="/dashboard" className={`flex items-center min-w-0 ${isCollapsed ? 'justify-center w-full' : ''}`}>
-            <motion.div 
+        <div
+          className={`flex items-center ${
+            isCollapsed ? "justify-center" : "justify-between"
+          } p-6 h-16`}
+        >
+          <Link
+            href="/"
+            className={`flex items-center min-w-0 my-6 ${
+              isCollapsed ? "justify-center w-full" : "my-6"
+            }`}
+          >
+            {/* <motion.div
               className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={smoothSpring}
             >
               <Send className="w-6 h-6 text-primary-foreground rotate-45" />
-            </motion.div>
+            </motion.div> */}
             <AnimatePresence mode="wait">
               {!isCollapsed && (
                 <motion.div
@@ -180,22 +193,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
                   initial="hide"
                   animate="show"
                   exit="hide"
-                  className="ml-3 overflow-hidden"
-                  style={{ 
+                  className="ml-3 my-6 overflow-hidden"
+                  style={{
                     originX: 0,
-                    willChange: 'transform, opacity'
+                    willChange: "transform, opacity",
                   }}
                 >
-                  <span className="text-xl font-bold text-sidebar-foreground whitespace-nowrap">
-                    StarkRemit
-                  </span>
+                  <Image
+                    src="/Logo and text-3.png"
+                    alt="ChainRemit Logo"
+                    width={200}
+                    height={70}
+                    className="w-[200px] h-[70px] object-fill"
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
           </Link>
-          
-          
-          <motion.button 
+
+          <motion.button
             className="lg:hidden text-sidebar-foreground"
             onClick={onClose}
             whileHover={{ scale: 1.1 }}
@@ -206,49 +222,35 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
           </motion.button>
         </div>
 
-        
-        <motion.div 
-          className="px-4"
+        <motion.div
+          className="px-4 mt-6"
           variants={containerVariants}
           animate={isCollapsed ? "hide" : "show"}
         >
-          <AnimatePresence mode="wait">
-            {!isCollapsed && (
-              <motion.div 
-                key="nav-label"
-                variants={textVariants}
-                initial="hide"
-                animate="show"
-                exit="hide"
-                className="text-xs font-medium text-muted-foreground mb-4 px-2"
-                style={{ willChange: 'transform, opacity' }}
-              >
-                Navigation
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {!isConnected ? connectors.map((connector, idx) => (
-            <button
-              key="nav-label-connect"
-              className="text-xs font-medium text-muted-foreground mb-4 px-2"
-              onClick={() => { 
-                handleConnect(idx)
-              }}
-            >
-              Connect {connector.name}
-            </button>
-          )) : (
+          {/* {!isConnected ? (
+            connectors.map((connector, idx) => (
               <button
                 key="nav-label-connect"
                 className="text-xs font-medium text-muted-foreground mb-4 px-2"
                 onClick={() => {
-                  disconnect()
+                  handleConnect(idx);
                 }}
               >
-                Connected to {address ? truncate(address) : "-"} 
+                Connect {connector.name}
               </button>
-            )}
-          <nav className={`space-y-1 ${isCollapsed ? 'mt-[2em]' : 'mt-0'}`}>
+            ))
+          ) : (
+            <button
+              key="nav-label-connect"
+              className="text-xs font-medium text-muted-foreground mb-4 px-2"
+              onClick={() => {
+                disconnect();
+              }}
+            >
+              Connected to {address ? truncate(address) : "-"}
+            </button>
+          )} */}
+          <nav className={`space-y-1 ${isCollapsed ? "mt-[2em]" : "mt-0"}`}>
             {sidebarItems.map((item, index) => {
               const isActive = pathname === item.route;
               return (
@@ -261,21 +263,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
                   <Link
                     href={item.route}
                     onClick={onClose}
-                    className={`w-full flex items-center ${isCollapsed ? 'justify-center px-3 py-3' : 'space-x-3 px-3 py-3'} rounded-lg text-left transition-all duration-200 ease-out ${
+                    className={`w-full flex items-center ${
+                      isCollapsed
+                        ? "justify-center px-3 py-3"
+                        : "space-x-3 px-3 py-3"
+                    } rounded-lg text-left transition-all duration-200 ease-out ${
                       isActive
-                        ? 'bg-sidebar-accent text-sidebar-accent-foreground shadow-sm' 
-                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                        ? "bg-slate-100/95 dark:bg-slate-900/95 text-sidebar-accent-foreground shadow-sm"
+                        : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     }`}
                     title={isCollapsed ? item.label : undefined}
                   >
                     <motion.div
-                      animate={{ 
+                      animate={{
                         rotate: isActive ? 360 : 0,
-                        scale: isActive ? 1.1 : 1
+                        scale: isActive ? 1.1 : 1,
                       }}
                       transition={{
                         rotate: { duration: 0.6, ease: "easeInOut" },
-                        scale: smoothSpring
+                        scale: smoothSpring,
                       }}
                     >
                       <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -289,9 +295,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
                           animate="show"
                           exit="hide"
                           className="whitespace-nowrap"
-                          style={{ 
+                          style={{
                             originX: 0,
-                            willChange: 'transform, opacity'
+                            willChange: "transform, opacity",
                           }}
                         >
                           {item.label}
@@ -304,91 +310,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
             })}
           </nav>
         </motion.div>
-        <motion.div 
+        <motion.div
           className="absolute bottom-0 left-0 right-0 p-4 border-t border-sidebar-border"
           variants={containerVariants}
           animate={isCollapsed ? "hide" : "show"}
-        >
-          <motion.div 
-            className={`flex items-center ${isCollapsed ? 'justify-center' : ''} mb-4`}
-            whileHover={{ scale: 1.02, y: -1 }}
-            transition={smoothSpring}
-          >
-            <motion.div 
-              className="w-10 h-10 bg-muted rounded-full flex items-center justify-center flex-shrink-0"
-              whileHover={{ scale: 1.1 }}
-              transition={smoothSpring}
-            >
-              <User className="w-6 h-6 text-muted-foreground" />
-            </motion.div>
-            <AnimatePresence mode="wait">
-              {!isCollapsed && (
-                <motion.div
-                  key="user-name"
-                  variants={logoTextVariants}
-                  initial="hide"
-                  animate="show"
-                  exit="hide"
-                  className="ml-3 overflow-hidden"
-                  style={{ 
-                    originX: 0,
-                    willChange: 'transform, opacity'
-                  }}
-                >
-                  <span className="text-sidebar-foreground font-medium whitespace-nowrap">
-                    John Doe
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-          
-          <AnimatePresence mode="wait">
-            {!isCollapsed && (
-              <motion.div 
-                key="user-links"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{
-                  height: { ...smoothSpring, delay: 0.1 },
-                  opacity: { duration: 0.2, delay: 0.15 }
-                }}
-                style={{ overflow: 'hidden' }}
-                className="space-y-2"
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.02, x: 2 }} 
-                  whileTap={{ scale: 0.98 }}
-                  transition={smoothSpring}
-                >
-                  <Link 
-                    href="/dashboard/profile"
-                    className="w-full flex items-center space-x-3 px-3 py-2 text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-200 ease-out rounded-lg"
-                  >
-                    <User className="w-4 h-4" />
-                    <span className="text-sm">Profile</span>
-                  </Link>
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.02, x: 2 }} 
-                  whileTap={{ scale: 0.98 }}
-                  transition={smoothSpring}
-                >
-                  <Link 
-                    href="/dashboard/settings"
-                    className="w-full flex items-center space-x-3 px-3 py-2 text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-200 ease-out rounded-lg"
-                  >
-                    <Settings className="w-4 h-4" />
-                    <span className="text-sm">Settings</span>
-                  </Link>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-
-
+        ></motion.div>
       </motion.div>
     </>
   );

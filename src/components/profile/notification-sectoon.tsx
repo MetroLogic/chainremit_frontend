@@ -41,7 +41,7 @@ export default function NotificationsSection() {
   return (
     <div className="space-y-6">
       {/* Email Notifications */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Mail className="h-5 w-5 mr-2" />
@@ -125,7 +125,7 @@ export default function NotificationsSection() {
                 }))
               }
             >
-              <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer">
+              <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 cursor-pointer">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -140,7 +140,7 @@ export default function NotificationsSection() {
       </Card>
 
       {/* Push Notifications */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Smartphone className="h-5 w-5 mr-2" />
@@ -212,7 +212,7 @@ export default function NotificationsSection() {
       </Card>
 
       {/* SMS Alerts */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <MessageSquare className="h-5 w-5 mr-2" />
