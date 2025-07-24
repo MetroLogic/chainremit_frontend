@@ -113,16 +113,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95 flex items-center justify-center p-4">
+      <div className="w-full max-w-[600px] space-y-6">
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="flex items-center justify-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Send className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-bold">StarkRemit</span>
-          </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Welcome back
@@ -134,7 +128,7 @@ export default function LoginPage() {
         </div>
 
         {/* Login Card */}
-        <Card>
+        <Card className="bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 shadow-lg border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Sign In</CardTitle>
             <CardDescription>
@@ -173,7 +167,7 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                   <Input
                     id="email"
                     type="email"
@@ -183,7 +177,7 @@ export default function LoginPage() {
                       setEmail(e.target.value);
                       setErrors((prev) => ({ ...prev, email: "" }));
                     }}
-                    className={`pl-10 ${errors.email ? "border-red-500" : ""}`}
+                    className={`py-6 pl-10 ${errors.email ? "border-red-500" : ""}`}
                     disabled={isLoading}
                   />
                 </div>
@@ -195,7 +189,7 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -205,7 +199,7 @@ export default function LoginPage() {
                       setPassword(e.target.value);
                       setErrors((prev) => ({ ...prev, password: "" }));
                     }}
-                    className={`pl-10 pr-10 ${
+                    className={`py-6 px-10 ${
                       errors.password ? "border-red-500" : ""
                     }`}
                     disabled={isLoading}
@@ -283,6 +277,7 @@ export default function LoginPage() {
             {/* Social Login */}
             <div className="grid grid-cols-2 gap-4">
               <Button
+                className="py-6"
                 variant="outline"
                 onClick={() => handleSocialLogin("Google")}
                 disabled={isLoading}
@@ -308,6 +303,7 @@ export default function LoginPage() {
                 Google
               </Button>
               <Button
+                className="py-6"
                 variant="outline"
                 onClick={() => handleSocialLogin("Apple")}
                 disabled={isLoading}

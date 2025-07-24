@@ -7,6 +7,7 @@ import ActiveLoansCard from './components/active-loan';
 import TransactionsAndRequests from './components/recent-transaction';
 import LoanRepaymentCard from './components/loan-repayment';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const DashboardPage: React.FC = () => {
   return (

@@ -23,7 +23,7 @@ export default function PreferencesSection() {
   });
 
   return (
-    <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+    <Card className="bg  border-gray-200 dark:border-gray-800">
       <CardContent className="space-y-6 pt-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
           <div className="flex items-start sm:items-center space-x-3 flex-1">
@@ -43,7 +43,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, language: value }))
             }
           >
-            <SelectTrigger className="cursor-pointer  w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700">
+            <SelectTrigger className="cursor-pointer  w-full sm:w-32 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -74,7 +74,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, theme: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer ">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 cursor-pointer ">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -103,7 +103,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, currency: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer ">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 cursor-pointer ">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">
@@ -137,7 +137,7 @@ export default function PreferencesSection() {
               setPreferences((prev) => ({ ...prev, timezone: value }))
             }
           >
-            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-black border-gray-300 dark:border-gray-700 cursor-pointer">
+            <SelectTrigger className="w-full sm:w-32 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 cursor-pointer">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700">

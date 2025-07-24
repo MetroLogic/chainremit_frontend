@@ -43,7 +43,7 @@ export default function LoansPage() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="w-full py-1 px-0.5 bg-tabs-bg rounded-sm">
+        <TabsList className="w-full py-1 px-0.5 bg-slate-200/95 dark:bg-slate-950/95 rounded-sm">
           <TabsTrigger value="available">Available Offers</TabsTrigger>
           <TabsTrigger value="my-loans">My Loans</TabsTrigger>
           <TabsTrigger
