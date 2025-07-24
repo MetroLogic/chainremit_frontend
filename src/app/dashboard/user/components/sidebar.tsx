@@ -44,14 +44,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, onToggl
   };
   
   const sidebarItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', route: '/dashboard' },
-    { icon: Send, label: 'Send Money', route: '/dashboard/send' },
-    { icon: Download, label: 'Receive Money', route: '/dashboard/receive' },
-    { icon: CreditCard, label: 'Microloans', route: '/dashboard/loans' },
-    { icon: Users, label: 'Group Savings', route: '/dashboard/savings' },
-    { icon: TrendingUp, label: 'Credit Score', route: '/dashboard/credit-score' },
-    { icon: User, label: 'Profile', route: '/dashboard/profile' },
-    { icon: Settings, label: 'Settings', route: '/dashboard/settings' },
+    { icon: LayoutDashboard, label: 'Dashboard', route: '/dashboard/user' },
+    { icon: Send, label: 'Send Money', route: '/dashboard/user/send' },
+    { icon: Download, label: 'Receive Money', route: '/dashboard/user/receive' },
+    { icon: CreditCard, label: 'Microloans', route: '/dashboard/user/loans' },
+    { icon: Users, label: 'Group Savings', route: '/dashboard/user/savings' },
+    { icon: TrendingUp, label: 'Credit Score', route: '/dashboard/user/credit-score' },
+    { icon: User, label: 'Profile', route: '/dashboard/user/profile' },
+    { icon: Settings, label: 'Settings', route: '/dashboard/user/settings' },
   ];
 
   

@@ -1,15 +1,15 @@
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { StructuredData } from "../components/metadata/structured-data";
+import ClientProviders from "@/components/blockchain/client-provider";
 
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { Providers } from "@/components/providers";
-import { StructuredData } from "../components/metadata/structured-data"
-
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ChainRemit - Empowering Global Communities with Decentralized Finance",
+  title:
+    "ChainRemit - Empowering Global Communities with Decentralized Finance",
   description:
     "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion with instant money transfers, microloans, and savings groups.",
   keywords: [
@@ -42,7 +42,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://chainremit.com",
-    title: "ChainRemit - Empowering Global Communities with Decentralized Finance",
+    title:
+      "ChainRemit - Empowering Global Communities with Decentralized Finance",
     description:
       "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion with instant money transfers, microloans, and savings groups.",
     siteName: "ChainRemit",
@@ -57,8 +58,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChainRemit - Empowering Global Communities with Decentralized Finance",
-    description: "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion.",
+    title:
+      "ChainRemit - Empowering Global Communities with Decentralized Finance",
+    description:
+      "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion.",
     images: ["/twitter-image.png"],
     creator: "@chainremit",
     site: "@chainremit",
@@ -78,22 +81,21 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
     yandex: "your-yandex-verification-code",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head>
         <StructuredData />
       </head>
-     <body
-       >
-         <Providers>{children}</Providers>
+      <body>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
-  )
+  );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "starkremit_frontend",
+  "name": "chainremit",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -46,6 +46,7 @@
     "react-qr-code": "^2.0.16",
     "sharp": "^0.33.5",
     "starknet": "^6.11.0",
+    "starknetkit": "^2.12.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.25.71"

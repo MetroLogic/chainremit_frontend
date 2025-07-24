@@ -1,8 +1,48 @@
-import Link from "next/link"
-import { FiGlobe } from "react-icons/fi"
-import { HiArrowRight } from "react-icons/hi"
+import Link from "next/link";
+import { FiGlobe } from "react-icons/fi";
+import { HiArrowRight } from "react-icons/hi";
+import { useWalletContext } from "../blockchain/walletProvider";
+import { ConnectButton } from "../blockchain/connect-button";
+import WalletDisconnectModal from "../blockchain/Wallet-disconnect-modal";
+import { useState, useEffect } from "react";
+
+const shortenAddress = (address: string) => {
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+};
 
 export function HeroSection() {
+  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
+  const [isDisconnectModalOpen, setIsDisconnectModalOpen] = useState(false);
+
+  const { account, connectWallet, disconnectWallet, connectors } =
+    useWalletContext();
+
+  // Close connect modal once wallet is connected
+  useEffect(() => {
+    if (account) {
+      setIsConnectModalOpen(false);
+    }
+  }, [account]);
+
+  const handleWalletSelect = (walletId: string) => {
+    const connector = connectors.find((c) => c.id === walletId);
+    if (connector) {
+      connectWallet(connector);
+    }
+  };
+
+  const handleLaunchAppClick = () => {
+    if (account) {
+      setIsDisconnectModalOpen(true); // Already connected → show disconnect modal
+    } else {
+      setIsConnectModalOpen(true); // Not connected → show connect modal
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnectWallet();
+    setIsDisconnectModalOpen(false);
+  };
   return (
     <section className="px-4 py-12 lg:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
@@ -26,15 +66,15 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <button className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700">
-                <Link
-                  href="/dashboard"
-                >
-                  Launch App
-                </Link>
-                <HiArrowRight className="h-4 w-4" />
+              <button
+                onClick={handleLaunchAppClick}
+                className="inline-flex items-center cursor-pointer justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+              >
+                {account ? shortenAddress(account) : "Launch App"}
               </button>
-              <button className="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-transparent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800">
+              <HiArrowRight className="h-4 w-4" />
+
+              <button className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-600 bg-transparent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800">
                 Learn More
               </button>
             </div>
@@ -48,6 +88,20 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Connect modal */}
+      <ConnectButton
+        isOpen={isConnectModalOpen}
+        onSelect={handleWalletSelect}
+        setIsModalOpen={setIsConnectModalOpen}
+      />
+
+      {/* Disconnect modal */}
+      <WalletDisconnectModal
+        isOpen={isDisconnectModalOpen}
+        onClose={() => setIsDisconnectModalOpen(false)}
+        onDisconnect={handleDisconnect}
+      />
     </section>
   );
 }
