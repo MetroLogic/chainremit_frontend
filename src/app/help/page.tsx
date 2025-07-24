@@ -187,25 +187,25 @@ import PopularArticles from "@/components/help/popular-articles"
             </p>
   
             {/* Search Bar */}
-            <div className="relative mb-8 max-w-xl mx-auto">
+            <div className="relative mb-8 max-w-xl bg-black rounded-md mx-auto">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-              <Input
+              <Input    
                 placeholder="Search for help articles, guides, and FAQs..."
-                className="bg-slate-800 max-w-full border-slate-700 pl-12 text-lg placeholder:text-slate-400 focus:border-purple-500"
+                className="bg-transparent max-w-full  pl-12 text-lg placeholder:text-slate-400 focus:border-purple-500 border-white/20 rounded-md"
               />
             </div>
   
             {/* Action Buttons */}
             <div className="flex flex-wrap justify-center gap-4">
-              <Button className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600">
+              <Button className="bg-black cursor-pointer hover:bg-black/70 text-white border border-white/20">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Contact Support
               </Button>
-              <Button className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600">
+              <Button className="bg-black cursor-pointer hover:bg-black/70 text-white border border-white/20">
                 <Video className="mr-2 h-4 w-4" />
                 Watch Demo
               </Button>
-              <Button className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600">
+              <Button className="bg-black cursor-pointer hover:bg-black/70 text-white border border-white/20">
                 <Book className="mr-2 h-4 w-4" />
                 Getting Started Guide
               </Button>
@@ -218,10 +218,10 @@ import PopularArticles from "@/components/help/popular-articles"
           <div className="mx-auto max-w-full w-full xl:w-4/5">
             <div className="mb-8 flex items-center justify-between"> 
                 <Tabs defaultValue="browse" className="w-full">
-                <TabsList className="w-full p-1 rounded-md">
-                  <TabsTrigger className="rounded-sm cursor-pointer" value="browse">Browse Topics</TabsTrigger>
-                  <TabsTrigger className="rounded-sm cursor-pointer" value="popular">Popular Articles</TabsTrigger>
-                  <TabsTrigger className="rounded-sm cursor-pointer" value="faq">FAQ</TabsTrigger>
+                <TabsList className="w-full p-1 rounded-md bg-slate-800">
+                  <TabsTrigger className="rounded-sm cursor-pointer " value="browse">Browse Topics</TabsTrigger>
+                  <TabsTrigger className="rounded-sm cursor-pointer " value="popular">Popular Articles</TabsTrigger>
+                  <TabsTrigger className="rounded-sm cursor-pointer " value="faq">FAQ</TabsTrigger>
                 </TabsList>
                 <TabsContent value="browse" className="py-2 w-full">
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
