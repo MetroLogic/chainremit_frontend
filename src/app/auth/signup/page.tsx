@@ -1,8 +1,11 @@
 "use client";
 
 import type React from "react";
+import { useWalletContext } from "../../../components/blockchain/walletProvider";
+import { ConnectButton } from "../../../components/blockchain/connect-button";
+import WalletDisconnectModal from "../../../components/blockchain/Wallet-disconnect-modal";
+import { useState, useEffect } from "react";
 
-import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -34,6 +37,10 @@ import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PhoneInput } from "@/components/auth/phone-input";
 
+const shortenAddress = (address: string) => {
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+};
+
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -42,7 +49,7 @@ export default function SignUpPage() {
     password: "",
     confirmPassword: "",
     phoneNumber: "",
-    countryCode:"",
+    countryCode: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -146,7 +153,8 @@ export default function SignUpPage() {
         <div>
           <div className="font-bold">Account Created Successfully</div>
           <div>
-            Welcome to StarkRemit! Please check your email to verify your account.
+            Welcome to StarkRemit! Please check your email to verify your
+            account.
           </div>
         </div>
       );
@@ -167,24 +175,7 @@ export default function SignUpPage() {
     }
   };
 
-  const handleWalletConnect = async () => {
-    setIsLoading(true);
-    try {
-      // Simulate wallet connection
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      toast.success("Successfully connected to your StarkNet wallet");
-
-      router.push("/dashboard");
-    } catch (error) {
-      toast(
-       "Failed to connect wallet. Please try again.",
-        
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  
 
   const handleSocialSignUp = async (provider: string) => {
     setIsLoading(true);
@@ -196,13 +187,42 @@ export default function SignUpPage() {
 
       router.push("/dashboard");
     } catch (error) {
-      toast(
-      `Failed to sign up with ${provider}. Please try again.`,
-      
-      );
+      toast(`Failed to sign up with ${provider}. Please try again.`);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
+  const [isDisconnectModalOpen, setIsDisconnectModalOpen] = useState(false);
+  const { account, connectWallet, disconnectWallet, connectors } =
+    useWalletContext();
+
+  // Close connect modal once wallet is connected
+  useEffect(() => {
+    if (account) {
+      setIsConnectModalOpen(false);
+    }
+  }, [account]);
+
+  const handleWalletSelect = (walletId: string) => {
+    const connector = connectors.find((c) => c.id === walletId);
+    if (connector) {
+      connectWallet(connector);
+    }
+  };
+
+  const handleLaunchAppClick = () => {
+    if (account) {
+      setIsDisconnectModalOpen(true); // Already connected → show disconnect modal
+    } else {
+      setIsConnectModalOpen(true); // Not connected → show connect modal
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnectWallet();
+    setIsDisconnectModalOpen(false);
   };
 
   return (
@@ -235,20 +255,14 @@ export default function SignUpPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Wallet Connect */}
-            <Button
-              onClick={handleWalletConnect}
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              size="lg"
+            
+            <button
+              onClick={handleLaunchAppClick}
+              className="w-full rounded-full py-3 text-white cursor-pointer bg-gradient-to-r  from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
             >
-              {isLoading ? (
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-              ) : (
-                <Wallet className="mr-2 w-4 h-4" />
-              )}
-              Connect StarkNet Wallet
-            </Button>
+              <Wallet className="mr-2 w-4 h-4 inline" />
+              {account ? shortenAddress(account) : "Connect StarkNet Wallet"}
+            </button>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -582,6 +596,20 @@ export default function SignUpPage() {
         <div className="flex justify-center">
           <ThemeToggle />
         </div>
+
+        {/* Connect modal */}
+        <ConnectButton
+          isOpen={isConnectModalOpen}
+          onSelect={handleWalletSelect}
+          setIsModalOpen={setIsConnectModalOpen}
+        />
+
+        {/* Disconnect modal */}
+        <WalletDisconnectModal
+          isOpen={isDisconnectModalOpen}
+          onClose={() => setIsDisconnectModalOpen(false)}
+          onDisconnect={handleDisconnect}
+        />
       </div>
     </div>
   );
