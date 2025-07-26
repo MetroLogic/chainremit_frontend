@@ -1,70 +1,84 @@
+
 "use client";
 
-import React from "react";
-import { Bell, Menu, User, PanelLeftClose, LogOut } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  Bell,
+  Menu,
+  User,
+  PanelLeftClose,
+  LogOut,
+} from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useAccount } from "@starknet-react/core";
-import { useStarknetWallet } from "@/components/context/StarknetWalletContext";
+import WalletDisconnectModal from "../../../components/blockchain/Wallet-disconnect-modal";
+import { useAccount, useDisconnect } from "@starknet-react/core";
+import { useRouter } from "next/navigation";
 
-interface HeaderProps {
-  onMenuClick: () => void;
-  isCollapsed: boolean;
-  onToggleCollapse: () => void;
-}
+const Header = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [waitingForReconnect, setWaitingForReconnect] = useState(false);
 
-const Header: React.FC<HeaderProps> = ({
-  onMenuClick,
-  isCollapsed,
-  onToggleCollapse,
-}) => {
-  const { truncatedAddress, disconnectWallet, address } = useStarknetWallet();
+  const { disconnect } = useDisconnect();
+  const { address } = useAccount();
+  const router = useRouter();
+
+  const toggleSidebar = () => setIsCollapsed(!isCollapsed);
+
+  const handleDisconnect = () => {
+    disconnect();
+    setIsModalOpen(false);
+    setWaitingForReconnect(true);
+  };
+
+  // ✅ When the user reconnects after disconnecting, navigate to dashboard
+  useEffect(() => {
+    if (waitingForReconnect && address) {
+      router.push("/dashboard");
+    }
+  }, [waitingForReconnect, address, router]);
+
   return (
-    <header className="h-16 bg-slate-200/95 dark:bg-slate-950/95 border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
-      <div className="flex items-center space-x-4">
+    <header className="flex items-center justify-between px-4 py-2 border-b bg-background">
+      <div className="flex items-center gap-4">
         <button
-          className="lg:hidden text-foreground hover:text-muted-foreground"
-          onClick={onMenuClick}
+          onClick={toggleSidebar}
+          className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors"
         >
-          <Menu className="w-6 h-6" />
+          {isCollapsed ? (
+            <Menu className="w-4 h-4 text-muted-foreground" />
+          ) : (
+            <PanelLeftClose className="w-4 h-4 text-muted-foreground" />
+          )}
         </button>
-        <button
-          className="hidden lg:block text-foreground hover:text-muted-foreground"
-          onClick={onToggleCollapse}
-        >
-          <PanelLeftClose className="w-6 h-6" />
-        </button>
-        <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span className="text-xs font-medium text-green-700 dark:text-green-400">
-            Connected to StarkNet Mainnet
-          </span>
-        </div>
+        <span className="text-lg font-semibold">Dashboard</span>
       </div>
-      <div className="flex items-center space-x-4">
-        {address && (
-          <div className="text-sm text-muted-foreground">
-            {" "}
-            {truncatedAddress}{" "}
-          </div>
-        )}
-        <button className="relative p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
 
+      <div className="flex items-center gap-3">
         <ThemeToggle />
+
+        <button className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors">
+          <Bell className="w-4 h-4 text-muted-foreground" />
+        </button>
 
         <button className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors">
           <User className="w-4 h-4 text-muted-foreground" />
         </button>
 
         <button
-          onClick={disconnectWallet}
-          className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors"
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors cursor-pointer"
         >
           <LogOut className="w-4 h-4 text-muted-foreground" />
         </button>
       </div>
+
+      {/* Disconnect confirmation modal */}
+      <WalletDisconnectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onDisconnect={handleDisconnect}
+      />
     </header>
   );
 };

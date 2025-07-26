@@ -3,8 +3,9 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { Providers } from "@/components/providers";
 import { StructuredData } from "../components/metadata/structured-data"
+import ClientProviders from "@/components/blockchain/client-provider";
+import { WalletProvider } from "@/components/blockchain/WalletProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -92,7 +93,10 @@ export default function RootLayout({
       </head>
      <body
        >
-         <Providers>{children}</Providers>
+        <ClientProviders>
+            <WalletProvider>  {children}</WalletProvider>
+        </ClientProviders>
+       
       </body>
     </html>
   )

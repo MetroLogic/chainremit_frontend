@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useState } from "react";
 import { HiMenu, HiX, HiPaperAirplane } from "react-icons/hi";
-import { useStarknetWallet } from "../context/StarknetWalletContext";
+
 import { Button } from "../ui/button";
 import Image from "next/image";
 
@@ -15,8 +15,7 @@ interface NavigationProps {
 
 export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { address, walletName, connectWallet, disconnectWallet, status } =
-    useStarknetWallet();
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

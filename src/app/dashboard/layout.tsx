@@ -3,7 +3,7 @@
 import React, { useState, ReactNode } from "react";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
-import { Providers } from "@/components/providers";
+
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -13,9 +13,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
 
   const closeSidebar = () => {
     setSidebarOpen(false);
@@ -39,9 +39,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         }`}
       >
         <Header
-          onMenuClick={toggleSidebar}
-          isCollapsed={sidebarCollapsed}
-          onToggleCollapse={toggleSidebarCollapse}
+  
         />
         <main className="p-4 lg:p-6">{children}</main>
       </div>
