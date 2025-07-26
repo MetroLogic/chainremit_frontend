@@ -1,8 +1,6 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -20,6 +18,15 @@ import { Eye, EyeOff, Mail, Lock, Loader2, Send, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useWalletContext } from "../../../components/blockchain/WalletProvider";
+
+import { ConnectButton } from "../../../components/blockchain/connect-button";
+import WalletDisconnectModal from "../../../components/blockchain/Wallet-disconnect-modal";
+
+// Utility to shorten wallet address
+const shortenAddress = (address: string) => {
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+};
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -112,6 +119,32 @@ export default function LoginPage() {
     }
   };
 
+  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
+  const [isDisconnectModalOpen, setIsDisconnectModalOpen] = useState(false);
+
+  const { account, connectWallet, disconnectWallet, connectors } =
+    useWalletContext();
+
+  // Close connect modal once wallet is connected
+  useEffect(() => {
+    if (account) {
+      setIsConnectModalOpen(false);
+    }
+  }, [account]);
+
+  const handleLaunchAppClick = () => {
+    if (account) {
+      setIsDisconnectModalOpen(true); // Already connected → show disconnect modal
+    } else {
+      setIsConnectModalOpen(true); // Not connected → show connect modal
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnectWallet();
+    setIsDisconnectModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95 flex items-center justify-center p-4">
       <div className="w-full max-w-[600px] space-y-6">
@@ -128,7 +161,7 @@ export default function LoginPage() {
         </div>
 
         {/* Login Card */}
-        <Card className="bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 shadow-lg border border-gray-200 dark:border-gray-700">
+        <Card className=" bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 shadow-lg border border-gray-200 dark:border-gray-700 ">
           <CardHeader>
             <CardTitle>Sign In</CardTitle>
             <CardDescription>
@@ -136,20 +169,12 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Wallet Connect */}
-            <Button
-              onClick={handleWalletConnect}
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              size="lg"
+            <button
+              onClick={handleLaunchAppClick}
+              className="w-full bg-gradient-to-r  from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-full py-2 px-3 text-white cursor-pointer"
             >
-              {isLoading ? (
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-              ) : (
-                <Wallet className="mr-2 w-4 h-4" />
-              )}
-              Connect StarkNet Wallet
-            </Button>
+              {account ? shortenAddress(account) : "Connect StarkNet Wallet"}
+            </button>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -177,7 +202,9 @@ export default function LoginPage() {
                       setEmail(e.target.value);
                       setErrors((prev) => ({ ...prev, email: "" }));
                     }}
-                    className={`py-6 pl-10 ${errors.email ? "border-red-500" : ""}`}
+                    className={`py-6 pl-10 ${
+                      errors.email ? "border-red-500" : ""
+                    }`}
                     disabled={isLoading}
                   />
                 </div>
@@ -338,6 +365,21 @@ export default function LoginPage() {
         <div className="flex justify-center">
           <ThemeToggle />
         </div>
+
+        {/* Connect modal */}
+        <ConnectButton
+          isOpen={isConnectModalOpen}
+          isClosed
+          onSelect={handleWalletConnect}
+          setIsModalOpen={setIsConnectModalOpen}
+        />
+
+        {/* Disconnect modal */}
+        <WalletDisconnectModal
+          isOpen={isDisconnectModalOpen}
+          onClose={() => setIsDisconnectModalOpen(false)}
+          onDisconnect={handleDisconnect}
+        />
       </div>
     </div>
   );
