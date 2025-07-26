@@ -20,26 +20,16 @@ export const useContactForm = () => {
     setSuccess(false);
 
     try {
-      if (!data.email.includes("@")) {
-        throw new Error("Please enter a valid email address");
-      }
-      if (data.message.length < 10) {
-        throw new Error("Message must be at least 10 characters");
-      }
-      const resp = await fetch("/api/contact/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (!resp.ok) {
-        throw new Error("Failed to send message. Please try again.");
-      }
+      // Simulate form submission since backend was removed
+      // TODO: add real backend integration when needed
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate delay
+
       setSuccess(true);
+      // Hide success after a bit - not perfect, but good enough
       setTimeout(() => setSuccess(false), 5000);
       return { success: true };
     } catch (err) {
+      // Not logging to Sentry yet, just show error
       const errorMessage =
         err instanceof Error ? err.message : "Something went wrong";
       setError(errorMessage);

@@ -28,11 +28,7 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Quick check - just the basics for now
-    if (!formData.fullName || !formData.email || !formData.message) {
-      alert("Missing required fields");
-      return;
-    }
+
     const res = await submitForm(formData);
     if (res.success) {
       setFormData({
@@ -43,7 +39,6 @@ const ContactForm = () => {
         message: "",
       });
     }
-    // TODO: maybe show a toast instead of alert
   };
 
   // Just a helper to update fields
@@ -71,6 +66,7 @@ const ContactForm = () => {
                 placeholder="Your full name"
                 className="mt-1"
                 disabled={loading}
+                required
               />
             </div>
             <div>
@@ -83,6 +79,7 @@ const ContactForm = () => {
                 placeholder="your@email.com"
                 className="mt-1"
                 disabled={loading}
+                required
               />
             </div>
           </div>
@@ -130,6 +127,8 @@ const ContactForm = () => {
               rows={6}
               className="mt-1"
               disabled={loading}
+              required
+              minLength={10}
             />
           </div>
           {success && (
