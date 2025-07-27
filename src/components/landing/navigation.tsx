@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useState } from "react";
 import { HiMenu, HiX, HiPaperAirplane } from "react-icons/hi";
-import { useStarknetWallet } from "../context/StarknetWalletContext";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
@@ -15,8 +14,7 @@ interface NavigationProps {
 
 export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { address, walletName, connectWallet, disconnectWallet, status } =
-    useStarknetWallet();
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -46,19 +44,19 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
         <nav className="hidden lg:flex items-center space-x-6">
           <Link
             href="#features"
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+            className="text-gray-600 cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             Features
           </Link>
           <Link
             href="/demo"
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+            className="text-gray-600 cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             Demo
           </Link>
           <Link
             href="/about"
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+            className="text-gray-600 cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
           >
             About
           </Link>
@@ -117,7 +115,7 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-md flex items-center justify-center">
                     <Send className="w-3 h-3 text-white" />
                   </div>
-                  <span className="text-lg font-bold">StarkRemit</span>
+                  <span className="text-lg font-bold cursor-pointer">StarkRemit</span>
                 </div>
                 <button
                   onClick={closeMenu}
@@ -133,28 +131,28 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   <Link
                     href="#features"
                     onClick={closeMenu}
-                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    className="block px-4 py-3 cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
                   >
                     Features
                   </Link>
                   <Link
                     href="/demo"
                     onClick={closeMenu}
-                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    className="block px-4 py-3 cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
                   >
                     Demo
                   </Link>
                   <Link
                     href="/about"
                     onClick={closeMenu}
-                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    className="block px-4 py-3 cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
                   >
                     About
                   </Link>
                   <Link
                     href="/help"
                     onClick={closeMenu}
-                    className="block px-4 py-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    className="block px-4 py-3 cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
                   >
                     Help
                   </Link>
@@ -162,7 +160,7 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
               </div>
 
               {/* Bottom Actions */}
-              <div className="p-4 border-t dark:border-gray-800 space-y-3">
+              <div className="p-4 border-t cursor-pointer dark:border-gray-800 space-y-3">
                 <Button
                   variant="outline"
                   className="w-full"
@@ -172,7 +170,7 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   <Link href="/auth/login">Log In</Link>
                 </Button>
                 <Button
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  className="w-full cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                   asChild
                   onClick={closeMenu}
                 >
