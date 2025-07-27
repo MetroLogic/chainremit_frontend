@@ -1,10 +1,14 @@
+
+
+
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { Bell, Menu, User, PanelLeftClose, LogOut } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useAccount } from "@starknet-react/core";
-import { useStarknetWallet } from "@/components/context/StarknetWalletContext";
+import WalletDisconnectModal from "../../../components/blockchain/Wallet-disconnect-modal";
+import { useAccount, useDisconnect } from "@starknet-react/core";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -17,7 +21,25 @@ const Header: React.FC<HeaderProps> = ({
   isCollapsed,
   onToggleCollapse,
 }) => {
-  const { truncatedAddress, disconnectWallet, address } = useStarknetWallet();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [waitingForReconnect, setWaitingForReconnect] = useState(false);
+  const { disconnect } = useDisconnect();
+  const { address } = useAccount();
+  const router = useRouter();
+
+  const handleDisconnect = () => {
+    disconnect();
+    setIsModalOpen(false);
+    setWaitingForReconnect(true);
+  };
+
+  // ✅ When the user reconnects after disconnecting, navigate to dashboard
+  useEffect(() => {
+    if (waitingForReconnect && address) {
+      router.push("/dashboard");
+    }
+  }, [waitingForReconnect, address, router]);
+
   return (
     <header className="h-16 bg-slate-200/95 dark:bg-slate-950/95 border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
       <div className="flex items-center space-x-4">
@@ -40,13 +62,8 @@ const Header: React.FC<HeaderProps> = ({
           </span>
         </div>
       </div>
+
       <div className="flex items-center space-x-4">
-        {address && (
-          <div className="text-sm text-muted-foreground">
-            {" "}
-            {truncatedAddress}{" "}
-          </div>
-        )}
         <button className="relative p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
           <Bell className="w-5 h-5" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -59,12 +76,19 @@ const Header: React.FC<HeaderProps> = ({
         </button>
 
         <button
-          onClick={disconnectWallet}
           className="flex items-center justify-center w-8 h-8 bg-muted rounded-full hover:bg-accent transition-colors"
+          onClick={() => setIsModalOpen(true)}
         >
-          <LogOut className="w-4 h-4 text-muted-foreground" />
+          <LogOut className="w-4 h-4 text-muted-foreground cursor-pointer" />
         </button>
       </div>
+
+      {/* Disconnect confirmation modal */}
+      <WalletDisconnectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onDisconnect={handleDisconnect}
+      />
     </header>
   );
 };
