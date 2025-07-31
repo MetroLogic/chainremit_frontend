@@ -262,7 +262,7 @@ Detailed History:
 
   return (
     <div className="space-y-4 lg:space-y-6">
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Download className="h-5 w-5 mr-2" />
@@ -360,7 +360,7 @@ Detailed History:
       </Card>
 
       {/* Export History */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="bg-gray-50 border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Calendar className="h-5 w-5 mr-2" />

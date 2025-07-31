@@ -47,7 +47,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm dark:bg-black border-1 border-white dark:border-white">
+    <Card className="border-white dark:border-slate-600 shadow-2xl">
       <CardHeader>
         <CardTitle className="text-2xl">Send us a Message</CardTitle>
         <p className="text-gray-600 dark:text-gray-300">
@@ -76,7 +76,7 @@ const ContactForm = () => {
                 type="email"
                 value={formData.email}
                 onChange={(e) => updateField("email", e.target.value)}
-                placeholder="your@email.com"
+                placeholder="your gmail"
                 className="mt-1"
                 disabled={loading}
                 required
