@@ -14,7 +14,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   icon,
   content,
 }) => (
-    <Card id={id} className="scroll-mt-20 bg-white dark:bg-[#09090b] ">
+    <Card id={id} className="scroll-mt-20">
     <CardHeader>
       <CardTitle className="flex items-center">
         <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white mr-3">

@@ -15,6 +15,7 @@ import TermsSection from "./components/TermsSection";
 import TableOfContents from "./components/TableOfContents";
 import ImportantNotice from "./components/ImportantNotice";
 import ContactSection from "./components/ContactSection";
+import Image from "next/image";
 
 export default function TermsPage() {
   const sections = [
@@ -148,10 +149,18 @@ export default function TermsPage() {
       <header className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Send className="w-4 h-4 text-white" />
+            <div className="flex items-center space-x-2">
+              <Link href="/">
+                <Image
+                  src="/Logo and text-3.png"
+                  alt="ChainRemit Logo"
+                  width={150}
+                  height={50}
+                  className="w-[150px] h-[50px] object-fill"
+                />
+              </Link>
             </div>
-            <span className="text-xl font-bold">StarkRemit</span>
+            {/* <span className="text-xl font-bold">StarkRemit</span> */}
           </div>
           <div className="flex items-center space-x-4">
             <Button variant="ghost" asChild>

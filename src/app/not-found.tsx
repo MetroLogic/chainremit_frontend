@@ -15,6 +15,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NotFound() {
   const [mounted, setMounted] = useState(false);
@@ -78,15 +79,13 @@ export default function NotFound() {
                 mounted ? "scale-100 opacity-100" : "scale-75 opacity-0"
               }`}
             >
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
-                  <Send className="w-6 h-6 text-white" />
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl blur opacity-30 animate-pulse" />
-              </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                ChainRemit
-              </span>
+              {/* <Image
+                src="/Logo and text-3.png"
+                alt="ChainRemit Logo"
+                width={150}
+                height={50}
+                className="w-[150px] h-[50px] object-fill"
+              /> */}
             </div>
           </div>
 
@@ -102,16 +101,6 @@ export default function NotFound() {
                 <div className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 select-none tracking-wider relative">
                   {glitchText}
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 blur-2xl animate-pulse" />
-                </div>
-
-                {/* Floating search icon with animation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="w-28 h-28 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 animate-bounce">
-                      <Search className="w-14 h-14 text-blue-300" />
-                    </div>
-                    <div className="absolute inset-0 w-28 h-28 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full animate-ping" />
-                  </div>
                 </div>
               </div>
 
@@ -179,7 +168,10 @@ export default function NotFound() {
                       className="bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:border-blue-400/50 transition-all duration-300 cursor-pointer hover:scale-105 group"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <Link href={link.path} className="text-blue-200 group-hover:text-white transition-colors duration-300 font-medium">
+                      <Link
+                        href={link.path}
+                        className="text-blue-200 group-hover:text-white transition-colors duration-300 font-medium"
+                      >
                         {link.name}
                       </Link>
                     </div>
@@ -229,12 +221,14 @@ export default function NotFound() {
                 issues or questions you might have.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  variant="outline"
-                  className="border-blue-400/50 text-blue-200 hover:bg-blue-500/10 hover:border-blue-400 backdrop-blur-sm bg-white/5 transition-all duration-300"
-                >
-                  Contact Support
-                </Button>
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    className="border-blue-400/50 text-blue-200 hover:bg-blue-500/10 hover:border-blue-400 backdrop-blur-sm bg-white/5 transition-all duration-300"
+                  >
+                    Contact Support
+                  </Button>
+                </Link>
                 <Button
                   variant="ghost"
                   className="text-blue-300 hover:bg-blue-500/10 transition-all duration-300"

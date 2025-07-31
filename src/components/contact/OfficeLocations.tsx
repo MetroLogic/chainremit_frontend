@@ -7,10 +7,10 @@ const OfficeLocations = () => {
   // Not using a map yet, just static data for now
   const offices = [
     {
-      city: "San Francisco",
+      city: "Lagos",
       address: "123 Market Street, Suite 400",
-      country: "United States",
-      timezone: "PST",
+      country: "Nigeria",
+      timezone: "WAT",
     },
     {
       city: "London",
@@ -41,7 +41,7 @@ const OfficeLocations = () => {
         {offices.map((office, idx) => (
           <Card
             key={idx}
-            className="hover:shadow-lg transition-shadow dark:bg-black border-1 border-white dark:border-white"
+            className="hover:shadow-lg transition-shadow border-1 border-white dark:border-slate-600"
           >
             <CardContent className="p-6">
               <div className="flex items-center space-x-2 mb-4">

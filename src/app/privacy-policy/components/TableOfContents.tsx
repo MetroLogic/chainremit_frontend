@@ -14,7 +14,7 @@ interface TableOfContentsProps {
 // #09090b
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => (
-    <Card className="mb-12 bg-white dark:bg-[#09090b]">
+  <Card className="mb-12">
     <CardHeader>
       <CardTitle className="flex items-center">
         <FileText className="mr-2 w-5 h-5" />
@@ -32,7 +32,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => (
             <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400">
               {section.icon}
             </div>
-            <span className="font-medium text-black dark:text-white">{section.title}</span>
+            <span className="font-medium text-black dark:text-white">
+              {section.title}
+            </span>
           </Link>
         ))}
       </div>

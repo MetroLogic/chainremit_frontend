@@ -44,7 +44,7 @@ const QuickHelp = () => {
         {helpCategories.map((category, idx) => (
           <Card
             key={idx}
-            className="hover:shadow-lg transition-shadow dark:bg-black border-1 border-white dark:border-white"
+            className="hover:shadow-lg transition-shado border-1 border-white dark:border-slate-600"
           >
             <CardContent className="p-6 text-center">
               <div

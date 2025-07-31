@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-slate-200/95 dark:bg-slate-950/95 text-gray-950 dark:text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="border border-gray-300 dark:border-gray-700 grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-5 md:gap-6 mb-8 p-6 md:p-10 rounded-lg">
           <div>
             <h3 className="text-lg font-semibold mb-4">Product</h3>
             <ul className="space-y-2">
@@ -88,15 +88,15 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="bord border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <Link href="/" className="flex items-center">
               <Image
                 src="/Logo and text-3.png"
                 alt="ChainRemit Logo"
-                width={150}
+                width={120}
                 height={50}
-                className="w-[150px] h-[50px] object-fill"
+                className="w-[120px] h-[50px] object-fill"
               />
             </Link>
             <span className="text-gray-500">×</span>
@@ -105,10 +105,18 @@ export function Footer() {
           <div className="flex items-center space-x-4">
             <select className="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-sm">
               <option>English</option>
+              <option>Hausa</option>
               <option>Español</option>
               <option>Français</option>
+              <option>Deutsch</option>
+              <option>中文</option>
+              <option>Português</option>
+              <option>Русский</option>
+              <option>Türkçe</option>
+              <option>Polski</option>
+              <option>Italiano</option>
             </select>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </div>
       </div>

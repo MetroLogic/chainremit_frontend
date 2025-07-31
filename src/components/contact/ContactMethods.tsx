@@ -22,7 +22,7 @@ const ContactMethods = () => {
       description: "Chat with our team",
       contact: "Available 24/7",
       action: "Start Chat",
-      href: "#", 
+      href: "#",
       bgColor: "bg-green-600",
     },
     {
@@ -37,7 +37,7 @@ const ContactMethods = () => {
   ];
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm dark:bg-black border-1 border-white dark:border-white">
+    <Card className="border-1 border-white dark:border-slate-600">
       <CardHeader>
         <CardTitle>Contact Methods</CardTitle>
         <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -48,7 +48,7 @@ const ContactMethods = () => {
         {contactMethods.map((method, idx) => (
           <div
             key={idx}
-            className="border border-gray-200 dark:border-white rounded-lg p-4"
+            className="border border-gray-200 dark:border-slate-600 rounded-lg p-4"
           >
             <div className="flex items-start space-x-3">
               <div

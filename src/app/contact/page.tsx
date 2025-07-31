@@ -7,6 +7,7 @@ import QuickHelp from "@/components/contact/QuickHelp";
 import OfficeLocations from "@/components/contact/OfficeLocations";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
+import Image from "next/image";
 import { Send } from "lucide-react";
 
 export default function ContactPage() {
@@ -15,10 +16,13 @@ export default function ContactPage() {
       <header className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Send className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-xl font-bold">ChainRemit</span>
+            <Image
+              src="/Logo and text-3.png"
+              alt="ChainRemit Logo"
+              width={150}
+              height={50}
+              className="w-[150px] h-[50px] object-fill"
+            />
           </Link>
           <div className="flex items-center space-x-4">
             <Link
