@@ -205,12 +205,21 @@ const Sidebar: React.FC<SidebarProps> = ({
                     willChange: "transform, opacity",
                   }}
                 >
+                  {/* Light theme image */}
+                  <Image
+                    src="/darklogotext.png"
+                    alt="ChainRemit Logo"
+                    width={80}
+                    height={60}
+                    className="w-[80px] h-[60px] object-fill dark:hidden"
+                  />
+                  {/* Dark theme image */}
                   <Image
                     src="/logoText.png"
                     alt="ChainRemit Logo"
                     width={80}
                     height={60}
-                    className="w-[80px] h-[60px] object-fill"
+                    className="w-[80px] h-[60px] object-fill hidden dark:block"
                   />
                 </motion.div>
               )}

@@ -107,12 +107,21 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/">
+              {/* Light theme image */}
+              <Image
+                src="/Logo and text-4.png"
+                alt="ChainRemit Logo"
+                width={150}
+                height={50}
+                className="w-[150px] h-[50px] object-fill block dark:hidden"
+              />
+              {/* Dark theme image */}
               <Image
                 src="/Logo and text-3.png"
                 alt="ChainRemit Logo"
                 width={150}
                 height={50}
-                className="w-[150px] h-[50px] object-fill"
+                className="w-[150px] h-[50px] object-fill hidden dark:block"
               />
             </Link>
           </div>
@@ -346,7 +355,7 @@ export default function AboutPage() {
         </div>
 
         {/* Stats Section */}
-        <Card className="mb-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
+        <Card className="mb-16 bg-gradient-to-r from-emerald-500 to-teal-600 text-white border-0">
           <CardContent className="p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4">Our Impact</h2>
