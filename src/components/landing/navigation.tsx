@@ -15,7 +15,6 @@ interface NavigationProps {
 export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -30,12 +29,21 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
         {/* Logo */}
         <div className="flex items-center justify-center">
           <Link href="/" className="flex items-center">
+            {/* Light theme image */}
+            <Image
+              src="/Logo and text-4.png"
+              alt="ChainRemit Logo"
+              width={200}
+              height={70}
+              className="w-[200px] h-[70px] object-fill block dark:hidden"
+            />
+            {/* Dark theme image */}
             <Image
               src="/Logo and text-3.png"
               alt="ChainRemit Logo"
               width={200}
               height={70}
-              className="w-[200px] h-[70px] object-fill"
+              className="w-[200px] h-[70px] object-fill hidden dark:block"
             />
           </Link>
         </div>
@@ -115,7 +123,9 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
                   <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-md flex items-center justify-center">
                     <Send className="w-3 h-3 text-white" />
                   </div>
-                  <span className="text-lg font-bold cursor-pointer">StarkRemit</span>
+                  <span className="text-lg font-bold cursor-pointer">
+                    StarkRemit
+                  </span>
                 </div>
                 <button
                   onClick={closeMenu}

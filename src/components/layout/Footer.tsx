@@ -91,12 +91,21 @@ export function Footer() {
         <div className="bord border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <Link href="/" className="flex items-center">
+              {/* Light theme image */}
+              <Image
+                src="/Logo and text-4.png"
+                alt="ChainRemit Logo"
+                width={120}
+                height={50}
+                className="w-[120px] h-[50px]  object-fill block dark:hidden"
+              />
+              {/* Dark theme image */}
               <Image
                 src="/Logo and text-3.png"
                 alt="ChainRemit Logo"
                 width={120}
                 height={50}
-                className="w-[120px] h-[50px] object-fill"
+                className="w-[120px] h-[50px]  object-fill hidden dark:block"
               />
             </Link>
             <span className="text-gray-500">×</span>

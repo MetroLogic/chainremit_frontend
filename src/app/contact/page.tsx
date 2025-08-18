@@ -15,15 +15,26 @@ export default function ContactPage() {
     <div className="min-h-screen bg-slate-50/95 dark:bg-slate-900/95">
       <header className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/Logo and text-3.png"
-              alt="ChainRemit Logo"
-              width={150}
-              height={50}
-              className="w-[150px] h-[50px] object-fill"
-            />
-          </Link>
+          <div className="flex items-center space-x-2">
+            <Link href="/">
+              {/* Light theme image */}
+              <Image
+                src="/Logo and text-4.png"
+                alt="ChainRemit Logo"
+                width={150}
+                height={50}
+                className="w-[150px] h-[50px] object-fill block dark:hidden"
+              />
+              {/* Dark theme image */}
+              <Image
+                src="/Logo and text-3.png"
+                alt="ChainRemit Logo"
+                width={150}
+                height={50}
+                className="w-[150px] h-[50px] object-fill hidden dark:block"
+              />
+            </Link>
+          </div>
           <div className="flex items-center space-x-4">
             <Link
               href="/"
