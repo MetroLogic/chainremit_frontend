@@ -1,8 +1,8 @@
-"use client" 
+"use client";
 
-import React from "react"
-import Receive from "../components/receive"
-import WalletWrapper from "../components/wallet-wrapper"
+import React from "react";
+import Receive from "../components/receive";
+import WalletWrapper from "../components/wallet-wrapper";
 
 const DUMMY_RECENT = [
   {
@@ -29,21 +29,23 @@ const DUMMY_RECENT = [
     amount: "+$200.00",
     status: "Failed",
   },
-]
+];
 
 const page = () => {
   return (
     <WalletWrapper>
       {({ address, starknetId, isStarknetIdLoading }) => {
-        return <Receive 
-          address={address}
-          starknetId={starknetId}
-          isStarknetIdLoading={isStarknetIdLoading}
-          recentPayments={DUMMY_RECENT}
-        />
+        return (
+          <Receive
+            address={address}
+            starknetId={starknetId}
+            isStarknetIdLoading={isStarknetIdLoading}
+            recentPayments={DUMMY_RECENT}
+          />
+        );
       }}
     </WalletWrapper>
-  )
-}
+  );
+};
 
-export default page
+export default page;

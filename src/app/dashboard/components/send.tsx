@@ -140,46 +140,48 @@ export const Send: React.FC<ISend> = ({
   }
 
   if(!isConnected) {
-    return <div className="flex flex-col items-center">
-      <div className="space-y-6 w-[600px] max-w-[600px]">
-        <div>
-          <h1 className="text-2xl font-semibold">Connect Wallet</h1>
-          <h3 className="text-md font-light opacity-65">Connect your wallet to send money</h3>
+    return <div className="w-full px-4 py-6">
+      <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto">
+        <div className="text-center sm:text-left">
+          <h1 className="text-xl sm:text-2xl font-semibold">Connect Wallet</h1>
+          <h3 className="text-sm sm:text-md font-light opacity-65">Connect your wallet to send money</h3>
         </div>
       </div>
     </div>
   }
 
   return (
-    <div className="flex flex-col items-center">
-    <div className="space-y-6 w-[600px] max-w-[600px]">
-      <div>
-        <h1 className="text-2xl font-semibold">Send Money</h1>
-        <h3 className="text-md font-light opacity-65">Transfer funds instantly across the globe</h3>
-      </div>
+    <div className="w-full px-4 py-6">
+      <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto">
+        <div className="text-center sm:text-left">
+          <h1 className="text-xl sm:text-2xl font-semibold">Send Money</h1>
+          <h3 className="text-sm sm:text-md font-light opacity-65">Transfer funds instantly across the globe</h3>
+        </div>
+        
         <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-6 space-y-4">
-        <div className="flex flex-col justify-center items-start">
-          <h2 className="text-xl font-medium">Send Funds</h2>
-          <h2 className="text-sm font-light mb-4 opacity-65">Enter recipient details and amount to transfer</h2>
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Recipient Address or StarkNet ID</label>
-          <input
-            className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1"
-            placeholder="0x... or username.stark"
-            {...register("recipient_address", { required: true })}
-          />
-          {errors.recipient_address?.message && <p className="text-sm text-red-700">{errors?.recipient_address?.message}</p>}
-        </div>
+          <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-4 sm:p-6 space-y-4">
+            <div className="flex flex-col justify-center items-start">
+              <h2 className="text-lg sm:text-xl font-medium">Send Funds</h2>
+              <h2 className="text-xs sm:text-sm font-light mb-4 opacity-65">Enter recipient details and amount to transfer</h2>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium">Recipient Address or StarkNet ID</label>
+              <input
+                className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1 text-sm"
+                placeholder="0x... or username.stark"
+                {...register("recipient_address", { required: true })}
+              />
+              {errors.recipient_address?.message && <p className="text-sm text-red-700 mt-1">{errors?.recipient_address?.message}</p>}
+            </div>
 
-        <div className="flex gap-2">
-          <div className="flex-1 w-[50%]">
-            <div className="flex justify-between">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-2">
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
                   <label className="block text-sm font-medium">Amount</label>
                   { 
                     isBalanceAvailable && <button
-                      className="px-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-transparent rounded-sm hover:border-gray-400 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 transition text-[10px]"
+                      className="px-2 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-transparent rounded-sm hover:border-gray-400 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 transition text-[10px]"
                       onClick={(e) => {
                         e.preventDefault()
                         handleMaxAmount()
@@ -188,79 +190,80 @@ export const Send: React.FC<ISend> = ({
                       MAX 
                     </button>
                   }
-            </div>
-            <input
-              className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1"
-              placeholder="0.00"
-              type="text"
-              pattern="[0-9]*[.,]?[0-9]*"
-              {...register("amount", { required: true })}
-            />
-            {errors.amount?.message && <p className="text-sm text-red-700">{errors?.amount?.message}</p>}
-          </div>
-          <div className="w-[50%]">
-            <label className="block text-sm font-medium">Currency</label>
-            <div className="relative mt-1">
+                </div>
+                <input
+                  className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1 text-sm"
+                  placeholder="0.00"
+                  type="text"
+                  pattern="[0-9]*[.,]?[0-9]*"
+                  {...register("amount", { required: true })}
+                />
+                {errors.amount?.message && <p className="text-sm text-red-700 mt-1">{errors?.amount?.message}</p>}
+              </div>
+              
+              <div className="flex-1">
+                <label className="block text-sm font-medium">Currency</label>
+                <div className="relative mt-1">
                   <select
                     defaultValue="USDC"
-                    className="appearance-none w-full h-[43px] rounded border  border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent pr-8"
+                    className="appearance-none w-full h-[43px] rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent pr-8 text-sm"
                     {...register("currency", { required: true })}
                   >
                     {Object.keys(currentCurrencies ?? {}).map(key => {
-                      return <option value={key}>{key}</option>
+                      return <option key={key} value={key}>{key}</option>
                     })}
                   </select>
-              <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
-                <ArrowDownIcon size={16} />
+                  <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
+                    <ArrowDownIcon size={16} />
+                  </div>
+                </div>
               </div>
             </div>
+
+            <div>
+              <label className="block text-sm font-medium">Message (Optional)</label>
+              <textarea
+                className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1 text-sm resize-none"
+                placeholder="Add a note for the recipient..."
+                rows={3}
+                {...register("message", { required: false })}
+              />
+            </div>
+
+            <button 
+              className="w-full bg-gray-300 text-gray-800 dark:text-gray-200 dark:bg-gray-700 font-semibold py-2.5 sm:py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-800 flex items-center justify-center gap-2 disabled:opacity-65 text-sm sm:text-base"
+              type="submit"
+            >
+              <SendIcon size={18} /> Send Funds
+            </button>
+          </div>
+        </form>
+
+        <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold">Recent Recipients</h2>
+          <p className="text-xs sm:text-sm font-light mb-4 opacity-65">Quick send to your frequent contacts</p>
+          <div className="space-y-3">
+            {recentRecipients.map((recipient, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 sm:gap-4 rounded-md border border-gray-800 dark:border-gray-300 p-3 bg-transparent"
+              >
+                <div className="border p-2 rounded-md flex-shrink-0">
+                  <SendIcon className="text-white" size={16} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm sm:text-base truncate">{recipient.name}</div>
+                  <div className="text-xs sm:text-sm text-gray-400 truncate">{recipient.id}</div>
+                </div>
+                <div className="flex flex-col justify-end items-end flex-shrink-0">
+                  <div className="text-xs sm:text-sm">Last sent</div>
+                  <div className="text-xs sm:text-sm font-medium">{recipient.amount}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-medium">Message (Optional)</label>
-          <textarea
-            className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1"
-            placeholder="Add a note for the recipient..."
-            rows={3}
-            {...register("message", { required: true })}
-          />
-        </div>
-
-        <button 
-            className="w-full bg-gray-300 text-gray-800 dark:text-gray-200 dark:bg-gray-700 font-semibold py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-800  flex items-center justify-center gap-2 disabled:opacity-65"
-            type="submit"
-        >
-          <SendIcon size={18} /> Send Funds
-        </button>
       </div>
-      </form>
-
-      <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-6">
-        <h2 className="text-lg font-semibold">Recent Recipients</h2>
-        <p className="text-sm font-light mb-4 opacity-65">Quick send to your frequent contacts</p>
-        <div className="space-y-3">
-          {recentRecipients.map((recipient, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-4 rounded-md border border-gray-800 dark:border-gray-300 p-3 bg-transparent"
-            >
-              <div className="bg-blue-800/10 p-2 rounded-md">
-                <SendIcon className="text-blue-600/50" size={20} />
-              </div>
-              <div className="flex-1">
-                <div className="font-medium">{recipient.name}</div>
-                <div className="text-sm">{recipient.id}</div>
-              </div>
-              <div className="flex flex-col justify-end items-end">
-                  <div className="text-sm">Last sent</div>
-                  <div className="text-sm">{recipient.amount}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

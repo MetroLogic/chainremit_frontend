@@ -11,7 +11,7 @@ const SupportHours = () => {
   ];
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm dark:bg-black border-1 border-white dark:border-white">
+    <Card className="border-1 border-white dark:border-slate-600">
       <CardHeader>
         <div className="flex items-center space-x-2">
           <Clock className="w-5 h-5" />

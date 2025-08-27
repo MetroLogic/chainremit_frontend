@@ -177,14 +177,20 @@ const Sidebar: React.FC<SidebarProps> = ({
               isCollapsed ? "justify-center w-full" : "my-6"
             }`}
           >
-            {/* <motion.div
-              className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0"
+            <motion.div
+              className="rounded-lg flex items-center justify-center flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={smoothSpring}
             >
-              <Send className="w-6 h-6 text-primary-foreground rotate-45" />
-            </motion.div> */}
+              <Image
+                src="/Logo.png"
+                alt="ChainRemit Logo"
+                width={80}
+                height={60}
+                className="w-[80px] h-[60px] object-fill"
+              />
+            </motion.div>
             <AnimatePresence mode="wait">
               {!isCollapsed && (
                 <motion.div
@@ -193,18 +199,27 @@ const Sidebar: React.FC<SidebarProps> = ({
                   initial="hide"
                   animate="show"
                   exit="hide"
-                  className="ml-3 my-6 overflow-hidden"
+                  className="-ml-3 my-6 overflow-hidden"
                   style={{
                     originX: 0,
                     willChange: "transform, opacity",
                   }}
                 >
+                  {/* Light theme image */}
                   <Image
-                    src="/Logo and text-3.png"
+                    src="/darklogotext.png"
                     alt="ChainRemit Logo"
-                    width={200}
-                    height={70}
-                    className="w-[200px] h-[70px] object-fill"
+                    width={80}
+                    height={60}
+                    className="w-[80px] h-[60px] object-fill dark:hidden"
+                  />
+                  {/* Dark theme image */}
+                  <Image
+                    src="/logoText.png"
+                    alt="ChainRemit Logo"
+                    width={80}
+                    height={60}
+                    className="w-[80px] h-[60px] object-fill hidden dark:block"
                   />
                 </motion.div>
               )}

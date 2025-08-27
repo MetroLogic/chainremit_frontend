@@ -49,7 +49,7 @@ export default function SecuritySection() {
   return (
     <div className="space-y-6">
       {/* Password Change */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border-gray-200 dark:border-gray-800">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Lock className="h-5 w-5 mr-2" />
@@ -69,7 +69,7 @@ export default function SecuritySection() {
                 Change Password
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-white bg-card  border-gray-200 dark:border-gray-800">
+            <DialogContent className="border">
               <DialogHeader>
                 <DialogTitle className="text-gray-900 dark:text-white">
                   Change Password
@@ -126,7 +126,7 @@ export default function SecuritySection() {
       </Card>
 
       {/* Two-Factor Authentication */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Shield className="h-5 w-5 mr-2" />
@@ -176,7 +176,7 @@ export default function SecuritySection() {
       </Card>
 
       {/* Login History */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <History className="h-5 w-5 mr-2" />
@@ -190,7 +190,7 @@ export default function SecuritySection() {
           {loginHistory.map((login, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 dark:bg-black rounded-lg space-y-2 sm:space-y-0"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 border rounded-lg space-y-2 sm:space-y-0"
             >
               <div className="flex items-center space-x-3">
                 <Monitor className="h-4 w-4 lg:h-5 lg:w-5 text-gray-500 dark:text-gray-400" />
@@ -217,7 +217,7 @@ export default function SecuritySection() {
       </Card>
 
       {/* Recovery Phrase */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Key className="h-5 w-5 mr-2" />

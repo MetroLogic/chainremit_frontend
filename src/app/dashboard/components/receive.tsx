@@ -1,5 +1,11 @@
 import React from "react";
-import { DownloadIcon, CheckCircleIcon, ClockIcon, XCircleIcon, QrCodeIcon } from "lucide-react";
+import {
+  DownloadIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  XCircleIcon,
+} from "lucide-react";
+import { MdCallReceived } from "react-icons/md";
 import { CopyButton } from "./copy-button";
 import QrCode from "./qr-code";
 import { WalletInjectedProps } from "./wallet-wrapper";
@@ -43,81 +49,119 @@ interface IncomingPayment {
   status: string;
 }
 
-export const Receive: React.FC<WalletInjectedProps & {
-  recentPayments: IncomingPayment[];
-}> = ({ starknetId, address, recentPayments }) => {
-
+export const Receive: React.FC<
+  WalletInjectedProps & {
+    recentPayments: IncomingPayment[];
+  }
+> = ({ starknetId, address, recentPayments }) => {
   return (
-    <div className="flex flex-col items-center">
-    <div className="space-y-6 w-[600px] max-w-[600px]">
-      <div>
-        <h1 className="text-2xl font-semibold">Receive Money</h1>
-        <h3 className="text-md font-light opacity-65">Share your wallet details to recieve payments</h3>
-      </div>
-      <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-6">
-        <div className="flex flex-col justify-center items-center">
-          <h2 className="text-2xl font-medium mb-1">Your Payment QR Code</h2>
-          <h2 className="text-sm font-light mb-4 opacity-65">Scan to send money to your wallet</h2>
+    <div className="flex flex-col items-center px-4 sm:px-0">
+      <div className="space-y-4 sm:space-y-6 w-full max-w-[600px]">
+        <div className="text-center sm:text-left">
+          <h1 className="text-xl sm:text-2xl font-semibold">Receive Money</h1>
+          <h3 className="text-sm sm:text-md font-light opacity-65">
+            Share your wallet details to receive payments
+          </h3>
         </div>
-        <QrCode walletAddress={address} starknetId={starknetId} />
-      </div>
 
-      <div className="rounded-lg border p-6  border-gray-800 dark:border-gray-300">
-        <div className="flex flex-col justify-center items-start">
-          <h2 className="text-lg font-medium">Wallet Details</h2>
-          <h2 className="text-sm font-light mb-4 opacity-65">Share these details to receive payments</h2>
+        <div className="rounded-lg border border-gray-800 dark:border-gray-300 p-4 sm:p-6">
+          <div className="flex flex-col justify-center items-center">
+            <h2 className="text-lg sm:text-2xl font-medium mb-1">
+              Your Payment QR Code
+            </h2>
+            <h2 className="text-xs sm:text-sm font-light mb-4 opacity-65 text-center">
+              Scan to send money to your wallet
+            </h2>
+          </div>
+          <QrCode walletAddress={address} starknetId={starknetId} />
         </div>
-        <div className="space-y-4">
-            { starknetId && <div>
-              <label className="block text-sm font-medium">StarkNet ID</label>
-              <div className="flex items-center gap-2 mt-1">
-                <input readOnly value={starknetId} className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-1 bg-transparent" />
-                <CopyButton text={starknetId} />
-              </div>
-            </div>
-            }
-            { address 
-              ? <div>
-                <label className="block text-sm font-medium">Wallet Address</label>
+
+        <div className="rounded-lg border p-4 sm:p-6 border-gray-800 dark:border-gray-300">
+          <div className="flex flex-col justify-center items-start">
+            <h2 className="text-base sm:text-lg font-medium">Wallet Details</h2>
+            <h2 className="text-xs sm:text-sm font-light mb-4 opacity-65">
+              Share these details to receive payments
+            </h2>
+          </div>
+          <div className="space-y-3 sm:space-y-4">
+            {starknetId && (
+              <div>
+                <label className="block text-sm font-medium">StarkNet ID</label>
                 <div className="flex items-center gap-2 mt-1">
-                  <input readOnly value={address} className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-1 bg-transparent" />
-                  <CopyButton text={address} />
+                  <input
+                    readOnly
+                    value={starknetId}
+                    className="w-full rounded border border-gray-300 dark:border-gray-800 px-2 sm:px-3 py-1 bg-transparent text-sm overflow-hidden text-ellipsis"
+                  />
+                  <div className="flex-shrink-0">
+                    <CopyButton text={starknetId} />
+                  </div>
                 </div>
-              </div> 
-              : <p className="block text-sm font-medium">Connect wallet to view address</p>
-            }
+              </div>
+            )}
+            {address ? (
+              <div>
+                <label className="block text-sm font-medium">
+                  Wallet Address
+                </label>
+                <div className="flex items-center gap-2 mt-1">
+                  <input
+                    readOnly
+                    value={address}
+                    className="w-full rounded border border-gray-300 dark:border-gray-800 px-2 sm:px-3 py-1 bg-transparent text-sm overflow-hidden text-ellipsis"
+                  />
+                  <div className="flex-shrink-0">
+                    <CopyButton text={address} />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="block text-sm font-medium">
+                Connect wallet to view address
+              </p>
+            )}
+          </div>
         </div>
-      </div>
 
-      <div className="rounded-lg border p-6  border-gray-800 dark:border-gray-300">
-        <div className="flex flex-col justify-center items-start">
-          <h2 className="text-lg font-medium">Recent Incoming Payments</h2>
-          <h2 className="text-sm font-light mb-4 opacity-65">Your latest recieved transactions</h2>
-        </div>
-        <div className="space-y-3">
-          {recentPayments.map((tx, i) => (
+        <div className="rounded-lg border p-4 sm:p-6 border-gray-800 dark:border-gray-300">
+          <div className="flex flex-col justify-center items-start">
+            <h2 className="text-base sm:text-lg font-medium">
+              Recent Incoming Payments
+            </h2>
+            <h2 className="text-xs sm:text-sm font-light mb-4 opacity-65">
+              Your latest received transactions
+            </h2>
+          </div>
+          <div className="space-y-3">
+            {recentPayments.map((tx, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 rounded-md border border-gray-800 dark:border-gray-300 p-3"
+                className="flex items-center gap-3 sm:gap-4 rounded-md border border-gray-800 dark:border-gray-300 p-3"
               >
-                <div className="bg-green-300/20 p-2 rounded-full">
-                  <DownloadIcon className="text-green-600" size={20} />
+                <div className="bg-green-300/20 p-2 rounded-full flex-shrink-0">
+                  <MdCallReceived className="text-green-600" size={16} />
                 </div>
-                <div className="flex-1">
-                  <div className="font-regular">From {tx.from}</div>
-                  <div className="text-sm text-gray-400">{tx.date}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-regular text-sm sm:text-base truncate">
+                    From {tx.from}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-400">
+                    {tx.date}
+                  </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-green-500 font-medium">{tx.amount}</div>
-                  {getStatusBadge(tx.status)}
+                <div className="text-right flex-shrink-0">
+                  <div className="text-green-500 font-medium text-sm sm:text-base">
+                    {tx.amount}
+                  </div>
+                  <div className="mt-1">{getStatusBadge(tx.status)}</div>
                 </div>
               </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
 
-export default Receive
+export default Receive;

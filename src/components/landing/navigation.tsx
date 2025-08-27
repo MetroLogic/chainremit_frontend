@@ -15,7 +15,6 @@ interface NavigationProps {
 export function Navigation({ setIsModalOpen }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -30,12 +29,21 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
         {/* Logo */}
         <div className="flex items-center justify-center">
           <Link href="/" className="flex items-center">
+            {/* Light theme image */}
+            <Image
+              src="/Logo and text-4.png"
+              alt="ChainRemit Logo"
+              width={200}
+              height={70}
+              className="w-[200px] h-[70px] object-fill block dark:hidden"
+            />
+            {/* Dark theme image */}
             <Image
               src="/Logo and text-3.png"
               alt="ChainRemit Logo"
               width={200}
               height={70}
-              className="w-[200px] h-[70px] object-fill"
+              className="w-[200px] h-[70px] object-fill hidden dark:block"
             />
           </Link>
         </div>
@@ -108,14 +116,16 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
 
           {/* Mobile Menu */}
           <div className="fixed top-0 right-0 h-full w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-2xl z-50 transform transition-transform duration-300 border-l border-gray-200 dark:border-gray-700">
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full bg-white/95 dark:bg-gray-900/95">
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
                 <div className="flex items-center space-x-2">
                   <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-md flex items-center justify-center">
                     <Send className="w-3 h-3 text-white" />
                   </div>
-                  <span className="text-lg font-bold cursor-pointer">StarkRemit</span>
+                  <span className="text-lg font-bold cursor-pointer">
+                    StarkRemit
+                  </span>
                 </div>
                 <button
                   onClick={closeMenu}
@@ -160,7 +170,7 @@ export function Navigation({ setIsModalOpen }: NavigationProps) {
               </div>
 
               {/* Bottom Actions */}
-              <div className="p-4 border-t cursor-pointer dark:border-gray-800 space-y-3">
+              <div className="p-4 border-t bg-white/95 dark:bg-gray-900/95 cursor-pointer dark:border-gray-800 space-y-3">
                 <Button
                   variant="outline"
                   className="w-full"
