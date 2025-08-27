@@ -33,7 +33,7 @@ export default function LoanOfferCard({
   onApplyNow,
 }: LoanOfferCardProps) {
   return (
-    <Card className="border-2 border-t-[#9c9c9e] p-3 gap-2 md:gap-4 border-b-[#9c9c9e] border-l-[#d5d5d7] border-r-[#d5d5d7]">
+    <Card className="border p-3 gap-2 md:gap-4">
       <CardHeader className="p-0">
         <div className="flex justify-between items-start">
           <div>
