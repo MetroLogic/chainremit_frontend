@@ -31,7 +31,7 @@ export default function PrivacySection() {
   return (
     <div className="space-y-6">
       {/* Profile Visibility */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Eye className="h-5 w-5 mr-2" />
@@ -62,7 +62,7 @@ export default function PrivacySection() {
       </Card>
 
       {/* Activity Sharing */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Share className="h-5 w-5 mr-2" />
@@ -109,7 +109,7 @@ export default function PrivacySection() {
       </Card>
 
       {/* Data Export */}
-      <Card className="bg-gray-50 bg-card  border-gray-200 dark:border-gray-800">
+      <Card className="border">
         <CardHeader>
           <CardTitle className="text-gray-900 dark:text-white flex items-center text-lg lg:text-xl">
             <Download className="h-5 w-5 mr-2" />
@@ -135,7 +135,7 @@ export default function PrivacySection() {
       </Card>
 
       {/* Account Deletion */}
-      <Card className="bg-gray-50 bg-card  border-red-200 dark:border-red-800/50">
+      <Card className="border-red-200 dark:border-red-800/50">
         <CardHeader>
           <CardTitle className="text-red-600 dark:text-red-400 flex items-center text-lg lg:text-xl">
             <Trash2 className="h-5 w-5 mr-2" />
@@ -165,7 +165,7 @@ export default function PrivacySection() {
             <DialogTrigger asChild>
               <Button className="cursor-pointer" variant="destructive">Delete Account</Button>
             </DialogTrigger>
-            <DialogContent className="bg-white bg-card  border-gray-200 dark:border-gray-800">
+            <DialogContent className="border">
               <DialogHeader>
                 <DialogTitle className="text-red-600 dark:text-red-400">
                   Confirm Account Deletion
