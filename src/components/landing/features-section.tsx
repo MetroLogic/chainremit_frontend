@@ -12,7 +12,7 @@ const features = [
     icon: HiPaperAirplane,
     title: "Send Money Instantly",
     description:
-      "Transfer funds globally with minimal fees and instant settlement on StarkNet",
+      "Transfer funds globally with minimal fees and instant settlement on Starknet",
     iconColor: "bg-blue-600",
   },
   {
@@ -38,7 +38,7 @@ const features = [
   },
   {
     icon: HiLightningBolt,
-    title: "Powered by StarkNet",
+    title: "Powered by Starknet",
     description:
       "Lightning-fast transactions with low fees on Ethereum's most advanced L2",
     iconColor: "bg-blue-600",
