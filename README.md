@@ -1,8 +1,8 @@
-# starkRemit_frontend
+# chainkRemit_frontend
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ## Project Overview 🧐
 
-starkRemit_frontend is the user-facing web application for starkRemit, a platform designed to global remittances and microfinance by combining blockchain scalability, smart contract automation, and AI-driven insights. Tailored for migrant workers and underbanked communities, the platform allows users to send money, access microloans, and join community-based savings groups with minimal fees and near-instant settlements. By leveraging the power of StarkNet, StarkRemit offers a secure, decentralized alternative to traditional remittance and lending services, dramatically reducing reliance on banks and high transaction costs. facilitate seamless and secure international money transfers. Built with Next.js, it leverages the power of React for building dynamic user interfaces with features like server-side rendering and excellent developer experience. This documentation serves as the central guide for developers looking to understand, contribute to, or deploy this frontend application.
+chainkRemit_frontend is the user-facing web application for chainkRemit, a platform designed to global remittances and microfinance by combining blockchain scalability, smart contract automation, and AI-driven insights. Tailored for migrant workers and underbanked communities, the platform allows users to send money, access microloans, and join community-based savings groups with minimal fees and near-instant settlements. By leveraging the power of Stellar, chainkRemit offers a secure, decentralized alternative to traditional remittance and lending services, dramatically reducing reliance on banks and high transaction costs. facilitate seamless and secure international money transfers. Built with Next.js, it leverages the power of React for building dynamic user interfaces with features like server-side rendering and excellent developer experience. This documentation serves as the central guide for developers looking to understand, contribute to, or deploy this frontend application.
 
 ## Setup Instructions 🛠️
 
@@ -15,8 +15,8 @@ Follow these steps to get the project running on your local machine:
 
 2.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/MetroLogic/starkRemit_frontend
-    cd starkRemit_frontend
+    git clone https://github.com/MetroLogic/ChainkRemit_frontend
+    cd ChainkRemit_frontend
     ```
 
 3.  **Install Dependencies:**
@@ -62,7 +62,7 @@ Here's a high-level overview of the project's directory structure:
 ## 📁 Project Structure
 
 ```bash
-starkRemit_frontend/
+chainkRemit_frontend/
 │
 ├── .github/                # GitHub-specific configurations (e.g., workflows, issue templates)
 ├── public/                 # Static files like images and favicons
