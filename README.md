@@ -88,3 +88,8 @@ chainkRemit_frontend/
 npm run build
 # or
 yarn build
+
+
+### Code of Conduct
+
+Please treat all maintainers and other contributors with respect. We strive to maintain a welcoming, inclusive, and collaborative environment for everyone.
