@@ -25,10 +25,10 @@ export default function TermsPage() {
       icon: <Scale className="w-5 h-5" />,
       content: [
         {
-          text: "By accessing or using StarkRemit's services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using our services.",
+          text: "By accessing or using ChainRemit's services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using our services.",
         },
         {
-          text: "These terms constitute a legally binding agreement between you and StarkRemit. We may update these terms from time to time, and your continued use of our services constitutes acceptance of any changes.",
+          text: "These terms constitute a legally binding agreement between you and ChainRemit. We may update these terms from time to time, and your continued use of our services constitutes acceptance of any changes.",
         },
       ],
     },
@@ -38,7 +38,7 @@ export default function TermsPage() {
       icon: <CreditCard className="w-5 h-5" />,
       content: [
         {
-          text: "StarkRemit provides decentralized financial services including money transfers, savings groups, microloans, and credit scoring on the StarkNet blockchain.",
+          text: "ChainRemit provides decentralized financial services including money transfers, savings groups, microloans, and credit scoring on the Stellar blockchain.",
         },
         {
           text: "Our services are provided 'as is' and we reserve the right to modify, suspend, or discontinue any aspect of our services at any time with or without notice.",
@@ -169,7 +169,7 @@ export default function TermsPage() {
                 />
               </Link>
             </div>
-            {/* <span className="text-xl font-bold">StarkRemit</span> */}
+            {/* <span className="text-xl font-bold">ChainRemit</span> */}
           </div>
           <div className="flex items-center space-x-4">
             <Button variant="ghost" asChild>
@@ -193,7 +193,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
-            Please read these terms carefully before using StarkRemit's
+            Please read these terms carefully before using ChainRemit's
             services. By using our platform, you agree to these terms and
             conditions.
           </p>

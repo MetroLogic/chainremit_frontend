@@ -152,7 +152,7 @@ export default function SignUpPage() {
         <div>
           <div className="font-bold">Account Created Successfully</div>
           <div>
-            Welcome to StarkRemit! Please check your email to verify your
+            Welcome to ChainRemit! Please check your email to verify your
             account.
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function SignUpPage() {
       // Simulate wallet connection
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      toast.success("Successfully connected to your StarkNet wallet");
+      toast.success("Successfully connected to your Stellar wallet");
 
       router.push("/dashboard");
     } catch (error) {
@@ -252,7 +252,7 @@ export default function SignUpPage() {
           <CardHeader>
             <CardTitle>Sign Up</CardTitle>
             <CardDescription>
-              Create your StarkRemit account to get started
+              Create your ChainRemit account to get started
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -262,7 +262,7 @@ export default function SignUpPage() {
               onClick={handleLaunchAppClick}
               className="w-full bg-gradient-to-r  from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-full py-2 px-3 text-white cursor-pointer"
             >
-              {account ? shortenAddress(account) : "Connect StarkNet Wallet"}
+              {account ? shortenAddress(account) : "Connect Stellar Wallet"}
             </button>
 
             <div className="relative">

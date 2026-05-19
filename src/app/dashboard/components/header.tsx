@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Bell, Menu, User, PanelLeftClose, LogOut } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import WalletDisconnectModal from "../../../components/blockchain/Wallet-disconnect-modal";
-import { useAccount, useDisconnect } from "@starknet-react/core";
+import { useWalletContext } from "../../../components/blockchain/walletProvider";
 import { useRouter } from "next/navigation";
 
 interface HeaderProps {
@@ -23,22 +23,21 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [waitingForReconnect, setWaitingForReconnect] = useState(false);
-  const { disconnect } = useDisconnect();
-  const { address } = useAccount();
+  const { disconnectWallet, account } = useWalletContext();
   const router = useRouter();
 
   const handleDisconnect = () => {
-    disconnect();
+    disconnectWallet();
     setIsModalOpen(false);
     setWaitingForReconnect(true);
   };
 
   // ✅ When the user reconnects after disconnecting, navigate to dashboard
   useEffect(() => {
-    if (waitingForReconnect && address) {
+    if (waitingForReconnect && account) {
       router.push("/dashboard");
     }
-  }, [waitingForReconnect, address, router]);
+  }, [waitingForReconnect, account, router]);
 
   return (
     <header className="h-16 bg-slate-200/95 dark:bg-slate-950/95 border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50">
@@ -58,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full">
           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
           <span className="text-xs font-medium text-green-700 dark:text-green-400">
-            Connected to StarkNet Mainnet
+            Connected to Stellar Mainnet
           </span>
         </div>
       </div>

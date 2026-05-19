@@ -6,25 +6,25 @@ import WalletWrapper from "../components/wallet-wrapper";
 
 const DUMMY_RECENT = [
   {
-    from: "alice.stark",
+    from: "alice*stellar.org",
     date: "July 2, 2025",
     amount: "+$150.00",
     status: "Completed",
   },
   {
-    from: "0x91b3...e4a9",
+    from: "GD91B3...E4A9",
     date: "July 1, 2025",
     amount: "+$300.00",
     status: "Completed",
   },
   {
-    from: "bob.stark",
+    from: "bob*stellar.org",
     date: "June 28, 2025",
     amount: "+$200.00",
     status: "Pending",
   },
   {
-    from: "me.stark",
+    from: "me*stellar.org",
     date: "June 25, 2025",
     amount: "+$200.00",
     status: "Failed",

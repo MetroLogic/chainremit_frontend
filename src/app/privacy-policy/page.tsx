@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         },
         {
           title: "Blockchain Data",
-          text: "As a blockchain-based service, certain transaction data is publicly available on the StarkNet blockchain.",
+          text: "As a blockchain-based service, certain transaction data is publicly available on the Stellar blockchain.",
         },
       ],
     },

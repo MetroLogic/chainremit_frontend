@@ -27,7 +27,7 @@ export default function DemoPage() {
   const [demoProgress, setDemoProgress] = useState(0);
   const [walletConnected, setWalletConnected] = useState(false);
   const [sendAmount, setSendAmount] = useState("125.50");
-  const [recipient, setRecipient] = useState("alice.stark");
+  const [recipient, setRecipient] = useState("alice*stellar.org");
   const [groupProgress, setGroupProgress] = useState(80);
   const [creditScore, setCreditScore] = useState(742);
   const [activeTab, setActiveTab] = useState("interactive");
@@ -37,7 +37,7 @@ export default function DemoPage() {
   const demoSteps = [
     {
       title: "Connect Your Wallet",
-      description: "Securely connect your StarkNet wallet to get started",
+      description: "Securely connect your Stellar wallet to get started",
       component: "wallet-connect",
       duration: 3000,
     },
@@ -75,7 +75,7 @@ export default function DemoPage() {
 
     // Reset demo state
     setSendAmount("125.50");
-    setRecipient("alice.stark");
+    setRecipient("alice*stellar.org");
     setGroupProgress(80);
     setCreditScore(742);
 
@@ -156,7 +156,7 @@ export default function DemoPage() {
     setDemoProgress(0);
     setWalletConnected(false);
     setSendAmount("125.50");
-    setRecipient("alice.stark");
+    setRecipient("alice*stellar.org");
     setGroupProgress(80);
     setCreditScore(742);
 
@@ -216,7 +216,7 @@ export default function DemoPage() {
               <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto">
                 <Wallet className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold">Connect StarkNet Wallet</h3>
+              <h3 className="text-xl font-semibold">Connect Stellar Wallet</h3>
               <p className="text-gray-600 dark:text-gray-300">
                 Securely connect your wallet to access all ChainRemit features
               </p>
@@ -227,7 +227,7 @@ export default function DemoPage() {
                     <span>Wallet Connected!</span>
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-300">
-                    Address: 0x1234...5678
+                    Address: GD1234...5678
                   </div>
                 </div>
               ) : (

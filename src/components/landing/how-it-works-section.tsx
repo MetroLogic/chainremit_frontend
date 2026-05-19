@@ -11,7 +11,7 @@ const steps = [
     number: "1",
     icon: HiCreditCard,
     title: "Connect Wallet",
-    description: "Connect your StarkNet wallet or create a new one",
+    description: "Connect your Stellar wallet or create a new one",
   },
   {
     number: "2",
@@ -52,7 +52,7 @@ export function HowItWorksSection() {
             </div>
             <h3 className="text-xl font-semibold mb-2">1. Connect Wallet</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Connect your StarkNet wallet or create a new one
+              Connect your Stellar wallet or create a new one
             </p>
           </div>
           <div className="text-center">

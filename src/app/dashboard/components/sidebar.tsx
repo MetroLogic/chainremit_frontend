@@ -15,8 +15,6 @@ import {
   Settings,
   X,
 } from "lucide-react";
-import { useAccount, useConnect, useDisconnect } from "@starknet-react/core";
-import { truncate } from "@/lib/utils";
 import Image from "next/image";
 
 interface SidebarProps {
@@ -34,20 +32,14 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const pathname = usePathname();
 
-  const { disconnect } = useDisconnect();
-  const { isConnected, address } = useAccount();
-  const { connect, connectors, error } = useConnect();
+  const disconnect = () => {};
+  const isConnected = false;
+  const address = "";
+  const connect = () => {};
+  const connectors: any[] = [];
+  const error = null;
 
-  const handleConnect = (idx: number) => {
-    const connector = connectors[idx]; // or find based on `id` like 'argentX', 'braavos'
-
-    if (!connector) {
-      console.error("No wallet connector available");
-      return;
-    }
-
-    connect({ connector });
-  };
+  const handleConnect = (idx: number) => {};
 
   const sidebarItems = [
     { icon: LayoutDashboard, label: "Dashboard", route: "/dashboard" },

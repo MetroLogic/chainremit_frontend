@@ -72,7 +72,7 @@ export default function LoginPage() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Simulate successful login
-      toast.success("Login Successful\nWelcome back to StarkRemit!");
+      toast.success("Login Successful\nWelcome back to ChainRemit!");
 
       // Redirect to dashboard
       router.push("/dashboard");
@@ -90,7 +90,7 @@ export default function LoginPage() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       toast.success(
-        "Wallet Connected\n Successfully connected to your StarkNet wallet"
+        "Wallet Connected\n Successfully connected to your Stellar wallet"
       );
 
       router.push("/dashboard");
@@ -179,7 +179,7 @@ export default function LoginPage() {
               onClick={handleLaunchAppClick}
               className="w-full bg-gradient-to-r  from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-full py-2 px-3 text-white cursor-pointer"
             >
-              {account ? shortenAddress(account) : "Connect StarkNet Wallet"}
+              {account ? shortenAddress(account) : "Connect Stellar Wallet"}
             </button>
 
             <div className="relative">

@@ -43,8 +43,8 @@ export default function ProfileSection() {
     phone: "+1 (555) 123-4567",
     location: "San Francisco, CA",
     timezone: "Pacific Standard Time (PST)",
-    walletAddress: "0xabc123...def789",
-    starknetId: "johndoe.stark",
+    walletAddress: "GD2ABC123...DEF789",
+    stellarId: "johndoe*stellar.org",
     avatar: "/placeholder.svg?height=100&width=100",
   });
 
@@ -281,7 +281,7 @@ export default function ProfileSection() {
             Wallet Information
           </CardTitle>
           <CardDescription className="text-sm lg:text-base text-gray-600 dark:text-gray-400">
-            Your connected wallet and StarkNet details
+            Your connected wallet and Stellar details
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -325,10 +325,10 @@ export default function ProfileSection() {
               </div>
               <div>
                 <p className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">
-                  StarkNet ID
+                  Stellar ID
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 text-xs lg:text-sm">
-                  {profile.starknetId}
+                  {profile.stellarId}
                 </p>
               </div>
             </div>

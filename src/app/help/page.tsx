@@ -38,7 +38,7 @@ export default function HelpPage() {
       id: "getting-started",
       title: "Getting Started",
       icon: <Book className="w-5 h-5" />,
-      description: "Learn the basics of using StarkRemit",
+      description: "Learn the basics of using ChainRemit",
       articles: 12,
     },
     {
@@ -94,7 +94,7 @@ export default function HelpPage() {
 
   const popularArticles = [
     {
-      title: "How to connect your StarkNet wallet",
+      title: "How to connect your Stellar wallet",
       category: "Getting Started",
       views: "2.3k views",
     },
@@ -124,7 +124,7 @@ export default function HelpPage() {
     {
       question: "How do I get started with ChainRemit?",
       answer:
-        "To get started, you'll need to connect a StarkNet-compatible wallet, complete identity verification (optional for higher limits), and you can immediately start sending money or joining savings groups.",
+        "To get started, you'll need to connect a Stellar-compatible wallet, complete identity verification (optional for higher limits), and you can immediately start sending money or joining savings groups.",
     },
     {
       question: "What are the fees for sending money?",
@@ -134,7 +134,7 @@ export default function HelpPage() {
     {
       question: "How long do transactions take?",
       answer:
-        "Most transactions are completed within minutes thanks to StarkNet's fast processing. International transfers typically take 2-10 minutes, while domestic transfers are usually instant.",
+        "Most transactions are completed within minutes thanks to Stellar's fast processing. International transfers typically take 2-10 minutes, while domestic transfers are usually instant.",
     },
     {
       question: "Is my money safe with ChainRemit?",

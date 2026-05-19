@@ -6,22 +6,22 @@ import WalletWrapper from "../components/wallet-wrapper";
 const DUMMY_RECIPIENTS = [
   {
     name: "Alice Johnson",
-    id: "alice.stark",
+    id: "alice*stellar.org",
     amount: "$125.50",
   },
   {
     name: "Bob Smith",
-    id: "bob.stark",
+    id: "bob*stellar.org",
     amount: "$75.00",
   },
   {
     name: "Charlie Miner",
-    id: "0x8aE3...D7F4",
+    id: "GD8AE3...D7F4",
     amount: "$300.00",
   },
   {
     name: "Community Wallet",
-    id: "0x456...def",
+    id: "GD456...DDEF",
     amount: "$50.00",
   },
 ];

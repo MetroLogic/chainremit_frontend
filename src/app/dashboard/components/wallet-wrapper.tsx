@@ -1,7 +1,7 @@
 "use client"
 
 import { CURRENCIES_TYPE, TokenBalance, useBalances } from '@/hooks/use-balances';
-import { useAccount, useStarkName } from '@starknet-react/core'
+import { useWalletContext } from "../../../components/blockchain/walletProvider";
 import React, { ReactElement } from 'react'
 
 
@@ -20,12 +20,14 @@ type IWalletWrapper = {
 
 const WalletWrapper:React.FC<IWalletWrapper> = ({ children }) => {
 
-  const { address, isConnected } = useAccount()
-  let { data, isLoading } = useStarkName({ address })
+  const { account } = useWalletContext();
+  const isConnected = !!account;
+  const address = account ?? undefined;
+  const isLoading = false;
 
   const { currentCurrencies, tokenBalances } = useBalances({ ownerAddress: address })
 
-  data = "me.stark"
+  const data = "me*stellar.org"
 
   return <>
     {children({

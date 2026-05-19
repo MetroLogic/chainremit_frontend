@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ChainRemit - Decentralized Finance Platform",
     short_name: "ChainRemit",
-    description: "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion.",
+    description: "Send, save, and borrow across borders on Stellar. Join the future of financial inclusion.",
     start_url: "/",
     display: "standalone",
     background_color: "#1e293b",

@@ -11,16 +11,16 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { WalletInjectedProps } from "./wallet-wrapper";
 
-const currencies  = z.enum(["USDC", "ETH", "STRK"])
+const currencies  = z.enum(["USDC", "ETH", "XLM"])
 
 const addressSchema = z
   .string()
   .refine((val) => {
-    const isHex = /^0x[0-9a-fA-F]+$/.test(val);
-    const isStarkDomain = val.endsWith('.stark');
-    return isHex || isStarkDomain;
+    const isStellarPublicKey = /^G[a-zA-Z0-9]{55}$/.test(val);
+    const isFederated = val.includes('*') || val.endsWith('.stellar');
+    return isStellarPublicKey || isFederated;
   }, {
-    message: 'Address must be a valid 0x hex or end with .stark',
+    message: 'Address must be a valid Stellar public key (starts with G) or federated address (e.g. user*domain.com)',
   });
 
 const amountSchema = z
@@ -166,10 +166,10 @@ export const Send: React.FC<ISend> = ({
             </div>
             
             <div>
-              <label className="block text-sm font-medium">Recipient Address or StarkNet ID</label>
+              <label className="block text-sm font-medium">Recipient Address or Stellar ID</label>
               <input
                 className="w-full rounded border border-gray-300 dark:border-gray-800 px-3 py-2 bg-transparent mt-1 text-sm"
-                placeholder="0x... or username.stark"
+                placeholder="G... or username*stellar.org"
                 {...register("recipient_address", { required: true })}
               />
               {errors.recipient_address?.message && <p className="text-sm text-red-700 mt-1">{errors?.recipient_address?.message}</p>}

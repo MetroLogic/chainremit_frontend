@@ -12,7 +12,7 @@ export function HeroSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <Badge variant="secondary" className="w-fit">
-                Powered by Starknet
+                Powered by Stellar
               </Badge>
               <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                 Empowering Global Communities with{" "}
@@ -21,7 +21,7 @@ export function HeroSection() {
                 </span>
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                Send, save, and borrow across borders on Starknet. Join the
+                Send, save, and borrow across borders on Stellar. Join the
                 future of financial inclusion.
               </p>
             </div>

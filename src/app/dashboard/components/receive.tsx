@@ -86,7 +86,7 @@ export const Receive: React.FC<
           <div className="space-y-3 sm:space-y-4">
             {starknetId && (
               <div>
-                <label className="block text-sm font-medium">StarkNet ID</label>
+                <label className="block text-sm font-medium">Stellar ID</label>
                 <div className="flex items-center gap-2 mt-1">
                   <input
                     readOnly

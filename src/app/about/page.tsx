@@ -42,7 +42,7 @@ export default function AboutPage() {
     {
       name: "Eleazer Musa",
       role: "Lead Engineer",
-      bio: "StarkNet core contributor, smart contract security specialist",
+      bio: "Stellar core contributor, smart contract security specialist",
       avatar: "EM",
     },
   ];
@@ -66,8 +66,8 @@ export default function AboutPage() {
     },
     {
       year: "2025",
-      event: "StarkNet integration",
-      description: "Full integration with StarkNet mainnet",
+      event: "Stellar integration",
+      description: "Full integration with Stellar mainnet",
     },
     {
       year: "2026",

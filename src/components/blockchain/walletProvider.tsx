@@ -4,28 +4,28 @@ import React, {
   createContext,
   useContext,
   ReactNode,
-  useCallback,
+  useState,
   useEffect,
+  useCallback,
 } from "react";
-import {
-  useConnect,
-  useAccount,
-  useDisconnect,
-  Connector,
-  ConnectVariables,
-} from "@starknet-react/core";
+
+export interface Connector {
+  id: string;
+  name: string;
+  available: () => boolean;
+}
 
 interface WalletContextProps {
   account: string | null;
-  connectors: Connector[]; // ← Exposed connectors
-  connectWallet: (connector: Connector) => void; // ← Takes connector arg
+  connectors: Connector[];
+  connectWallet: (connector: Connector) => void;
   disconnectWallet: () => void;
-  connectAsync: (args?: ConnectVariables) => Promise<void>;
+  connectAsync: () => Promise<void>;
 }
 
 const WalletContext = createContext<WalletContextProps>({
   account: null,
-  connectors: [], // ← Default empty
+  connectors: [],
   connectWallet: () => {},
   disconnectWallet: () => {},
   connectAsync: () => Promise.resolve(),
@@ -34,34 +34,46 @@ const WalletContext = createContext<WalletContextProps>({
 export const WalletProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { connect, connectors, connectAsync } = useConnect();
-  const { address } = useAccount();
-  const { disconnect } = useDisconnect();
+  const [account, setAccount] = useState<string | null>(null);
 
-  // Accept a specific connector when connecting
-  const connectWallet = useCallback(
-    (connector: Connector) => {
-      connect({ connector });
-    },
-    [connect]
-  );
-
-  // Save wallet address to localStorage when connected
   useEffect(() => {
-    if (address) {
-      localStorage.setItem("walletAddress", address);
-    } else {
-      localStorage.removeItem("walletAddress");
+    const saved = localStorage.getItem("walletAddress");
+    if (saved) {
+      setAccount(saved);
     }
-  }, [address]);
+  }, []);
+
+  const connectors: Connector[] = [
+    { id: "freighter", name: "Freighter Wallet", available: () => true },
+    { id: "lobstr", name: "LOBSTR Wallet", available: () => true },
+    { id: "xbull", name: "xBull Wallet", available: () => true },
+    { id: "albedo", name: "Albedo", available: () => true },
+  ];
+
+  const connectWallet = useCallback((connector: Connector) => {
+    const mockAddress = "GD2ABC12345678901234567890123456789012345678901234567890";
+    setAccount(mockAddress);
+    localStorage.setItem("walletAddress", mockAddress);
+  }, []);
+
+  const disconnectWallet = useCallback(() => {
+    setAccount(null);
+    localStorage.removeItem("walletAddress");
+  }, []);
+
+  const connectAsync = useCallback(async () => {
+    const mockAddress = "GD2ABC12345678901234567890123456789012345678901234567890";
+    setAccount(mockAddress);
+    localStorage.setItem("walletAddress", mockAddress);
+  }, []);
 
   return (
     <WalletContext.Provider
       value={{
-        account: address ?? null,
-        connectors, // ← Now available to consumers
-        connectWallet, // ← Can specify which connector
-        disconnectWallet: disconnect,
+        account,
+        connectors,
+        connectWallet,
+        disconnectWallet,
         connectAsync,
       }}
     >

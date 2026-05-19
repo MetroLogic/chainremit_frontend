@@ -19,7 +19,7 @@ const Wallet: React.FC = () => {
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-            <span className="text-muted-foreground">STRK: 450.8</span>
+            <span className="text-muted-foreground">XLM: 450.8</span>
           </div>
         </div>
       </div>

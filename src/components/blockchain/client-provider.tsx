@@ -1,17 +1,17 @@
 "use client";
 
-import StarknetProvider from "./StarknetProviders";
+import StellarProvider from "./StellarProviders";
 import { WalletProvider } from "./wallet-connect-context";
 
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
-    <StarknetProvider>
+    <StellarProvider>
       <WalletProvider>
 
           {children}
 
       </WalletProvider>
-    </StarknetProvider>
+    </StellarProvider>
   );
 } 

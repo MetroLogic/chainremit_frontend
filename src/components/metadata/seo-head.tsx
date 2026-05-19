@@ -9,7 +9,7 @@ interface SEOHeadProps {
 
 export function SEOHead({
   title = "ChainRemit - Empowering Global Communities with Decentralized Finance",
-  description = "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion with instant money transfers, microloans, and savings groups.",
+  description = "Send, save, and borrow across borders on Stellar. Join the future of financial inclusion with instant money transfers, microloans, and savings groups.",
   canonical = "https://chainremit.com",
   ogImage = "/og-image.png",
 }: SEOHeadProps) {
@@ -21,7 +21,7 @@ export function SEOHead({
       <meta name="description" content={description} />
       <meta
         name="keywords"
-        content="DeFi, decentralized finance, StarkNet, money transfer, remittance, microloans, savings groups, crypto, blockchain"
+        content="DeFi, decentralized finance, Stellar, money transfer, remittance, microloans, savings groups, crypto, blockchain"
       />
       <meta name="robots" content="index, follow" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />

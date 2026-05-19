@@ -24,14 +24,14 @@ export function StructuredData() {
     "@type": "WebSite",
     name: "ChainRemit",
     url: "https://chainremit.com",
-    description: "Send, save, and borrow across borders on StarkNet. Join the future of financial inclusion.",
+    description: "Send, save, and borrow across borders on Stellar. Join the future of financial inclusion.",
     publisher: {
       "@type": "Organization",
       name: "ChainRemit",
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://starkremit.com/search?q={search_term_string}",
+      target: "https://chainremit.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   }
@@ -98,7 +98,7 @@ export function StructuredData() {
         name: "What is ChainRemit?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "ChainRemit is a decentralized finance platform built on StarkNet that enables global money transfers, microloans, and savings groups with minimal fees and instant settlement.",
+          text: "ChainRemit is a decentralized finance platform built on Stellar that enables global money transfers, microloans, and savings groups with minimal fees and instant settlement.",
         },
       },
       {
@@ -114,7 +114,7 @@ export function StructuredData() {
         name: "What are the fees for using ChainRemit?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "ChainRemit offers minimal fees for global money transfers thanks to StarkNet's low-cost infrastructure, making it affordable for everyone.",
+          text: "ChainRemit offers minimal fees for global money transfers thanks to Stellar's low-cost infrastructure, making it affordable for everyone.",
         },
       },
       {
@@ -122,7 +122,7 @@ export function StructuredData() {
         name: "Is ChainRemit secure?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, ChainRemit is built on StarkNet with enterprise-grade security. All transactions are verifiable on-chain and transparent.",
+          text: "Yes, ChainRemit is built on Stellar with enterprise-grade security. All transactions are verifiable on-chain and transparent.",
         },
       },
     ],

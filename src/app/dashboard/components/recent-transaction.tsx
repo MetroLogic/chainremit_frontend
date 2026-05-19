@@ -8,7 +8,7 @@ const TransactionsAndRequests: React.FC = () => {
     {
       id: 1,
       type: 'Send',
-      toFrom: '0x789...abc',
+      toFrom: 'GD789...GABC',
       amount: '-$125.50',
       status: 'Complete',
       icon: ArrowUpRight,
@@ -17,7 +17,7 @@ const TransactionsAndRequests: React.FC = () => {
     {
       id: 2,
       type: 'Receive',
-      toFrom: '0x456...def',
+      toFrom: 'GD456...GDEF',
       amount: '+$75.00',
       status: 'Complete',
       icon: ArrowDownLeft,
